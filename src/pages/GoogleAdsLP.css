@@ -5,20 +5,20 @@
 
 .ads-lp {
   min-height: 100vh;
-  background: white;
+  background: var(--color-white);
   padding-bottom: 80px;
 }
 
 .ads-container {
-  max-width: 780px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-8);
 }
 
 .ads-container-wide {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-8);
 }
 
 /* ---- Logo ---- */
@@ -93,17 +93,14 @@
 /* ======== HERO ======== */
 .ads-hero {
   position: relative;
-  padding: var(--space-16) 0 var(--space-12);
+  padding: var(--space-20) 0 var(--space-16);
   text-align: center;
   overflow: hidden;
+  background: linear-gradient(180deg, rgba(240, 253, 250, 0.5) 0%, var(--color-white) 100%);
 }
 
 .ads-hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 80% at 50% 0%, rgba(13, 148, 136, 0.06) 0%, transparent 60%);
-  z-index: 0;
+  display: none;
 }
 
 .ads-hero .ads-container {
@@ -130,19 +127,22 @@
 }
 
 .ads-title {
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: var(--font-extrabold);
   line-height: 1.12;
-  margin-bottom: var(--space-5);
-  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.025em;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ads-subtitle {
   font-size: var(--text-lg);
   color: var(--color-gray-500);
   line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-8);
-  max-width: 560px;
+  margin-bottom: var(--space-10);
+  max-width: 620px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -251,19 +251,19 @@
 .ads-pain-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-  margin-bottom: var(--space-10);
+  gap: var(--space-5);
+  margin-bottom: var(--space-12);
 }
 
 .ads-pain-card {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   background: white;
   border: 1.5px solid var(--color-gray-100);
   border-radius: var(--radius-lg);
-  padding: var(--space-4) var(--space-5);
-  font-size: var(--text-sm);
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
   font-weight: var(--font-medium);
   color: var(--color-gray-700);
   transition: all var(--transition-base);
@@ -311,8 +311,8 @@
 /* ======== APPROACH SPLIT ======== */
 .ads-approach-split {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--space-10);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
   align-items: center;
 }
 
@@ -353,7 +353,7 @@
 
 .ads-approach-item strong {
   display: block;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-gray-800);
   margin-bottom: var(--space-1);
 }
@@ -491,7 +491,7 @@
 }
 
 .ads-usp-card h3 {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
   margin-bottom: var(--space-2);
 }
