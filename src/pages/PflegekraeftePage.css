@@ -1,0 +1,255 @@
+/* ============================================
+   PFLEGEKRÄFTE PAGE STYLES
+   ============================================ */
+
+/* ======== HERO ======== */
+.nurse-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--space-32) 0 var(--space-16);
+}
+
+.nurse-hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-12);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.nurse-hero-content {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.nurse-hero-image img {
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-2xl);
+  width: 100%;
+  object-fit: cover;
+  animation: fadeInRight 0.8s ease-out 0.3s both;
+}
+
+/* ======== PAIN POINTS ======== */
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.pain-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: white;
+  border: 1.5px solid var(--color-gray-100);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  transition: all var(--transition-base);
+}
+
+.pain-card:hover {
+  border-color: var(--color-error-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.pain-icon {
+  color: var(--color-error);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pain-card h3 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.pain-card p {
+  font-size: var(--text-xs);
+  color: var(--color-gray-500);
+  line-height: var(--leading-relaxed);
+}
+
+.pain-result {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.pain-result p {
+  font-size: var(--text-lg);
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+}
+
+/* ======== WECHSELPROFIL TAGS ======== */
+.profile-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: white;
+  border: 1.5px solid var(--color-primary-lightest);
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-gray-700);
+  transition: all var(--transition-base);
+}
+
+.profile-tag svg {
+  color: var(--color-primary);
+}
+
+.profile-tag:hover {
+  border-color: var(--color-primary-lighter);
+  background: var(--color-primary-lightest);
+  transform: translateY(-2px);
+}
+
+/* ======== PROCESS TIMELINE ======== */
+.process-timeline {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-primary-lighter), var(--color-primary-lightest));
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  position: relative;
+}
+
+.timeline-marker {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-num {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-bold);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+}
+
+.timeline-content {
+  background: white;
+  border: 1.5px solid var(--color-gray-100);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  flex: 1;
+  transition: all var(--transition-base);
+}
+
+.timeline-content:hover {
+  border-color: var(--color-primary-lighter);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-icon {
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.timeline-content h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-content p {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+  line-height: var(--leading-relaxed);
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 1024px) {
+  .nurse-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nurse-hero-content .hero-actions {
+    justify-content: center;
+  }
+
+  .nurse-hero-content .hero-trust {
+    justify-content: center;
+  }
+
+  .nurse-hero-image {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .pain-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nurse-hero {
+    padding: var(--space-24) 0 var(--space-12);
+    min-height: auto;
+  }
+
+  .pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nurse-hero-content .hero-actions {
+    flex-direction: column;
+  }
+
+  .nurse-hero-content .trust-dot {
+    display: none;
+  }
+
+  .nurse-hero-content .hero-trust {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
