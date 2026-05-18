@@ -25,8 +25,10 @@ import DigitalePlattform from './pages/DigitalePlattform'
 import Wechselberatung from './pages/Wechselberatung'
 import ArbeitgeberFinden from './pages/ArbeitgeberFinden'
 
-// Verbliebene Platzhalter (Wissen, Demo)
-import StubPage from './pages/StubPage'
+// Pages — Phase 3
+import Wissen from './pages/Wissen'
+import Artikel from './pages/Artikel'
+import DemoAnfragen from './pages/DemoAnfragen'
 
 export default function App() {
   return (
@@ -54,27 +56,14 @@ export default function App() {
         <Route path="/wechselberatung" element={<Wechselberatung />} />
         <Route path="/arbeitgeber-finden" element={<ArbeitgeberFinden />} />
 
+        {/* Wissen */}
+        <Route path="/wissen" element={<Wissen />} />
+        <Route path="/wissen/:slug" element={<Artikel />} />
+
         {/* Globale Seiten */}
         <Route path="/ueber-uns" element={<UeberUns />} />
         <Route path="/kontakt" element={<Kontakt />} />
-        <Route
-          path="/wissen"
-          element={
-            <StubPage
-              title="Wissen und Ratgeber"
-              description="Unser Wissens- und Ratgeberbereich wird in der nächsten Iteration aufgebaut — mit Artikeln zu Probezeitabbrüchen, Onboarding, Zeitarbeit-Reduktion, Rückgewinnung und Vereinbarkeit."
-            />
-          }
-        />
-        <Route
-          path="/demo-anfragen"
-          element={
-            <StubPage
-              title="Pilot- und Demogespräch"
-              description='Für Förderer, Träger und Pilotpartner. Schreiben Sie uns über das Kontaktformular mit der Auswahl "Förderer / Partner" — wir melden uns mit Konzeptunterlagen.'
-            />
-          }
-        />
+        <Route path="/demo-anfragen" element={<DemoAnfragen />} />
 
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />

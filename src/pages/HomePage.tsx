@@ -2,14 +2,63 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight, Shield, Clock, Heart, Target, Users, TrendingUp,
   CheckCircle, XCircle, UserCheck, Building2, Handshake, Search,
-  CalendarCheck, Briefcase, ShieldCheck
+  CalendarCheck, Briefcase, ShieldCheck, CalendarClock, FileText, Sparkles,
 } from 'lucide-react'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import FAQAccordion from '../components/ui/FAQAccordion'
+import ComparisonTable from '../components/sections/ComparisonTable'
 import { getFunnelUrl } from '../lib/tracking'
 import heroImage from '../assets/hero-nurse.png'
 import matchingImage from '../assets/matching-visual.png'
 import './HomePage.css'
+
+const leistungen = [
+  {
+    icon: <Target size={24} />,
+    title: 'PflegeMatch 180',
+    description: 'Direktvermittlung mit strukturiertem Matching und 180-Tage-Wechselbegleitung.',
+    href: '/pflegematch-180',
+  },
+  {
+    icon: <Search size={24} />,
+    title: 'Matching-System',
+    description: 'Sechs Match-Dimensionen, Pflegekraft- und Arbeitgeber-Fragebogen, klare Ampellogik.',
+    href: '/matching-system',
+  },
+  {
+    icon: <CalendarClock size={24} />,
+    title: 'Wechselbegleitung',
+    description: 'Check-ins nach 7, 30, 60, 100 und 180 Tagen mit Frühwarnindikatoren.',
+    href: '/wechselbegleitung',
+  },
+  {
+    icon: <ShieldCheck size={24} />,
+    title: 'Stabilitätsberatung',
+    description: 'Optionaler Beratungsbaustein für mehr Verbleib und bessere Matchingfähigkeit.',
+    href: '/stabilitaetsberatung',
+  },
+  {
+    icon: <FileText size={24} />,
+    title: 'Förderlogik',
+    description: 'Klar getrennte Bestandteile — fördernahe Module transparent aufgesetzt.',
+    href: '/foerderung',
+  },
+  {
+    icon: <Sparkles size={24} />,
+    title: 'CareOS Plattform',
+    description: 'Digitale Plattform für Matching, Check-ins und Reporting — im Aufbau.',
+    href: '/digitale-plattform',
+  },
+]
+
+const comparisonRows = [
+  { label: 'Matching-Grundlage', classic: 'Qualifikation + freie Stelle', medilane: 'Wechselprofil + echte Passung' },
+  { label: 'Pflegekraft-Verständnis', classic: 'Lebenslauf & Verfügbarkeit', medilane: 'Wünsche, No-Gos, Prioritäten' },
+  { label: 'Vermittlungsart', classic: 'Massenversand von Profilen', medilane: 'Gezielte Vorauswahl' },
+  { label: 'Arbeitgeber-Info', classic: 'Stellenanzeige', medilane: 'Reale Rahmenbedingungen' },
+  { label: 'Ziel', classic: 'Schnelle Besetzung', medilane: 'Langfristig passende Besetzung' },
+  { label: 'Beziehung', classic: 'Transaktional', medilane: 'Wechselbegleitung über 180 Tage' },
+]
 
 const faqItems = [
   {
@@ -340,36 +389,41 @@ export default function HomePage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="comparison-wrapper">
-              <div className="comparison-table">
-                <div className="comp-header">
-                  <div className="comp-cell comp-label"></div>
-                  <div className="comp-cell comp-old">Klassisch</div>
-                  <div className="comp-cell comp-new">Medi-Lane</div>
-                </div>
-                {[
-                  ['Matching-Grundlage', 'Qualifikation + freie Stelle', 'Wechselprofil + echte Passung'],
-                  ['Pflegekraft-Verständnis', 'Lebenslauf & Verfügbarkeit', 'Wünsche, No-Gos, Prioritäten'],
-                  ['Vermittlungsart', 'Massenversand von Profilen', 'Gezielte Vorauswahl'],
-                  ['Arbeitgeber-Info', 'Stellenanzeige', 'Intern bewertete Rahmenbedingungen'],
-                  ['Ziel', 'Schnelle Besetzung', 'Langfristig passende Besetzung'],
-                  ['Beziehung', 'Transaktional', 'Wechselbegleitung'],
-                ].map(([label, old, medi], i) => (
-                  <div className="comp-row" key={i}>
-                    <div className="comp-cell comp-label">{label}</div>
-                    <div className="comp-cell comp-old">
-                      <XCircle size={16} className="comp-icon comp-icon--no" />
-                      {old}
-                    </div>
-                    <div className="comp-cell comp-new">
-                      <CheckCircle size={16} className="comp-icon comp-icon--yes" />
-                      {medi}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <ComparisonTable rows={comparisonRows} />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ======== LEISTUNGEN ÜBERBLICK ======== */}
+      <section className="section section--alt" id="leistungen">
+        <div className="container">
+          <ScrollReveal>
+            <div className="section-header">
+              <span className="section-badge">Leistungen im Überblick</span>
+              <h2 className="section-title">
+                Sechs Bausteine, ein <span className="gradient-text">Integrationsmodell</span>
+              </h2>
+              <p className="section-subtitle">
+                Vermittlung, Methodik, Begleitung, Beratung, Förderung und Plattform — Sie nutzen
+                nur, was zu Ihrer Situation passt.
+              </p>
             </div>
           </ScrollReveal>
+
+          <div className="leistungen-grid">
+            {leistungen.map((l, i) => (
+              <ScrollReveal key={i} delay={(i % 3) + 1}>
+                <Link to={l.href} className="leistung-card">
+                  <div className="leistung-icon">{l.icon}</div>
+                  <h3>{l.title}</h3>
+                  <p>{l.description}</p>
+                  <span className="leistung-link">
+                    Mehr erfahren <ArrowRight size={16} />
+                  </span>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 

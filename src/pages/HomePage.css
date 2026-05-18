@@ -633,3 +633,83 @@
     padding: var(--space-12) var(--space-6);
   }
 }
+
+/* ============================================
+   LEISTUNGEN ÜBERBLICK
+   ============================================ */
+
+.leistungen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.leistung-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: all var(--transition-base);
+  height: 100%;
+}
+
+.leistung-card:hover {
+  border-color: var(--color-primary-lighter);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.leistung-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-lightest);
+  color: var(--color-primary-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leistung-card h3 {
+  font-size: var(--text-lg);
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.leistung-card p {
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-sm);
+  flex: 1;
+}
+
+.leistung-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  margin-top: auto;
+  transition: gap var(--transition-fast);
+}
+
+.leistung-card:hover .leistung-link {
+  gap: var(--space-2);
+}
+
+@media (max-width: 1024px) {
+  .leistungen-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .leistungen-grid {
+    grid-template-columns: 1fr;
+  }
+}
