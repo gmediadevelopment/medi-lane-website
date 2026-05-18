@@ -1,0 +1,186 @@
+/* ============================================
+   ARBEITGEBER FINDEN (Pflegekraft-Lead-Form)
+   ============================================ */
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.trust-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+  text-align: center;
+  height: 100%;
+}
+
+.trust-card:hover {
+  border-color: var(--color-primary-lighter);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.trust-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-lightest);
+  color: var(--color-primary-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.trust-card h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+  color: var(--color-gray-900);
+}
+
+.trust-card p {
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+}
+
+/* ---- Form Split ---- */
+.finden-form-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.finden-form-info .section-title {
+  margin-bottom: var(--space-4);
+}
+
+.finden-form-desc {
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-6);
+}
+
+.finden-form-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.finden-form-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-gray-700);
+  line-height: var(--leading-snug);
+}
+
+.finden-form-bullets li svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.finden-form-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.finden-form-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: var(--space-6);
+  right: var(--space-6);
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  border-radius: var(--radius-full);
+}
+
+/* ---- Next Steps ---- */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.next-step {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+  height: 100%;
+  position: relative;
+}
+
+.next-step:hover {
+  border-color: var(--color-primary-lighter);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.next-step-nr {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: var(--font-extrabold);
+  font-size: var(--text-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-cta);
+}
+
+.next-step h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+  color: var(--color-gray-900);
+}
+
+.next-step p {
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 1024px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .next-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .trust-grid,
+  .next-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .finden-form-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .finden-form-card {
+    padding: var(--space-6);
+  }
+}

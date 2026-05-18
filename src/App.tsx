@@ -11,14 +11,21 @@ import GoogleAdsLP from './pages/GoogleAdsLP'
 import Impressum from './pages/Impressum'
 import Datenschutz from './pages/Datenschutz'
 
-// Pages — Neu (Phase 1)
+// Pages — Phase 1
 import PflegeMatch180 from './pages/PflegeMatch180'
 import Stabilitaetsberatung from './pages/Stabilitaetsberatung'
 import Foerderung from './pages/Foerderung'
 import Kontakt from './pages/Kontakt'
 import UeberUns from './pages/UeberUns'
 
-// Platzhalter für noch nicht ausgebaute Seiten
+// Pages — Phase 2
+import MatchingSystem from './pages/MatchingSystem'
+import Wechselbegleitung from './pages/Wechselbegleitung'
+import DigitalePlattform from './pages/DigitalePlattform'
+import Wechselberatung from './pages/Wechselberatung'
+import ArbeitgeberFinden from './pages/ArbeitgeberFinden'
+
+// Verbliebene Platzhalter (Wissen, Demo)
 import StubPage from './pages/StubPage'
 
 export default function App() {
@@ -31,61 +38,21 @@ export default function App() {
       <Route element={<WebsiteLayout />}>
         <Route path="/" element={<HomePage />} />
 
-        {/* Hub-Seiten (bestehend) */}
+        {/* Hub-Seiten */}
         <Route path="/pflegekraefte" element={<PflegekraeftePage />} />
         <Route path="/arbeitgeber" element={<ArbeitgeberPage />} />
 
         {/* Für Einrichtungen — Detailseiten */}
         <Route path="/pflegematch-180" element={<PflegeMatch180 />} />
+        <Route path="/matching-system" element={<MatchingSystem />} />
+        <Route path="/wechselbegleitung" element={<Wechselbegleitung />} />
         <Route path="/stabilitaetsberatung" element={<Stabilitaetsberatung />} />
         <Route path="/foerderung" element={<Foerderung />} />
-        <Route
-          path="/matching-system"
-          element={
-            <StubPage
-              title="Das Medi-Lane Matching-System"
-              description="Methodische Details zu Fragebögen, Matching-Dimensionen, Scorelogik und Ampelbewertung. Die ausgebaute Seite folgt in der nächsten Iteration — gerne erläutern wir das Modell schon jetzt im persönlichen Gespräch."
-            />
-          }
-        />
-        <Route
-          path="/wechselbegleitung"
-          element={
-            <StubPage
-              title="180-Tage-Wechselbegleitung"
-              description="Vollständige Darstellung der Check-in-Termine, Frühwarnindikatoren und Interventionsmaßnahmen folgt in der nächsten Iteration. Eine Übersicht finden Sie aktuell auf der PflegeMatch-180-Seite."
-            />
-          }
-        />
-        <Route
-          path="/digitale-plattform"
-          element={
-            <StubPage
-              title="Medi-Lane CareOS"
-              description="Unsere digitale Plattform für Matching, Check-ins und Reporting befindet sich in der Aufbauphase. Wir geben gerne Einblick in das Konzept und mögliche Pilotrollen."
-            />
-          }
-        />
+        <Route path="/digitale-plattform" element={<DigitalePlattform />} />
 
-        {/* Für Pflegekräfte */}
-        <Route
-          path="/wechselberatung"
-          element={
-            <StubPage
-              title="Wechselberatung für Pflegekräfte"
-              description="Wir bauen aktuell die separate Beratungsseite für wechselbereite Pflegekräfte aus. In der Zwischenzeit finden Sie alle Informationen auf der Pflegekräfte-Hub-Seite."
-            />
-          }
-        />
-        <Route
-          path="/arbeitgeber-finden"
-          element={
-            <StubPage
-              title="Passenden Arbeitgeber finden"
-              description="Das ausführliche Lead-Formular für Pflegekräfte folgt in Kürze. Sie können sich aber jederzeit über das Kontaktformular bei uns melden."
-            />
-          }
-        />
+        {/* Für Pflegekräfte — Detailseiten */}
+        <Route path="/wechselberatung" element={<Wechselberatung />} />
+        <Route path="/arbeitgeber-finden" element={<ArbeitgeberFinden />} />
 
         {/* Globale Seiten */}
         <Route path="/ueber-uns" element={<UeberUns />} />
