@@ -1,61 +1,47 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
+import Lockup from '../sections/Lockup'
 import './Header.css'
 
-interface SubItem {
-  label: string
+interface NavItem {
   to: string
-  description?: string
+  title: string
+  desc: string
 }
 
 interface NavGroup {
   label: string
-  basePath: string
-  items: SubItem[]
+  items: NavItem[]
 }
 
-const NAV_GROUPS: NavGroup[] = [
-  {
-    label: 'Für Einrichtungen',
-    basePath: '/arbeitgeber',
-    items: [
-      { label: 'Überblick', to: '/arbeitgeber', description: 'Für Pflegeeinrichtungen' },
-      { label: 'PflegeMatch 180', to: '/pflegematch-180', description: 'Unser Kernangebot' },
-      { label: 'Matching-System', to: '/matching-system', description: 'Wie wir matchen' },
-      { label: 'Wechselbegleitung', to: '/wechselbegleitung', description: '180-Tage-Begleitung' },
-      { label: 'Stabilitätsberatung', to: '/stabilitaetsberatung', description: 'Beratung für Verbleib' },
-      { label: 'Fördermöglichkeiten', to: '/foerderung', description: 'Zuschüsse prüfen' },
-      { label: 'Digitale Plattform', to: '/digitale-plattform', description: 'Medilane CareOS' },
-    ],
-  },
-  {
-    label: 'Für Pflegekräfte',
-    basePath: '/pflegekraefte',
-    items: [
-      { label: 'Überblick', to: '/pflegekraefte', description: 'Für Pflegekräfte' },
-      { label: 'Wechselberatung', to: '/wechselberatung', description: 'Passend wechseln' },
-      { label: 'Arbeitgeber finden', to: '/arbeitgeber-finden', description: 'Stellen-Anfrage' },
-    ],
-  },
-]
+const EINRICHTUNGEN: NavGroup = {
+  label: 'Für Einrichtungen',
+  items: [
+    { to: '/arbeitgeber',           title: 'Übersicht',            desc: 'Was Medilane für deine Einrichtung bedeutet' },
+    { to: '/pflegematch-180',       title: 'PflegeMatch 180',      desc: 'Vermittlung mit Matching und 180-Tage-Begleitung' },
+    { to: '/matching-system',       title: 'Matching-System',      desc: 'Sechs Dimensionen, ehrliche Ampel' },
+    { to: '/wechselbegleitung',     title: 'Wechselbegleitung',    desc: '180-Tage-Begleitung im Detail' },
+    { to: '/stabilitaetsberatung',  title: 'Stabilitätsberatung',  desc: 'Verbleib, Rückgewinnung, Einarbeitung' },
+    { to: '/foerderung',            title: 'Förderung',            desc: 'Welche Bestandteile fördernah sind' },
+    { to: '/digitale-plattform',    title: 'Digitale Plattform',   desc: 'CareOS — Dashboards, Check-ins, Reports' },
+  ],
+}
 
-const SIMPLE_LINKS: { label: string; to: string }[] = [
-  { label: 'Wissen', to: '/wissen' },
-  { label: 'Über uns', to: '/ueber-uns' },
-]
+const PFLEGEKRAEFTE: NavGroup = {
+  label: 'Für Pflegekräfte',
+  items: [
+    { to: '/pflegekraefte',          title: 'Übersicht',         desc: 'Wie Medilane für dich arbeitet' },
+    { to: '/wechselberatung',        title: 'Wechselberatung',   desc: 'Wechseln ohne böse Überraschung' },
+    { to: '/arbeitgeber-finden',     title: 'Arbeitgeber finden', desc: 'Eine Stelle, die zu deinem Leben passt' },
+  ],
+}
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
   const location = useLocation()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const navigate = useNavigate()
 
   useEffect(() => {
     setMobileOpen(false)
@@ -66,75 +52,85 @@ export default function Header() {
     group.items.some(item => location.pathname === item.to)
 
   return (
-    <header className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}>
-      <div className="header-inner">
-        <Link to="/" className="header-logo" id="header-logo">
-          <span className="logo-mark">M</span>
-          <span className="logo-name">Medilane</span>
-        </Link>
+    <header className="site-header">
+      <div className="container site-header__inner">
+        <Lockup
+          as="a"
+          href="/"
+          onClick={e => {
+            e.preventDefault()
+            navigate('/')
+          }}
+        />
 
-        <nav className={`header-nav ${mobileOpen ? 'header-nav--open' : ''}`} id="main-nav">
-          {NAV_GROUPS.map(group => (
+        <nav
+          className={`site-nav ${mobileOpen ? 'site-nav--open' : ''}`}
+          aria-label="Hauptnavigation"
+        >
+          {[EINRICHTUNGEN, PFLEGEKRAEFTE].map(group => (
             <div
               key={group.label}
-              className={`nav-group ${openGroup === group.label ? 'nav-group--open' : ''} ${
-                isGroupActive(group) ? 'nav-group--active' : ''
+              className={`site-nav__group ${openGroup === group.label ? 'site-nav__group--open' : ''} ${
+                isGroupActive(group) ? 'site-nav__group--active' : ''
               }`}
               onMouseEnter={() => setOpenGroup(group.label)}
               onMouseLeave={() => setOpenGroup(null)}
             >
               <button
-                className="nav-group-trigger"
+                type="button"
+                className="site-nav__link"
                 onClick={() => setOpenGroup(openGroup === group.label ? null : group.label)}
                 aria-expanded={openGroup === group.label}
-                aria-haspopup="true"
               >
                 {group.label}
-                <ChevronDown size={14} className="nav-chevron" />
+                <span className="site-nav__caret">▾</span>
               </button>
-              <div className="nav-dropdown">
-                <div className="nav-dropdown-inner">
-                  {group.items.map(item => (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      className={`nav-dropdown-item ${
-                        location.pathname === item.to ? 'nav-dropdown-item--active' : ''
-                      }`}
-                    >
-                      <span className="nav-dropdown-label">{item.label}</span>
-                      {item.description && (
-                        <span className="nav-dropdown-desc">{item.description}</span>
-                      )}
-                    </Link>
-                  ))}
-                </div>
+              <div className="site-nav__dropdown" role="menu">
+                {group.items.map(item => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`site-nav__item ${
+                      location.pathname === item.to ? 'site-nav__item--active' : ''
+                    }`}
+                  >
+                    <span className="site-nav__item-title">{item.title}</span>
+                    <span className="site-nav__item-desc">{item.desc}</span>
+                  </Link>
+                ))}
               </div>
             </div>
           ))}
 
-          {SIMPLE_LINKS.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`nav-item ${location.pathname === link.to ? 'nav-item--active' : ''}`}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <Link to="/kontakt" className="header-cta" id="header-cta-kontakt">
-            Erstgespräch →
+          <Link
+            to="/wissen"
+            className={`site-nav__link ${location.pathname.startsWith('/wissen') ? 'is-active' : ''}`}
+          >
+            Wissen
           </Link>
+          <Link
+            to="/ueber-uns"
+            className={`site-nav__link ${location.pathname === '/ueber-uns' ? 'is-active' : ''}`}
+          >
+            Über uns
+          </Link>
+
+          <div className="site-nav__cta">
+            <Link to="/kontakt?typ=pflegekraft" className="btn btn--secondary btn--sm">
+              Als Pflegekraft starten
+            </Link>
+            <Link to="/kontakt?typ=einrichtung" className="btn btn--primary btn--sm">
+              Erstgespräch
+            </Link>
+          </div>
         </nav>
 
         <button
           className="mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Navigation umschalten"
-          id="mobile-menu-toggle"
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
     </header>

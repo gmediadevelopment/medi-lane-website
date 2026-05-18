@@ -1,495 +1,624 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight, Shield, Clock, Heart, Target, Users, TrendingUp,
-  CheckCircle, XCircle, UserCheck, Building2, Handshake, Search,
-  CalendarCheck, Briefcase, ShieldCheck, CalendarClock, FileText, Sparkles,
-} from 'lucide-react'
-import ScrollReveal from '../components/ui/ScrollReveal'
-import FAQAccordion from '../components/ui/FAQAccordion'
-import ComparisonTable from '../components/sections/ComparisonTable'
-import { getFunnelUrl } from '../lib/tracking'
-import heroImage from '../assets/hero-nurse.png'
-import matchingImage from '../assets/matching-visual.png'
+import Eyebrow from '../components/sections/Eyebrow'
+import AvailabilityBar from '../components/sections/AvailabilityBar'
+import ImageSlot from '../components/sections/ImageSlot'
+import { MatchReport } from '../components/sections/MatchReport'
+import heroTeam from '../assets/hero-team.png'
 import './HomePage.css'
 
-const leistungen = [
-  {
-    icon: <Target size={24} />,
-    title: 'PflegeMatch 180',
-    description: 'Direktvermittlung mit strukturiertem Matching und 180-Tage-Wechselbegleitung.',
-    href: '/pflegematch-180',
-  },
-  {
-    icon: <Search size={24} />,
-    title: 'Matching-System',
-    description: 'Sechs Match-Dimensionen, Pflegekraft- und Arbeitgeber-Fragebogen, klare Ampellogik.',
-    href: '/matching-system',
-  },
-  {
-    icon: <CalendarClock size={24} />,
-    title: 'Wechselbegleitung',
-    description: 'Check-ins nach 7, 30, 60, 100 und 180 Tagen mit Frühwarnindikatoren.',
-    href: '/wechselbegleitung',
-  },
-  {
-    icon: <ShieldCheck size={24} />,
-    title: 'Stabilitätsberatung',
-    description: 'Optionaler Beratungsbaustein für mehr Verbleib und bessere Matchingfähigkeit.',
-    href: '/stabilitaetsberatung',
-  },
-  {
-    icon: <FileText size={24} />,
-    title: 'Förderlogik',
-    description: 'Klar getrennte Bestandteile — fördernahe Module transparent aufgesetzt.',
-    href: '/foerderung',
-  },
-  {
-    icon: <Sparkles size={24} />,
-    title: 'CareOS Plattform',
-    description: 'Digitale Plattform für Matching, Check-ins und Reporting — im Aufbau.',
-    href: '/digitale-plattform',
-  },
-]
+const PRIMARY = '/kontakt?typ=einrichtung'
+const PFLEGEKRAFT = '/kontakt?typ=pflegekraft'
 
-const comparisonRows = [
-  { label: 'Matching-Grundlage', classic: 'Qualifikation + freie Stelle', medilane: 'Wechselprofil + echte Passung' },
-  { label: 'Pflegekraft-Verständnis', classic: 'Lebenslauf & Verfügbarkeit', medilane: 'Wünsche, No-Gos, Prioritäten' },
-  { label: 'Vermittlungsart', classic: 'Massenversand von Profilen', medilane: 'Gezielte Vorauswahl' },
-  { label: 'Arbeitgeber-Info', classic: 'Stellenanzeige', medilane: 'Reale Rahmenbedingungen' },
-  { label: 'Ziel', classic: 'Schnelle Besetzung', medilane: 'Langfristig passende Besetzung' },
-  { label: 'Beziehung', classic: 'Transaktional', medilane: 'Wechselbegleitung über 180 Tage' },
-]
+/* ======================================================================
+   TRUST STRIP
+   ====================================================================== */
+function TrustStrip() {
+  const items = [
+    'Direktvermittlung',
+    'Matching auf beiden Seiten',
+    '180-Tage-Wechselbegleitung',
+    'Frühwarnsystem nach 7/30/60/100 Tagen',
+    'Optional: Stabilitätsberatung',
+  ]
+  return (
+    <div className="trust-strip">
+      <div className="container">
+        <div className="trust-strip__row">
+          <span className="trust-strip__label">PflegeMatch 180</span>
+          <div className="trust-strip__items">
+            {items.map(t => (
+              <span key={t} className="trust-strip__item">
+                <span className="dot" />
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-const faqItems = [
-  {
-    question: 'Ist Medilane kostenlos für Pflegekräfte?',
-    answer: 'Ja, für Pflegekräfte ist unser Service vollständig kostenlos. Wir finanzieren uns über eine Vermittlungsgebühr, die der Arbeitgeber bei erfolgreicher Besetzung zahlt.',
-  },
-  {
-    question: 'Muss ich aktiv auf Jobsuche sein?',
-    answer: 'Nein. Viele Pflegekräfte erstellen ihr Wechselprofil, um sich unverbindlich zu orientieren. Sie müssen sich nicht sofort auf einen Wechsel festlegen.',
-  },
-  {
-    question: 'Wie unterscheidet sich Medilane von einer Jobbörse?',
-    answer: 'Jobbörsen zeigen Ihnen offene Stellen. Wir erfassen ein vollständiges Wechselprofil — mit Ihren Wünschen, Prioritäten und No-Gos — und matchen Sie aktiv mit passenden Arbeitgebern. Das ist keine Stellensuche, sondern echte Wechselbegleitung.',
-  },
-  {
-    question: 'Erfährt mein aktueller Arbeitgeber davon?',
-    answer: 'Nein. Ihr Profil wird nur anonymisiert an potenzielle Arbeitgeber vorgestellt. Erst wenn Sie aktiv zustimmen, geben wir Ihre Kontaktdaten weiter.',
-  },
-  {
-    question: 'Wie lange dauert es, bis ich Angebote erhalte?',
-    answer: 'In der Regel erhalten Sie innerhalb von 48 Stunden eine erste Rückmeldung. Je nach Region und Fachbereich kann es schneller oder etwas länger dauern.',
-  },
-  {
-    question: 'Welche Einrichtungen werden berücksichtigt?',
-    answer: 'Wir arbeiten mit stationären Pflegeeinrichtungen, ambulanten Diensten, Kliniken, Intensivpflege-Anbietern und Einrichtungen für betreutes Wohnen zusammen.',
-  },
-  {
-    question: 'Was macht Medilane für Arbeitgeber?',
-    answer: 'Wir liefern vorqualifizierte Wechselprofile von Pflegekräften mit klarer Passungslogik. Weniger Streuverlust, bessere Trefferquote und nachhaltigere Besetzungen.',
-  },
-]
+/* ======================================================================
+   STATS STRIP
+   ====================================================================== */
+function StatsStrip() {
+  const stats = [
+    { value: '180', suffix: 'Tage', label: 'Wechselbegleitung', sub: 'Pflichtbestandteil jeder Vermittlung — von Tag 1 bis Tag 180.' },
+    { value: '6',   suffix: '',     label: 'Match-Dimensionen', sub: 'Fachlich, Dienstplan, Belastung, Team, Führung, Entwicklung.' },
+    { value: '5',   suffix: '',     label: 'Check-in-Termine',  sub: 'Tag 7 · 30 · 60 · 100 · 180. Strukturiert, dokumentiert, nachgehalten.' },
+    { value: '0',   suffix: '€',    label: 'Für Pflegekräfte',  sub: 'Du zahlst für die Vermittlung nichts. Nie. Egal, wohin du wechselst.' },
+  ]
+  return (
+    <section className="stats-section">
+      <div className="container">
+        <div className="stats">
+          {stats.map(s => (
+            <div key={s.label} className="stats__cell">
+              <span className="stats__value">
+                {s.value}
+                {s.suffix && <span className="stats__value-suffix">{s.suffix}</span>}
+              </span>
+              <span className="stats__label">{s.label}</span>
+              <span className="stats__sub">{s.sub}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
+/* ======================================================================
+   PROBLEM CHAIN
+   ====================================================================== */
+function ProblemChain() {
+  const broken = ['Offene Stelle', 'Schnelle Besetzung', 'Unpassender Match', 'Frust im Stammteam', 'Probezeitabbruch', 'Erneute Lücke']
+  const medi   = ['Analyse beider Seiten', 'Strukturiertes Matching', 'Erwartungsabgleich', 'Startbegleitung', 'Check-ins Tag 7/30/60/100', '180-Tage-Verbleib']
+  return (
+    <section className="section section--soft">
+      <div className="container">
+        <div className="section__head">
+          <Eyebrow>Problem</Eyebrow>
+          <h2 className="section__title">
+            Das Problem ist nicht der Fachkräftemangel. Das Problem sind instabile Besetzungen.
+          </h2>
+          <p className="section__lead">
+            Viele Einrichtungen finden nicht nur zu wenige Bewerber. Die eigentlichen Kosten
+            entstehen danach: unpassende Matches, Probezeitabbrüche, erneute Suche, Frust im
+            Stammteam — und im Zweifel wieder Zeitarbeit.
+          </p>
+        </div>
+
+        <div className="chain-grid">
+          <div className="chain chain--broken">
+            <div className="chain__label">
+              Klassische Vermittlung
+              <span className="chain__badge">Die übliche Kette</span>
+            </div>
+            <h3 className="chain__title">Schnell besetzt, schnell wieder offen.</h3>
+            <div className="chain__steps">
+              {broken.map((step, i) => (
+                <div key={step} className="chain__step">
+                  <span className="chain__step-num">0{i + 1}</span>
+                  <span className="chain__step-text">{step}</span>
+                  {i < broken.length - 1 && <span className="chain__step-tail">↓</span>}
+                </div>
+              ))}
+            </div>
+            <div className="chain__outcome">
+              <span className="chain__outcome-dot chain__outcome-dot--muted" />
+              Ergebnis: Wiederbesetzungskosten, Zeitarbeit, Überlastung.
+            </div>
+          </div>
+
+          <div className="chain chain--medilane">
+            <div className="chain__label">
+              Medilane PflegeMatch 180
+              <span className="chain__badge chain__badge--brand">Unsere Kette</span>
+            </div>
+            <h3 className="chain__title">Passend besetzt, in der Anfangsphase begleitet.</h3>
+            <div className="chain__steps">
+              {medi.map((step, i) => (
+                <div key={step} className="chain__step">
+                  <span className="chain__step-num">0{i + 1}</span>
+                  <span className="chain__step-text">{step}</span>
+                  {i < medi.length - 1 && <span className="chain__step-tail chain__step-tail--brand">↓</span>}
+                </div>
+              ))}
+            </div>
+            <div className="chain__outcome">
+              <span className="chain__outcome-dot" />
+              Ergebnis: Stabiler Start, weniger Abbrüche, planbare Dienste.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   THREE PILLARS
+   ====================================================================== */
+function ThreePillars() {
+  const pillars = [
+    {
+      num: '01',
+      title: 'Matching vor Vermittlung',
+      desc: 'Wir prüfen vor jeder Vorstellung, ob Dienstplan, Belastung, Team und Erwartungen wirklich zusammenpassen — nicht nur Qualifikation und Gehalt.',
+      bullets: ['Pflegekraft-Profiling', 'Arbeitgeber-Profiling', 'Match-Bericht statt Lebenslauf'],
+    },
+    {
+      num: '02',
+      title: 'Verbleib statt Abschluss',
+      desc: 'Unser Ziel ist nicht die Unterschrift. Unser Ziel ist eine stabile Integration in den ersten sechs Monaten — gemessen, dokumentiert, nachgehalten.',
+      bullets: ['Erwartungsabgleich vor Start', '180-Tage-Begleitung', 'Abschlussreport mit Learnings'],
+    },
+    {
+      num: '03',
+      title: 'Frühwarnung statt Abwarten',
+      desc: 'Durch Check-ins nach 7, 30, 60, 100 und 180 Tagen erkennen wir Risiken früh — bevor aus Unsicherheit Kündigung wird.',
+      bullets: ['Strukturierte Check-ins', 'Frühwarnindikatoren', 'Konfliktmoderation'],
+    },
+  ]
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section__head">
+          <Eyebrow>PflegeMatch 180</Eyebrow>
+          <h2 className="section__title">Drei Säulen, die klassische Vermittlung nicht hat.</h2>
+          <p className="section__lead">
+            Wir kombinieren strukturierte Direktvermittlung, pflegebezogenes Matching auf
+            beiden Seiten und eine integrierte Wechselbegleitung über 180 Tage. Pflichtbestandteil
+            jeder Vermittlung — nicht Upsell.
+          </p>
+        </div>
+
+        <div className="pillars">
+          {pillars.map(p => (
+            <div key={p.num} className="pillar">
+              <span className="pillar__num">
+                <span className="dot" />
+                {p.num}
+              </span>
+              <h3 className="pillar__title">{p.title}</h3>
+              <p className="pillar__desc">{p.desc}</p>
+              <ul className="pillar__list">
+                {p.bullets.map(b => <li key={b}>{b}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   MATCH REPORT ARTIFACT
+   ====================================================================== */
+function MatchReportSection() {
+  return (
+    <section className="section section--ink">
+      <div className="container">
+        <div className="report-stage">
+          <div className="report-stage__copy">
+            <Eyebrow>Das Herzstück</Eyebrow>
+            <h2 className="report-stage__title">
+              Du bekommst keinen Profil-Stapel. Du bekommst einen Match-Bericht.
+            </h2>
+            <p className="report-stage__lead">
+              Jede Vorstellung wird mit einem strukturierten Bericht eingereicht. Stärken.
+              Risiken. Empfohlene Interview-Fragen. Empfohlene Startbedingungen.
+              Verbleibshypothese.
+            </p>
+
+            <div className="report-stage__features">
+              {[
+                ['6 Dimensionen', 'Fachlich, Dienstplan, Belastung, Team, Führung, Entwicklung.'],
+                ['Ampel-Logik', 'Grün = empfohlen. Gelb = vor Start klären. Rot = nicht vermitteln.'],
+                ['Startbedingungen', 'Mentor, Dienstplan-Absprachen, Einarbeitungsdauer, Feedback-Termine.'],
+                ['Verbleibshypothese', 'Begründete Einschätzung, wie wahrscheinlich der Match nach 180 Tagen hält.'],
+              ].map(([label, text]) => (
+                <div key={label} className="report-stage__feature">
+                  <span className="report-stage__feature-label">{label}</span>
+                  <span className="report-stage__feature-text">{text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="report-stage__cta">
+              <Link to="/pflegematch-180" className="btn btn--inverse btn--lg">
+                Beispielbericht ansehen <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link to={PRIMARY} className="btn btn--ghost btn--lg" style={{ color: 'var(--white)' }}>
+                Match anfragen
+              </Link>
+            </div>
+          </div>
+
+          <div className="report-stage__artifact">
+            <MatchReport />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   TIMELINE 180
+   ====================================================================== */
+function Timeline180() {
+  const nodes = [
+    { day: 'Vor Start', title: 'Erwartungs-\nabgleich',      desc: 'Dienstplanwunsch, Einarbeitung, Ansprechpartner, No-Gos.' },
+    { day: 'Tag 07',    title: 'Ankommen',                   desc: 'Erster Eindruck, Teamkontakt, Dienstplan, Überforderung.' },
+    { day: 'Tag 30',    title: 'Integration',                desc: 'Realität vs. Erwartung, Einarbeitung, Belastung.' },
+    { day: 'Tag 60',    title: 'Risikocheck',                desc: 'Zweifel, Konflikte, Zusatzdienste, Fehlzeiten.' },
+    { day: 'Tag 100',   title: 'Probezeit-\nStabilisierung', desc: 'Entscheidungssicherheit vor Probezeitende absichern.' },
+    { day: 'Tag 180',   title: 'Abschluss-\nbericht',        desc: 'Verbleib, Zufriedenheit, Learnings, Empfehlungen.' },
+  ]
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section__head">
+          <Eyebrow>180-Tage-Wechselbegleitung</Eyebrow>
+          <h2 className="section__title">Die kritischen Wochen sind die ersten. Wir bleiben da.</h2>
+          <p className="section__lead">
+            Viele Vermittlungen scheitern nicht bei der Unterschrift, sondern in den ersten
+            Wochen danach. Genau dort setzen wir an — mit strukturierten Check-ins und einem
+            Frühwarnsystem.
+          </p>
+        </div>
+
+        <div className="timeline">
+          {nodes.map((n, i) => (
+            <div
+              key={i}
+              className={`timeline__node ${i === 1 || i === 4 ? 'timeline__node--active' : ''}`}
+            >
+              <span className="timeline__day">{n.day}</span>
+              <span className="timeline__dot" />
+              <span className="timeline__title" style={{ whiteSpace: 'pre-line' }}>{n.title}</span>
+              <span className="timeline__desc">{n.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   AUDIENCE SPLIT
+   ====================================================================== */
+function AudienceSplit() {
+  return (
+    <section className="section section--soft">
+      <div className="container">
+        <div className="section__head">
+          <Eyebrow>Zwei Zielgruppen · Eine Marke</Eyebrow>
+          <h2 className="section__title">
+            Für die Menschen in der Pflege — und die Häuser, die sie suchen.
+          </h2>
+        </div>
+
+        <div className="audience-grid">
+          <Link to="/arbeitgeber" className="audience-card">
+            <ImageSlot
+              className="audience-card__img"
+              tag="Bildplatzhalter · Querformat"
+              caption="Wohnbereichsleitung im Gespräch — ruhig, konzentriert."
+            />
+            <div className="audience-card__body">
+              <span className="audience-card__eyebrow">
+                <span className="dot" />Für Einrichtungen
+              </span>
+              <h3 className="audience-card__title">
+                Pflegekräfte, die nicht nur anfangen — sondern bleiben.
+              </h3>
+              <p className="audience-card__desc">
+                Du brauchst nicht mehr Bewerbungen. Du brauchst die richtigen. Wir prüfen
+                vor der Vorstellung, ob Erwartungen und Realität zusammenpassen.
+              </p>
+              <ul className="audience-card__bullets">
+                <li>Weniger Probezeitabbrüche</li>
+                <li>Match-Bericht statt Profilflut</li>
+                <li>180-Tage-Wechselbegleitung verpflichtend</li>
+              </ul>
+              <span className="audience-card__link">
+                Für Einrichtungen <span className="arrow" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </Link>
+
+          <Link to="/pflegekraefte" className="audience-card">
+            <ImageSlot
+              className="audience-card__img"
+              tag="Bildplatzhalter · Querformat"
+              caption="Hände bei der Dokumentation — Ruhe, nicht Eile."
+            />
+            <div className="audience-card__body">
+              <span className="audience-card__eyebrow">
+                <span className="dot" />Für Pflegekräfte
+              </span>
+              <h3 className="audience-card__title">
+                Eine Stelle, die zu deinem Leben passt.
+              </h3>
+              <p className="audience-card__desc">
+                Du willst wechseln, aber nicht wieder enttäuscht werden. Erzähl uns von
+                deinem Alltag — wir öffnen nur die Türen, die zu dir passen.
+              </p>
+              <ul className="audience-card__bullets">
+                <li>Ehrlicher Erwartungsabgleich vor Start</li>
+                <li>Deine Dienstplanwünsche sind nicht Verhandlungsmasse</li>
+                <li>Wir bleiben auch nach Tag 1 erreichbar</li>
+              </ul>
+              <span className="audience-card__link">
+                Für Pflegekräfte <span className="arrow" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   COMPARISON
+   ====================================================================== */
+function Comparison() {
+  const rows = [
+    ['Vermittlungsfokus',           'Lebenslauf, Verfügbarkeit, Gehalt',     'Gesamtpassung: Fachlich, Dienstplan, Team, Belastung, Führung'],
+    ['Was du als Einrichtung bekommst', 'Profilstapel zur Sichtung',         'Begründeter Match-Bericht mit Risiken und Startbedingungen'],
+    ['Was nach Unterschrift passiert',  'Vermittler ist raus',               '180-Tage-Begleitung mit Check-ins an Tag 7/30/60/100/180'],
+    ['Dienstplanrealität',          'Wird selten geprüft',                   'Vor Vorstellung abgeglichen — keine schöngefärbten Versprechen'],
+    ['Risiken vor Start',           'Bleiben oft unsichtbar',                'Werden im Bericht benannt — grün, gelb, rot'],
+    ['Wenn es nach Tag 14 hakt',    'Problem der Einrichtung',               'Konfliktmoderation, Erwartungs-Neujustierung, Frühwarnung'],
+    ['Erfolgsmaß',                  'Vertragsunterschrift',                  'Verbleib nach 180 Tagen, gemessen und dokumentiert'],
+  ]
+  return (
+    <section className="section section--soft">
+      <div className="container">
+        <div className="section__head">
+          <Eyebrow>Wie wir uns unterscheiden</Eyebrow>
+          <h2 className="section__title">
+            Klassische Vermittlung endet bei der Unterschrift. Wir fangen dort erst an.
+          </h2>
+        </div>
+
+        <div className="compare">
+          <div className="compare__head">
+            <div className="compare__head-cell">&nbsp;</div>
+            <div className="compare__head-cell">Klassische Vermittlung</div>
+            <div className="compare__head-cell compare__head-cell--brand">
+              <span className="dot" />Medilane PflegeMatch 180
+            </div>
+          </div>
+          {rows.map(([topic, classic, medi]) => (
+            <div key={topic} className="compare__row">
+              <div className="compare__cell compare__cell--label">{topic}</div>
+              <div className="compare__cell">{classic}</div>
+              <div className="compare__cell compare__cell--brand">{medi}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   QUOTE
+   ====================================================================== */
+function QuoteBlock() {
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="quote-block">
+          <ImageSlot
+            className="quote-block__media"
+            tag="Bildplatzhalter · Porträt 4:5"
+            caption="Ruhiges Porträt einer Pflegekraft im Alltagslicht. Keine Pose, keine Inszenierung."
+          />
+          <div className="quote-block__copy">
+            <Eyebrow>Stimmen</Eyebrow>
+            <span className="quote-block__mark">„</span>
+            <p className="quote-block__text">
+              Medilane hat mir nicht die nächste Stelle vermittelt, sondern die richtige.
+              Drei Gespräche, kein Druck — und ein Team, das mich auch nach der Probezeit
+              noch anruft.
+            </p>
+            <div className="quote-block__attr">
+              <div className="quote-block__avatar">LH</div>
+              <div className="quote-block__who">
+                <span className="quote-block__name">Lena Hartmann</span>
+                <span className="quote-block__role">Examinierte Altenpflegerin · Berlin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   FAQ
+   ====================================================================== */
+function FAQ() {
+  const items = [
+    {
+      q: 'Ist Medilane eine Zeitarbeitsfirma?',
+      a: 'Nein. Wir setzen auf Direktvermittlung und langfristige Integration. Ziel ist nicht kurzfristige Arbeitnehmerüberlassung, sondern eine stabile Besetzung, die nach 180 Tagen noch steht.',
+    },
+    {
+      q: 'Was unterscheidet euch von klassischen Personalvermittlern?',
+      a: 'Wir kombinieren Vermittlung mit strukturiertem Matching auf beiden Seiten und einer 180-Tage-Wechselbegleitung. Der Prozess endet nicht bei der Unterschrift — er beginnt dort.',
+    },
+    {
+      q: 'Was passiert, wenn es nach dem Start Probleme gibt?',
+      a: 'Dann greift die Wechselbegleitung. Wir führen Check-ins durch, erkennen Frühwarnsignale und moderieren bei Bedarf zwischen Pflegekraft und Einrichtung. Wir ersetzen keine Führungsverantwortung — wir machen Probleme früh sichtbar.',
+    },
+    {
+      q: 'Kostet die Vermittlung Pflegekräfte etwas?',
+      a: 'Nein. Pflegekräfte zahlen für die Vermittlung nichts. Auch das Gespräch ist unverbindlich — du musst nicht wechseln, wenn du mit uns sprichst.',
+    },
+    {
+      q: 'Wie lange dauert eine Vermittlung?',
+      a: 'Das hängt von Region, Profil und Anforderungen ab. Wir priorisieren passende Matches gegenüber schneller, aber instabiler Besetzung. Lieber drei Wochen länger suchen als drei Monate später nachbesetzen.',
+    },
+    {
+      q: 'Werden Daten vertraulich behandelt?',
+      a: 'Ja. Eine Weitergabe an Einrichtungen erfolgt nur nach ausdrücklicher Abstimmung und Einwilligung. Wir erheben nur, was für das Matching wirklich relevant ist.',
+    },
+    {
+      q: 'Ist Beratung förderfähig?',
+      a: 'Die reine Vermittlung ist in der Regel nicht förderfähig. Beratungs- und Begleitmodule zu Personalbindung, Rückgewinnung, Wiedereinarbeitung oder Vereinbarkeit können je nach Programm und Einzelfall fördernah sein. Wir trennen das transparent.',
+    },
+  ]
+  const [open, setOpen] = useState<number>(0)
+  return (
+    <section className="section section--soft">
+      <div className="container">
+        <div className="section__head section__head--center">
+          <Eyebrow>Häufige Fragen</Eyebrow>
+          <h2 className="section__title">
+            Was Einrichtungen und Pflegekräfte uns am häufigsten fragen.
+          </h2>
+        </div>
+
+        <div className="faq">
+          {items.map((it, i) => {
+            const isOpen = open === i
+            return (
+              <div key={i} className={`faq__item ${isOpen ? 'faq__item--open' : ''}`}>
+                <button
+                  className="faq__btn"
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
+                >
+                  <span className="faq__q">{it.q}</span>
+                  <span className="faq__toggle" aria-hidden="true">+</span>
+                </button>
+                <p className="faq__a">{it.a}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   FINAL CTA
+   ====================================================================== */
+function FinalCTA() {
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="final-cta">
+          <div>
+            <h2 className="final-cta__title">
+              Pflege mit Zukunft beginnt mit einem ehrlichen Gespräch.
+            </h2>
+            <p className="final-cta__sub">
+              15 Minuten. Diskret. Unverbindlich. Du entscheidest, wie es weitergeht —
+              egal, ob du eine Einrichtung leitest oder eine neue Stelle suchst.
+            </p>
+          </div>
+          <div className="final-cta__col">
+            <Link to={PRIMARY} className="btn btn--inverse btn--lg">
+              <span>Erstgespräch für Einrichtungen</span>
+              <span className="arrow" aria-hidden="true">→</span>
+            </Link>
+            <Link
+              to={PFLEGEKRAFT}
+              className="btn btn--ghost btn--lg final-cta__ghost"
+            >
+              <span>Als Pflegekraft starten</span>
+              <span className="arrow" aria-hidden="true">→</span>
+            </Link>
+            <span className="final-cta__note">Antwort innerhalb von 24 Stunden · info@medi-lane.de</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   HERO B
+   ====================================================================== */
+function HeroB() {
+  return (
+    <section className="hero hero--b">
+      <div className="container">
+        <div className="hero__grid">
+          <div>
+            <div className="hero__topline">
+              <Eyebrow>Pflege mit Zukunft</Eyebrow>
+            </div>
+            <h1 className="hero__title">
+              Der passende Pflegejob ist mehr als eine offene <em>Stelle</em>.
+            </h1>
+            <p className="hero__sub">
+              Wir vermitteln Pflegekräfte nicht klassisch, sondern mit Matching auf beiden
+              Seiten und integrierter 180-Tage-Wechselbegleitung. Diskret. Verbindlich.
+              Auf Augenhöhe.
+            </p>
+            <div className="hero__cta">
+              <Link to={PRIMARY} className="btn btn--primary btn--lg">
+                Erstgespräch vereinbaren <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link to={PFLEGEKRAFT} className="btn btn--ghost btn--lg">
+                Als Pflegekraft starten →
+              </Link>
+            </div>
+            <p className="hero__note">15 Minuten · Diskret · Unverbindlich</p>
+            <div className="hero__avail">
+              <AvailabilityBar />
+            </div>
+          </div>
+
+          <div className="hero__image">
+            <img src={heroTeam} alt="Pflegeteam mit Bewohnerin im Empfangsbereich" />
+            <div className="hero__image-overlay">
+              <div className="avatar">LH</div>
+              <div className="who">
+                <strong>„Drei Gespräche. Kein Druck. Der richtige Ort."</strong>
+                <span>Lena, Altenpflegerin · Berlin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   PAGE
+   ====================================================================== */
 export default function HomePage() {
   return (
     <div className="home-page">
-      {/* ======== HERO ======== */}
-      <section className="hero" id="hero">
-        <div className="hero-bg">
-          <div className="hero-gradient" />
-          <div className="hero-mesh" />
-        </div>
-        <div className="container hero-container">
-          <div className="hero-content">
-            <div className="hero-badge animate-fadein">
-              <span className="badge-pulse" />
-              Neue Art der Pflegevermittlung
-            </div>
-            <h1 className="hero-title">
-              Der passende Pflegejob<br />
-              ist <span className="gradient-text">mehr als eine</span><br />
-              offene Stelle.
-            </h1>
-            <p className="hero-subtitle">
-              Wir begleiten Pflegekräfte diskret in den Job, der wirklich zu ihrem Leben passt — 
-              und helfen Arbeitgebern, Fachkräfte mit echter Passung zu finden.
-            </p>
-            <div className="hero-actions">
-              <a href={getFunnelUrl('website', 'organic', 'hero')} className="btn btn--primary btn--lg" id="hero-cta-funnel">
-                <UserCheck size={20} />
-                Wechselprofil erstellen
-              </a>
-              <Link to="/arbeitgeber" className="btn btn--secondary btn--lg" id="hero-cta-employer">
-                <Building2 size={20} />
-                Für Arbeitgeber
-              </Link>
-            </div>
-            <div className="hero-trust">
-              <div className="trust-item">
-                <Shield size={16} />
-                <span>DSGVO-konform</span>
-              </div>
-              <div className="trust-dot" />
-              <div className="trust-item">
-                <Clock size={16} />
-                <span>3 Min. Aufwand</span>
-              </div>
-              <div className="trust-dot" />
-              <div className="trust-item">
-                <Heart size={16} />
-                <span>100% kostenlos</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-image-wrapper">
-            <img src={heroImage} alt="Freundliche Pflegekraft in moderner Einrichtung" className="hero-image" />
-            <div className="hero-image-glow" />
-          </div>
-        </div>
-      </section>
-
-      {/* ======== PROBLEM ======== */}
-      <section className="section section--alt" id="problem">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Das Problem</span>
-              <h2 className="section-title">Warum einfach nur wechseln,<br />wenn man <span className="gradient-text">besser wechseln</span> kann?</h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="problem-grid">
-            <ScrollReveal delay={1}>
-              <div className="problem-card problem-card--nurse">
-                <div className="problem-card-header">
-                  <UserCheck size={24} />
-                  <h3>Pflegekräfte</h3>
-                </div>
-                <ul className="problem-list">
-                  <li><XCircle size={16} /> Zu viele Einspringdienste</li>
-                  <li><XCircle size={16} /> Chaotische Dienstpläne</li>
-                  <li><XCircle size={16} /> Fehlende Wertschätzung</li>
-                  <li><XCircle size={16} /> Schlechte Führung</li>
-                  <li><XCircle size={16} /> Wiederholte Fehlwechsel</li>
-                  <li><XCircle size={16} /> Überlastung im Alltag</li>
-                </ul>
-                <p className="problem-result">
-                  → Viele wechseln, landen aber wieder in ähnlichen Strukturen.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={2}>
-              <div className="problem-card problem-card--employer">
-                <div className="problem-card-header">
-                  <Building2 size={24} />
-                  <h3>Arbeitgeber</h3>
-                </div>
-                <ul className="problem-list">
-                  <li><XCircle size={16} /> Viele Bewerbungen, wenig Fit</li>
-                  <li><XCircle size={16} /> Hoher Streuverlust</li>
-                  <li><XCircle size={16} /> Kandidaten springen ab</li>
-                  <li><XCircle size={16} /> Hohe Frühfluktuation</li>
-                  <li><XCircle size={16} /> Stellen werden endlos neu besetzt</li>
-                  <li><XCircle size={16} /> Zeitverlust durch unpassende Gespräche</li>
-                </ul>
-                <p className="problem-result">
-                  → Klassische Vermittlung liefert Profile, aber keine Passung.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ======== APPROACH ======== */}
-      <section className="section" id="ansatz">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Unser Ansatz</span>
-              <h2 className="section-title">Keine Massenvermittlung.<br />Sondern <span className="gradient-text">echte Passung</span>.</h2>
-              <p className="section-subtitle">
-                Ein Matching-Modell, das Wechselgründe, Arbeitsrealität und echte Passung in den Mittelpunkt stellt.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="approach-grid">
-            <ScrollReveal delay={1}>
-              <div className="approach-card">
-                <div className="approach-icon">
-                  <Handshake size={28} />
-                </div>
-                <h3>Wechselbegleitung</h3>
-                <p>Wir begleiten nicht den schnellsten Wechsel, sondern den sinnvollsten. Mit Verständnis für Ihre Situation.</p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={2}>
-              <div className="approach-card">
-                <div className="approach-icon">
-                  <Target size={28} />
-                </div>
-                <h3>Echtes Matching</h3>
-                <p>Nicht „Qualifikation + freie Stelle = passt". Sondern Wünsche, No-Gos und Rahmenbedingungen werden abgeglichen.</p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={3}>
-              <div className="approach-card">
-                <div className="approach-icon">
-                  <TrendingUp size={28} />
-                </div>
-                <h3>Langfristiger Fit</h3>
-                <p>Ziel ist nicht irgendein Wechsel, sondern einer, der langfristig funktioniert — für beide Seiten.</p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ======== HOW IT WORKS ======== */}
-      <section className="section section--alt" id="so-funktionierts">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">So funktioniert's</span>
-              <h2 className="section-title">In drei Schritten zum <span className="gradient-text">passenden Job</span></h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="steps-row">
-            <ScrollReveal delay={1}>
-              <div className="step-card">
-                <div className="step-num">1</div>
-                <div className="step-icon-wrap"><Search size={32} /></div>
-                <h3>Wechselprofil anlegen</h3>
-                <p>Geben Sie Ihre Qualifikation, Wünsche, Prioritäten und Wechselgründe an — in nur 3 Minuten.</p>
-              </div>
-            </ScrollReveal>
-            <div className="step-connector"><ArrowRight size={24} /></div>
-            <ScrollReveal delay={2}>
-              <div className="step-card">
-                <div className="step-num">2</div>
-                <div className="step-icon-wrap"><Target size={32} /></div>
-                <h3>Intelligentes Matching</h3>
-                <p>Ihr Profil wird mit passenden Arbeitgebern abgeglichen — nicht nur fachlich, sondern ganzheitlich.</p>
-              </div>
-            </ScrollReveal>
-            <div className="step-connector"><ArrowRight size={24} /></div>
-            <ScrollReveal delay={3}>
-              <div className="step-card">
-                <div className="step-num">3</div>
-                <div className="step-icon-wrap"><CalendarCheck size={32} /></div>
-                <h3>Begleitung & Angebote</h3>
-                <p>Sie erhalten passende Angebote und werden begleitet, bis der richtige Arbeitgeber gefunden ist.</p>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          <ScrollReveal>
-            <div className="steps-cta">
-              <a href={getFunnelUrl('website', 'organic', 'steps')} className="btn btn--primary btn--lg" id="steps-cta-funnel">
-                Jetzt Wechselprofil erstellen — kostenlos
-                <ArrowRight size={20} />
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ======== FOR NURSES ======== */}
-      <section className="section" id="fuer-pflegekraefte">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Für Pflegekräfte</span>
-              <h2 className="section-title">Nicht einfach wechseln.<br /><span className="gradient-text">Besser wechseln.</span></h2>
-              <p className="section-subtitle">Ihr nächster Job soll nicht nur fachlich, sondern auch menschlich und organisatorisch passen.</p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid-3 benefits-cards">
-            {[
-              { icon: <Handshake size={24} />, title: 'Wechselbegleitung', desc: 'Nicht nur ein Job-Link, sondern echte Begleitung beim Übergang.' },
-              { icon: <ShieldCheck size={24} />, title: '100% diskret', desc: 'Ihr Arbeitgeber erfährt nichts. Profil wird nur anonymisiert vorgestellt.' },
-              { icon: <Target size={24} />, title: 'Wechselprofil statt CV', desc: 'Wünsche, No-Gos und Prioritäten zählen — nicht nur der Lebenslauf.' },
-              { icon: <Heart size={24} />, title: 'Passung vor Speed', desc: 'Ziel ist nicht der schnellste Wechsel, sondern der sinnvollste.' },
-              { icon: <Shield size={24} />, title: 'Weniger Fehlwechsel', desc: 'Durch tiefere Erfassung sinkt das Risiko, wieder falsch zu landen.' },
-              { icon: <Briefcase size={24} />, title: 'Echte Arbeitsrealität', desc: 'Dienstplan, Führung, Team und Arbeitsweg werden ernst genommen.' },
-            ].map((item, i) => (
-              <ScrollReveal key={i} delay={i % 3 + 1}>
-                <div className="benefit-card">
-                  <div className="benefit-icon-wrap">{item.icon}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal>
-            <div className="section-bottom-cta">
-              <Link to="/pflegekraefte" className="btn btn--secondary">
-                Mehr erfahren <ArrowRight size={18} />
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ======== FOR EMPLOYERS ======== */}
-      <section className="section section--alt" id="fuer-arbeitgeber">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Für Arbeitgeber</span>
-              <h2 className="section-title">Weniger Fluktuation durch<br /><span className="gradient-text">bessere Passung</span></h2>
-              <p className="section-subtitle">Wir vermitteln keine Masse, sondern wechselbereite Pflegekräfte mit klaren Erwartungen und echter Passung.</p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid-3 benefits-cards">
-            {[
-              { icon: <UserCheck size={24} />, title: 'Vorqualifizierte Profile', desc: 'Keine beliebigen Kandidaten, sondern Profile mit echter Passungslogik.' },
-              { icon: <TrendingUp size={24} />, title: 'Langfristige Besetzung', desc: 'Das Modell ist auf geringere Fluktuation und bessere Bindung ausgerichtet.' },
-              { icon: <Target size={24} />, title: 'Weniger Streuverlust', desc: 'Unpassende Kandidaten und unnötige Interviews werden reduziert.' },
-              { icon: <Search size={24} />, title: 'Echte Wechselmotive', desc: 'Wir wissen nicht nur wer sucht, sondern auch warum.' },
-              { icon: <CheckCircle size={24} />, title: 'Bessere Trefferquote', desc: 'Qualifikation + Rahmenbedingungen + kulturelle Passung.' },
-              { icon: <Users size={24} />, title: 'Persönlicher Partner', desc: 'Aktive Begleitung und direkte Vermittlung statt nur Plattform.' },
-            ].map((item, i) => (
-              <ScrollReveal key={i} delay={i % 3 + 1}>
-                <div className="benefit-card">
-                  <div className="benefit-icon-wrap benefit-icon-wrap--amber">{item.icon}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal>
-            <div className="section-bottom-cta">
-              <Link to="/arbeitgeber" className="btn btn--accent">
-                Kontakt aufnehmen <ArrowRight size={18} />
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ======== COMPARISON ======== */}
-      <section className="section" id="unterschied">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Der Unterschied</span>
-              <h2 className="section-title">Klassische Vermittlung vs. <span className="gradient-text">Medilane</span></h2>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <ComparisonTable rows={comparisonRows} />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ======== LEISTUNGEN ÜBERBLICK ======== */}
-      <section className="section section--alt" id="leistungen">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Leistungen im Überblick</span>
-              <h2 className="section-title">
-                Sechs Bausteine, ein <span className="gradient-text">Integrationsmodell</span>
-              </h2>
-              <p className="section-subtitle">
-                Vermittlung, Methodik, Begleitung, Beratung, Förderung und Plattform — Sie nutzen
-                nur, was zu Ihrer Situation passt.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="leistungen-grid">
-            {leistungen.map((l, i) => (
-              <ScrollReveal key={i} delay={(i % 3) + 1}>
-                <Link to={l.href} className="leistung-card">
-                  <div className="leistung-icon">{l.icon}</div>
-                  <h3>{l.title}</h3>
-                  <p>{l.description}</p>
-                  <span className="leistung-link">
-                    Mehr erfahren <ArrowRight size={16} />
-                  </span>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ======== MATCHING VISUAL ======== */}
-      <section className="section section--alt">
-        <div className="container">
-          <div className="matching-split">
-            <ScrollReveal>
-              <div className="matching-text">
-                <span className="section-badge">Unser Matching-Modell</span>
-                <h2 className="section-title" style={{ textAlign: 'left' }}>Gute Vermittlung beginnt mit <span className="gradient-text">Verständnis</span></h2>
-                <p className="matching-desc">
-                  Wir erfassen nicht nur Qualifikationen und Verfügbarkeit, sondern ein vollständiges Wechselprofil. 
-                  Darin werden Wechselgründe, No-Gos, bevorzugte Arbeitsmodelle, Schichtwünsche und Prioritäten berücksichtigt.
-                </p>
-                <ul className="matching-checklist">
-                  <li><CheckCircle size={18} /> Warum will die Pflegekraft wechseln?</li>
-                  <li><CheckCircle size={18} /> Was braucht sie wirklich?</li>
-                  <li><CheckCircle size={18} /> Was darf sich nicht wiederholen?</li>
-                  <li><CheckCircle size={18} /> Welcher Arbeitgeber passt tatsächlich?</li>
-                </ul>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={2}>
-              <div className="matching-image-wrapper">
-                <img src={matchingImage} alt="Medilane Matching-Modell Visualisierung" className="matching-image" />
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ======== FAQ ======== */}
-      <section className="section" id="faq">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Häufige Fragen</span>
-              <h2 className="section-title">Alles, was Sie <span className="gradient-text">wissen müssen</span></h2>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <FAQAccordion items={faqItems} />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ======== FINAL CTA ======== */}
-      <section className="section final-cta-section" id="start">
-        <div className="container">
-          <ScrollReveal>
-            <div className="final-cta-box">
-              <h2>Bereit für den Wechsel?</h2>
-              <p>
-                Erstellen Sie jetzt Ihr Wechselprofil und erhalten Sie passende Jobangebote —
-                kostenlos, diskret und unverbindlich.
-              </p>
-              <a href={getFunnelUrl('website', 'organic', 'final_cta')} className="btn btn--white btn--lg" id="final-cta-funnel">
-                Jetzt Wechselprofil erstellen
-                <ArrowRight size={20} />
-              </a>
-              <span className="final-cta-note">Kein Account nötig · 3 Minuten · DSGVO-konform</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <HeroB />
+      <TrustStrip />
+      <StatsStrip />
+      <ProblemChain />
+      <ThreePillars />
+      <MatchReportSection />
+      <Timeline180 />
+      <AudienceSplit />
+      <Comparison />
+      <QuoteBlock />
+      <FAQ />
+      <FinalCTA />
     </div>
   )
 }

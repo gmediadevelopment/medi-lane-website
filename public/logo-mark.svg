@@ -1,18 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-  <defs>
-    <linearGradient id="ml-mark-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#14B8A6"/>
-      <stop offset="100%" stop-color="#0F766E"/>
-    </linearGradient>
-  </defs>
-  <rect width="80" height="80" rx="18" fill="url(#ml-mark-bg)"/>
-  <path
-    d="M 18 58 L 18 22 L 40 44 L 62 22 L 62 58"
-    stroke="#ffffff"
-    stroke-width="6.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  />
-  <circle cx="40" cy="44" r="3.5" fill="#FCD34D"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Medilane">
+  
+  <circle cx="50" cy="50" r="48" fill="#0F172A"></circle>
+  
+  <g transform="translate(22 35.5)">
+    <path d="M3 33 L 3 11 A 11 11 0 0 1 25 11 L 25 33" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="square"></path>
+    <path d="M25 33 L 25 11 A 11 11 0 0 1 47 11 L 47 33" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="square"></path>
+  </g>
+  
+  <circle cx="68" cy="72" r="3" fill="#0D9488"></circle>
 </svg>

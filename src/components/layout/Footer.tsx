@@ -1,90 +1,68 @@
 import { Link } from 'react-router-dom'
-import { Heart, Mail, Phone, MapPin } from 'lucide-react'
+import Lockup from '../sections/Lockup'
+import AvailabilityBar from '../sections/AvailabilityBar'
 import './Footer.css'
 
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
     <footer className="site-footer">
-      <div className="footer-container">
-        <div className="footer-grid">
-          {/* Brand */}
-          <div className="footer-col footer-brand">
-            <Link to="/" className="footer-logo">
-              <span className="footer-logo-mark">M</span>
-              <span className="footer-logo-name">Medilane</span>
-            </Link>
-            <p className="footer-tagline">
-              Pflegekräfte finden, passend integrieren und langfristig halten —
-              mit Matching, Wechselbegleitung und Beratung für Pflegeeinrichtungen.
+      <div className="container">
+        <div className="site-footer__top">
+          <div className="site-footer__brand">
+            <Lockup inverse as="span" />
+            <p className="site-footer__about">
+              Medilane vermittelt und begleitet Pflegekräfte in Häuser, die zu ihrem Leben
+              passen. Diskret. Verbindlich. Auf Augenhöhe.
             </p>
-            <div className="footer-contact">
-              <a href="mailto:info@medi-lane.de" className="footer-contact-item">
-                <Mail size={16} />
-                info@medi-lane.de
-              </a>
-              <a href="tel:+4900000000" className="footer-contact-item">
-                <Phone size={16} />
-                +49 (0) 000 000 000
-              </a>
-              <span className="footer-contact-item">
-                <MapPin size={16} />
-                Deutschland
-              </span>
-            </div>
+            <AvailabilityBar
+              className="site-footer__avail"
+              style={{
+                background: 'transparent',
+                borderColor: 'rgba(255,255,255,0.12)',
+                color: 'var(--slate-300)',
+              }}
+            />
           </div>
 
-          {/* Für Einrichtungen */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Für Einrichtungen</h4>
-            <nav className="footer-nav">
-              <Link to="/arbeitgeber">Überblick</Link>
-              <Link to="/pflegematch-180">PflegeMatch 180</Link>
-              <Link to="/matching-system">Matching-System</Link>
-              <Link to="/wechselbegleitung">Wechselbegleitung</Link>
-              <Link to="/stabilitaetsberatung">Stabilitätsberatung</Link>
-              <Link to="/foerderung">Fördermöglichkeiten</Link>
-              <Link to="/digitale-plattform">Digitale Plattform</Link>
-            </nav>
+          <div className="site-footer__col">
+            <h4>Für Einrichtungen</h4>
+            <Link to="/arbeitgeber">Übersicht</Link>
+            <Link to="/pflegematch-180">PflegeMatch 180</Link>
+            <Link to="/stabilitaetsberatung">Stabilitätsberatung</Link>
+            <Link to="/digitale-plattform">Digitale Plattform</Link>
+            <Link to="/foerderung">Förderung</Link>
           </div>
 
-          {/* Für Pflegekräfte */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Für Pflegekräfte</h4>
-            <nav className="footer-nav">
-              <Link to="/pflegekraefte">Überblick</Link>
-              <Link to="/wechselberatung">Wechselberatung</Link>
-              <Link to="/arbeitgeber-finden">Arbeitgeber finden</Link>
-            </nav>
+          <div className="site-footer__col">
+            <h4>Für Pflegekräfte</h4>
+            <Link to="/pflegekraefte">Übersicht</Link>
+            <Link to="/wechselberatung">Wechselberatung</Link>
+            <Link to="/arbeitgeber-finden">Arbeitgeber finden</Link>
           </div>
 
-          {/* Unternehmen */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Unternehmen</h4>
-            <nav className="footer-nav">
-              <Link to="/ueber-uns">Über Medilane</Link>
-              <Link to="/wissen">Wissen</Link>
-              <Link to="/kontakt">Kontakt</Link>
-              <Link to="/demo-anfragen">Pilot / Demo</Link>
-            </nav>
+          <div className="site-footer__col">
+            <h4>Methodik</h4>
+            <Link to="/matching-system">Matching-System</Link>
+            <Link to="/wechselbegleitung">Wechselbegleitung</Link>
+            <Link to="/wissen">Wissen</Link>
           </div>
 
-          {/* Rechtliches */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Rechtliches</h4>
-            <nav className="footer-nav">
-              <Link to="/impressum">Impressum</Link>
-              <Link to="/datenschutz">Datenschutz</Link>
-            </nav>
+          <div className="site-footer__col">
+            <h4>Unternehmen</h4>
+            <Link to="/ueber-uns">Über uns</Link>
+            <Link to="/kontakt">Kontakt</Link>
+            <Link to="/demo-anfragen">Demo / Pilot</Link>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p className="footer-copy">
-            © {new Date().getFullYear()} Medilane. Alle Rechte vorbehalten.
-          </p>
-          <p className="footer-made">
-            Mit <Heart size={14} className="footer-heart" /> für die Pflege gemacht
-          </p>
+        <div className="site-footer__bottom">
+          <span className="num">© {year} · Medilane</span>
+          <div className="site-footer__legal">
+            <a href="mailto:info@medi-lane.de">info@medi-lane.de</a>
+            <Link to="/datenschutz">Datenschutz</Link>
+            <Link to="/impressum">Impressum</Link>
+          </div>
         </div>
       </div>
     </footer>

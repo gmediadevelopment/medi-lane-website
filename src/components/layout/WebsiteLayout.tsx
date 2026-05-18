@@ -6,7 +6,6 @@ import Footer from './Footer'
 export default function WebsiteLayout() {
   const { pathname } = useLocation()
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
@@ -14,7 +13,7 @@ export default function WebsiteLayout() {
   return (
     <>
       <Header />
-      <main style={{ paddingTop: 'var(--header-height)' }}>
+      <main>
         <Outlet />
       </main>
       <Footer />
