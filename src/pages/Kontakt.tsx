@@ -171,7 +171,7 @@ export default function Kontakt() {
               <p>Welche Bestandteile fördernah aufgesetzt werden können.</p>
             </Link>
             <Link to="/ueber-uns" className="kontakt-quicklink">
-              <h3>Über Medi-Lane</h3>
+              <h3>Über Medilane</h3>
               <p>Warum wir Vermittlung anders denken.</p>
             </Link>
           </div>

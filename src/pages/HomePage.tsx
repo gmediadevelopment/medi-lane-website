@@ -62,7 +62,7 @@ const comparisonRows = [
 
 const faqItems = [
   {
-    question: 'Ist Medi-Lane kostenlos für Pflegekräfte?',
+    question: 'Ist Medilane kostenlos für Pflegekräfte?',
     answer: 'Ja, für Pflegekräfte ist unser Service vollständig kostenlos. Wir finanzieren uns über eine Vermittlungsgebühr, die der Arbeitgeber bei erfolgreicher Besetzung zahlt.',
   },
   {
@@ -70,7 +70,7 @@ const faqItems = [
     answer: 'Nein. Viele Pflegekräfte erstellen ihr Wechselprofil, um sich unverbindlich zu orientieren. Sie müssen sich nicht sofort auf einen Wechsel festlegen.',
   },
   {
-    question: 'Wie unterscheidet sich Medi-Lane von einer Jobbörse?',
+    question: 'Wie unterscheidet sich Medilane von einer Jobbörse?',
     answer: 'Jobbörsen zeigen Ihnen offene Stellen. Wir erfassen ein vollständiges Wechselprofil — mit Ihren Wünschen, Prioritäten und No-Gos — und matchen Sie aktiv mit passenden Arbeitgebern. Das ist keine Stellensuche, sondern echte Wechselbegleitung.',
   },
   {
@@ -86,7 +86,7 @@ const faqItems = [
     answer: 'Wir arbeiten mit stationären Pflegeeinrichtungen, ambulanten Diensten, Kliniken, Intensivpflege-Anbietern und Einrichtungen für betreutes Wohnen zusammen.',
   },
   {
-    question: 'Was macht Medi-Lane für Arbeitgeber?',
+    question: 'Was macht Medilane für Arbeitgeber?',
     answer: 'Wir liefern vorqualifizierte Wechselprofile von Pflegekräften mit klarer Passungslogik. Weniger Streuverlust, bessere Trefferquote und nachhaltigere Besetzungen.',
   },
 ]
@@ -384,7 +384,7 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="section-header">
               <span className="section-badge">Der Unterschied</span>
-              <h2 className="section-title">Klassische Vermittlung vs. <span className="gradient-text">Medi-Lane</span></h2>
+              <h2 className="section-title">Klassische Vermittlung vs. <span className="gradient-text">Medilane</span></h2>
             </div>
           </ScrollReveal>
 
@@ -449,7 +449,7 @@ export default function HomePage() {
             </ScrollReveal>
             <ScrollReveal delay={2}>
               <div className="matching-image-wrapper">
-                <img src={matchingImage} alt="Medi-Lane Matching-Modell Visualisierung" className="matching-image" />
+                <img src={matchingImage} alt="Medilane Matching-Modell Visualisierung" className="matching-image" />
               </div>
             </ScrollReveal>
           </div>

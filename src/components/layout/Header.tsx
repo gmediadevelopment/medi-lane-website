@@ -26,7 +26,7 @@ const NAV_GROUPS: NavGroup[] = [
       { label: 'Wechselbegleitung', to: '/wechselbegleitung', description: '180-Tage-Begleitung' },
       { label: 'Stabilitätsberatung', to: '/stabilitaetsberatung', description: 'Beratung für Verbleib' },
       { label: 'Fördermöglichkeiten', to: '/foerderung', description: 'Zuschüsse prüfen' },
-      { label: 'Digitale Plattform', to: '/digitale-plattform', description: 'Medi-Lane CareOS' },
+      { label: 'Digitale Plattform', to: '/digitale-plattform', description: 'Medilane CareOS' },
     ],
   },
   {
@@ -70,7 +70,7 @@ export default function Header() {
       <div className="header-inner">
         <Link to="/" className="header-logo" id="header-logo">
           <span className="logo-mark">M</span>
-          <span className="logo-name">Medi-Lane</span>
+          <span className="logo-name">Medilane</span>
         </Link>
 
         <nav className={`header-nav ${mobileOpen ? 'header-nav--open' : ''}`} id="main-nav">

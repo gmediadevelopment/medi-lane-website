@@ -267,7 +267,7 @@ export default function Wechselbegleitung() {
                 <span className="gradient-text">ein Indikator auslöst</span>
               </h2>
               <p className="section-subtitle">
-                Medi-Lane ersetzt keine Führungsverantwortung der Einrichtung. Unsere Rolle:
+                Medilane ersetzt keine Führungsverantwortung der Einrichtung. Unsere Rolle:
                 Probleme früh sichtbar machen, Erwartungen klären, Maßnahmen festhalten, nachhalten.
               </p>
             </div>

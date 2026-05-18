@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="footer-col footer-brand">
             <Link to="/" className="footer-logo">
               <span className="footer-logo-mark">M</span>
-              <span className="footer-logo-name">Medi-Lane</span>
+              <span className="footer-logo-name">Medilane</span>
             </Link>
             <p className="footer-tagline">
               Pflegekräfte finden, passend integrieren und langfristig halten —
@@ -61,7 +61,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-heading">Unternehmen</h4>
             <nav className="footer-nav">
-              <Link to="/ueber-uns">Über Medi-Lane</Link>
+              <Link to="/ueber-uns">Über Medilane</Link>
               <Link to="/wissen">Wissen</Link>
               <Link to="/kontakt">Kontakt</Link>
               <Link to="/demo-anfragen">Pilot / Demo</Link>
@@ -80,7 +80,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p className="footer-copy">
-            © {new Date().getFullYear()} Medi-Lane. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Medilane. Alle Rechte vorbehalten.
           </p>
           <p className="footer-made">
             Mit <Heart size={14} className="footer-heart" /> für die Pflege gemacht

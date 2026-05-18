@@ -44,7 +44,7 @@ const pillars = [
     icon: <CalendarClock size={28} />,
     title: '180-Tage-Wechselbegleitung',
     description:
-      'Nach der Einstellung bleibt Medi-Lane aktiv: strukturierte Check-ins decken Risiken auf, bevor sie zu Kündigungen werden.',
+      'Nach der Einstellung bleibt Medilane aktiv: strukturierte Check-ins decken Risiken auf, bevor sie zu Kündigungen werden.',
     bullets: [
       'Check-ins nach 7, 30, 60, 100 und 180 Tagen',
       'Frühwarnindikatoren und Konfliktmoderation',

@@ -140,7 +140,7 @@ export default function ArbeitgeberPage() {
                 <span>vs.</span>
               </div>
               <div className="approach-col approach-col--new">
-                <h3><CheckCircle size={20} /> Medi-Lane denkt</h3>
+                <h3><CheckCircle size={20} /> Medilane denkt</h3>
                 <ol>
                   <li>Warum will die Pflegekraft wechseln?</li>
                   <li>Was braucht sie wirklich?</li>
@@ -160,7 +160,7 @@ export default function ArbeitgeberPage() {
           <ScrollReveal>
             <div className="section-header">
               <span className="section-badge section-badge--amber">Ihre Vorteile</span>
-              <h2 className="section-title">Warum Einrichtungen auf <span className="gradient-text--amber">Medi-Lane</span> setzen</h2>
+              <h2 className="section-title">Warum Einrichtungen auf <span className="gradient-text--amber">Medilane</span> setzen</h2>
             </div>
           </ScrollReveal>
 

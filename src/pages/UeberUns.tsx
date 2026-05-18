@@ -49,14 +49,14 @@ export default function UeberUns() {
   return (
     <div className="ueber-page">
       <PageHero
-        badge="Über Medi-Lane"
+        badge="Über Medilane"
         title={
           <>
             Vermittlung muss{' '}
             <span className="gradient-text">ehrlicher</span> werden
           </>
         }
-        subtitle="Medi-Lane entsteht aus der Überzeugung, dass Pflegevermittlung besser funktionieren muss. Nicht schneller, lauter oder aggressiver — sondern ehrlicher, strukturierter und nachhaltiger."
+        subtitle="Medilane entsteht aus der Überzeugung, dass Pflegevermittlung besser funktionieren muss. Nicht schneller, lauter oder aggressiver — sondern ehrlicher, strukturierter und nachhaltiger."
       />
 
       {/* MOTIVATION */}
@@ -64,7 +64,7 @@ export default function UeberUns() {
         <div className="container container--narrow">
           <ScrollReveal>
             <div className="motivation-block">
-              <span className="section-badge">Warum es Medi-Lane gibt</span>
+              <span className="section-badge">Warum es Medilane gibt</span>
               <h2 className="section-title">
                 Pflegeeinrichtungen brauchen Stabilität.<br />
                 Pflegekräfte brauchen{' '}
@@ -130,10 +130,10 @@ export default function UeberUns() {
               <div className="founder-text">
                 <span className="section-badge">Gründer</span>
                 <h2 className="section-title" style={{ textAlign: 'left' }}>
-                  Wer hinter Medi-Lane steht
+                  Wer hinter Medilane steht
                 </h2>
                 <p>
-                  Medi-Lane wurde gegründet aus persönlicher Erfahrung mit den Strukturproblemen
+                  Medilane wurde gegründet aus persönlicher Erfahrung mit den Strukturproblemen
                   der Pflegebranche und der Überzeugung, dass es eine ehrlichere, methodisch
                   bessere Form der Vermittlung geben muss.
                 </p>
@@ -156,7 +156,7 @@ export default function UeberUns() {
         <div className="container">
           <ScrollReveal>
             <div className="final-cta-box">
-              <h2>Medi-Lane kennenlernen</h2>
+              <h2>Medilane kennenlernen</h2>
               <p>
                 Ob Einrichtung, Pflegekraft oder Partner — wir nehmen uns Zeit für ein erstes
                 Gespräch und prüfen ehrlich, ob unser Modell zu Ihrer Situation passt.

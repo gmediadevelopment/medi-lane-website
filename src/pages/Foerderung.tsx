@@ -189,7 +189,7 @@ export default function Foerderung() {
                   </div>
                   <p className="program-desc">{p.description}</p>
                   <div className="program-relevance">
-                    <strong>Für Medi-Lane relevant:</strong> {p.relevance}
+                    <strong>Für Medilane relevant:</strong> {p.relevance}
                   </div>
                 </div>
               </ScrollReveal>

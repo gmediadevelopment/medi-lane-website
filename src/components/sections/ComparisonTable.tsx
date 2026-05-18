@@ -16,7 +16,7 @@ interface ComparisonTableProps {
 export default function ComparisonTable({
   rows,
   classicHeader = 'Klassisch',
-  medilaneHeader = 'Medi-Lane',
+  medilaneHeader = 'Medilane',
 }: ComparisonTableProps) {
   return (
     <div className="comparison-wrapper">

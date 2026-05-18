@@ -38,7 +38,7 @@ const steps = [
 ]
 
 const faqItems = [
-  { question: 'Ist der Service kostenlos für mich?', answer: 'Ja, für Pflegekräfte ist Medi-Lane vollständig kostenlos. Wir finanzieren uns über den Arbeitgeber bei erfolgreicher Vermittlung.' },
+  { question: 'Ist der Service kostenlos für mich?', answer: 'Ja, für Pflegekräfte ist Medilane vollständig kostenlos. Wir finanzieren uns über den Arbeitgeber bei erfolgreicher Vermittlung.' },
   { question: 'Muss ich dafür meinen aktuellen Job kündigen?', answer: 'Nein. Sie erstellen zunächst nur Ihr Wechselprofil. Ein tatsächlicher Wechsel findet nur statt, wenn Sie sich aktiv dafür entscheiden.' },
   { question: 'Erfährt mein Arbeitgeber davon?', answer: 'Nein. Ihr Profil wird anonymisiert und erst nach Ihrer ausdrücklichen Zustimmung an einen Arbeitgeber weitergegeben.' },
   { question: 'Wie lange dauert es, bis ich Angebote bekomme?', answer: 'In der Regel erhalten Sie innerhalb von 48 Stunden eine erste Rückmeldung mit passenden Optionen.' },
@@ -154,7 +154,7 @@ export default function PflegekraeftePage() {
           <ScrollReveal>
             <div className="section-header">
               <span className="section-badge">Ihre Vorteile</span>
-              <h2 className="section-title">Warum Pflegekräfte <span className="gradient-text">Medi-Lane</span> wählen</h2>
+              <h2 className="section-title">Warum Pflegekräfte <span className="gradient-text">Medilane</span> wählen</h2>
             </div>
           </ScrollReveal>
 

@@ -110,7 +110,7 @@ export default function ContactForm({
     const payload: Record<string, string | undefined> = {
       access_key: accessKey,
       subject: `Anfrage von ${TYPE_LABEL[type]} via medi-lane.de`,
-      from_name: 'Medi-Lane Website',
+      from_name: 'Medilane Website',
       botcheck: '',
       anfrage_typ: TYPE_LABEL[type],
       quelle: source,

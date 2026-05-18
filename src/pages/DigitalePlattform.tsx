@@ -45,7 +45,7 @@ const nutzergruppen = [
   },
   {
     icon: <Settings2 size={28} />,
-    title: 'Medi-Lane',
+    title: 'Medilane',
     description:
       'Steuerung der Kandidatenpipeline, Match-Scoring, Check-in-Management und Qualitätssicherung.',
     bullets: [
@@ -111,7 +111,7 @@ export default function DigitalePlattform() {
   return (
     <div className="plattform-page">
       <PageHero
-        badge="Medi-Lane CareOS"
+        badge="Medilane CareOS"
         title={
           <>
             Die digitale Plattform für Matching,<br />
@@ -119,7 +119,7 @@ export default function DigitalePlattform() {
             <span className="gradient-text">Personalstabilität</span>
           </>
         }
-        subtitle="Medi-Lane CareOS verbindet Fragebögen, Match-Berichte, Check-ins und KPI-Dashboards in einem System. Wir bauen sie schrittweise auf, aus validierten Prozessen — nicht aus Slides."
+        subtitle="Medilane CareOS verbindet Fragebögen, Match-Berichte, Check-ins und KPI-Dashboards in einem System. Wir bauen sie schrittweise auf, aus validierten Prozessen — nicht aus Slides."
         actions={
           <>
             <Link to="/kontakt?typ=partner" className="btn btn--primary btn--lg">
@@ -180,7 +180,7 @@ export default function DigitalePlattform() {
                 <span className="gradient-text">eigene Sicht</span>
               </h2>
               <p className="section-subtitle">
-                Einrichtungen, Pflegekräfte und das Medi-Lane-Team arbeiten mit demselben System —
+                Einrichtungen, Pflegekräfte und das Medilane-Team arbeiten mit demselben System —
                 jeweils mit der passenden Tiefe und Sichtbarkeit.
               </p>
             </div>

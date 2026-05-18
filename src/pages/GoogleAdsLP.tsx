@@ -12,11 +12,11 @@ import matchingImage from '../assets/matching-visual.png'
 import './GoogleAdsLP.css'
 
 const faqItems = [
-  { question: 'Ist der Service wirklich kostenlos?', answer: 'Ja, für Pflegekräfte ist Medi-Lane zu 100% kostenlos. Keine versteckten Kosten. Wir finanzieren uns ausschließlich über eine Vermittlungsgebühr, die der Arbeitgeber zahlt.' },
+  { question: 'Ist der Service wirklich kostenlos?', answer: 'Ja, für Pflegekräfte ist Medilane zu 100% kostenlos. Keine versteckten Kosten. Wir finanzieren uns ausschließlich über eine Vermittlungsgebühr, die der Arbeitgeber zahlt.' },
   { question: 'Muss ich dafür kündigen?', answer: 'Nein! Sie erstellen nur ein unverbindliches Wechselprofil. Ein Wechsel passiert nur, wenn Sie sich aktiv dafür entscheiden. Kein Druck, keine Verpflichtung.' },
   { question: 'Erfährt mein Arbeitgeber davon?', answer: 'Absolut nicht. Ihr Profil wird nur anonymisiert an potenzielle Arbeitgeber vorgestellt. Ihre Kontaktdaten werden erst nach Ihrer ausdrücklichen Zustimmung weitergegeben.' },
   { question: 'Wie schnell bekomme ich Angebote?', answer: 'In der Regel erhalten Sie innerhalb von 48 Stunden eine erste Rückmeldung mit passenden Stellen.' },
-  { question: 'Was unterscheidet Medi-Lane von Jobbörsen?', answer: 'Jobbörsen zeigen Ihnen offene Stellen. Wir erfassen ein komplettes Wechselprofil mit Ihren Wünschen, No-Gos und Prioritäten — und matchen Sie aktiv mit Arbeitgebern, die wirklich zu Ihnen passen.' },
+  { question: 'Was unterscheidet Medilane von Jobbörsen?', answer: 'Jobbörsen zeigen Ihnen offene Stellen. Wir erfassen ein komplettes Wechselprofil mit Ihren Wünschen, No-Gos und Prioritäten — und matchen Sie aktiv mit Arbeitgebern, die wirklich zu Ihnen passen.' },
   { question: 'Welche Bereiche werden abgedeckt?', answer: 'Stationäre Pflege, ambulante Pflege, Klinik, außerklinische Intensivpflege und betreutes Wohnen — weitere Bereiche kommen laufend dazu.' },
 ]
 
@@ -42,7 +42,7 @@ export default function GoogleAdsLP() {
       <div className="ads-logo">
         <a href="/" className="ads-logo-link">
           <span className="ads-logo-mark">M</span>
-          <span className="ads-logo-name">Medi-Lane</span>
+          <span className="ads-logo-name">Medilane</span>
         </a>
       </div>
 
@@ -156,7 +156,7 @@ export default function GoogleAdsLP() {
             Nicht einfach wechseln. <span className="ads-highlight">Besser wechseln.</span>
           </h2>
           <p className="ads-section-subtitle">
-            Medi-Lane ist keine Jobbörse und keine Zeitarbeit. Wir sind Ihre persönliche Wechselbegleitung.
+            Medilane ist keine Jobbörse und keine Zeitarbeit. Wir sind Ihre persönliche Wechselbegleitung.
           </p>
 
           <div className="ads-approach-split">
@@ -255,7 +255,7 @@ export default function GoogleAdsLP() {
       <section className="ads-section">
         <div className="ads-container">
           <h2 className="ads-section-title">
-            Warum Pflegekräfte <span className="ads-highlight">Medi-Lane</span> wählen
+            Warum Pflegekräfte <span className="ads-highlight">Medilane</span> wählen
           </h2>
           <div className="ads-usp-grid">
             {[
@@ -280,7 +280,7 @@ export default function GoogleAdsLP() {
       <section className="ads-section ads-section--alt">
         <div className="ads-container">
           <h2 className="ads-section-title">
-            Jobbörse vs. <span className="ads-highlight">Medi-Lane</span>
+            Jobbörse vs. <span className="ads-highlight">Medilane</span>
           </h2>
 
           <div className="ads-comparison">
@@ -295,7 +295,7 @@ export default function GoogleAdsLP() {
               </ul>
             </div>
             <div className="ads-comp-col ads-comp-col--new">
-              <h3><CheckCircle size={20} /> Medi-Lane</h3>
+              <h3><CheckCircle size={20} /> Medilane</h3>
               <ul>
                 <li>Wir finden passende Jobs für Sie</li>
                 <li>Wechselprofil statt Bewerbungsmarathon</li>
@@ -329,7 +329,7 @@ export default function GoogleAdsLP() {
               </ul>
             </div>
             <div className="ads-matching-img">
-              <img src={matchingImage} alt="Medi-Lane Matching-Modell" />
+              <img src={matchingImage} alt="Medilane Matching-Modell" />
             </div>
           </div>
         </div>
