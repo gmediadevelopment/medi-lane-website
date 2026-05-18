@@ -145,12 +145,14 @@ export default function Datenschutz() {
         <section className="legal-section">
           <h2>6. Externe Dienste</h2>
 
-          <h3>Supabase</h3>
+          <h3>Web3Forms</h3>
           <p>
-            Für die Speicherung von Daten nutzen wir Supabase (Supabase Inc.). Die Server befinden 
-            sich in der EU. Die Datenschutzerklärung von Supabase finden Sie unter:{' '}
-            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">
-              https://supabase.com/privacy
+            Zur Übermittlung der Kontaktformular-Anfragen nutzen wir den Dienst Web3Forms
+            (Codewithyou Pty Ltd). Die Anfragedaten werden ausschließlich zur Zustellung
+            per E-Mail an uns verarbeitet und nicht dauerhaft gespeichert. Mehr Informationen
+            finden Sie unter:{' '}
+            <a href="https://web3forms.com/privacy-policy" target="_blank" rel="noopener noreferrer">
+              https://web3forms.com/privacy-policy
             </a>
           </p>
 

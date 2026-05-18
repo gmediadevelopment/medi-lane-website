@@ -1,0 +1,114 @@
+/* ============================================
+   COMPARISON TABLE
+   ============================================ */
+
+.comparison-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.comparison-table {
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-gray-200);
+}
+
+.comp-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1.4fr;
+  background: var(--color-gray-900);
+  color: white;
+}
+
+.comp-header .comp-cell {
+  padding: var(--space-5) var(--space-6);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
+  display: flex;
+  align-items: center;
+}
+
+.comp-header .comp-label {
+  background: var(--color-gray-800);
+}
+
+.comp-header .comp-old {
+  background: var(--color-gray-700);
+  color: var(--color-gray-300);
+}
+
+.comp-header .comp-new {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+}
+
+.comp-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1.4fr;
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.comp-row:hover {
+  background: var(--color-gray-50);
+}
+
+.comp-cell {
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.comp-label {
+  font-weight: var(--font-semibold);
+  color: var(--color-gray-900);
+  background: var(--color-gray-50);
+}
+
+.comp-old {
+  color: var(--color-gray-500);
+}
+
+.comp-new {
+  color: var(--color-gray-800);
+  font-weight: var(--font-medium);
+  background: var(--color-primary-lightest);
+}
+
+.comp-icon {
+  flex-shrink: 0;
+}
+
+.comp-icon--no {
+  color: var(--color-gray-400);
+}
+
+.comp-icon--yes {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .comp-header,
+  .comp-row {
+    grid-template-columns: 1fr;
+  }
+
+  .comp-header .comp-label {
+    display: none;
+  }
+
+  .comp-cell {
+    padding: var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .comp-row .comp-label {
+    background: var(--color-gray-900);
+    color: white;
+    font-weight: var(--font-bold);
+  }
+}

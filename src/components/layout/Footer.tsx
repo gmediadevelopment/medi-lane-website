@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Heart, Mail, Phone, MapPin } from 'lucide-react'
-import { getFunnelUrl } from '../../lib/tracking'
 import './Footer.css'
 
 export default function Footer() {
@@ -15,7 +14,8 @@ export default function Footer() {
               <span className="footer-logo-name">Medi-Lane</span>
             </Link>
             <p className="footer-tagline">
-              Wir begleiten Pflegekräfte diskret in den Job, der wirklich zu ihrem Leben passt.
+              Pflegekräfte finden, passend integrieren und langfristig halten —
+              mit Matching, Wechselbegleitung und Beratung für Pflegeeinrichtungen.
             </p>
             <div className="footer-contact">
               <a href="mailto:info@medi-lane.de" className="footer-contact-item">
@@ -33,28 +33,42 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Pflegekräfte */}
+          {/* Für Einrichtungen */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Für Einrichtungen</h4>
+            <nav className="footer-nav">
+              <Link to="/arbeitgeber">Überblick</Link>
+              <Link to="/pflegematch-180">PflegeMatch 180</Link>
+              <Link to="/matching-system">Matching-System</Link>
+              <Link to="/wechselbegleitung">Wechselbegleitung</Link>
+              <Link to="/stabilitaetsberatung">Stabilitätsberatung</Link>
+              <Link to="/foerderung">Fördermöglichkeiten</Link>
+              <Link to="/digitale-plattform">Digitale Plattform</Link>
+            </nav>
+          </div>
+
+          {/* Für Pflegekräfte */}
           <div className="footer-col">
             <h4 className="footer-heading">Für Pflegekräfte</h4>
             <nav className="footer-nav">
-              <Link to="/pflegekraefte">Wechselbegleitung</Link>
-              <a href={getFunnelUrl('website', 'organic', 'footer')}>Wechselprofil erstellen</a>
-              <Link to="/pflegekraefte#ablauf">So funktioniert's</Link>
-              <Link to="/pflegekraefte#faq">Häufige Fragen</Link>
+              <Link to="/pflegekraefte">Überblick</Link>
+              <Link to="/wechselberatung">Wechselberatung</Link>
+              <Link to="/arbeitgeber-finden">Arbeitgeber finden</Link>
             </nav>
           </div>
 
-          {/* Arbeitgeber */}
+          {/* Unternehmen */}
           <div className="footer-col">
-            <h4 className="footer-heading">Für Arbeitgeber</h4>
+            <h4 className="footer-heading">Unternehmen</h4>
             <nav className="footer-nav">
-              <Link to="/arbeitgeber">Matching-Modell</Link>
-              <Link to="/arbeitgeber#vorteile">Ihre Vorteile</Link>
-              <Link to="/arbeitgeber#kontakt">Kontakt aufnehmen</Link>
+              <Link to="/ueber-uns">Über Medi-Lane</Link>
+              <Link to="/wissen">Wissen</Link>
+              <Link to="/kontakt">Kontakt</Link>
+              <Link to="/demo-anfragen">Pilot / Demo</Link>
             </nav>
           </div>
 
-          {/* Legal */}
+          {/* Rechtliches */}
           <div className="footer-col">
             <h4 className="footer-heading">Rechtliches</h4>
             <nav className="footer-nav">
