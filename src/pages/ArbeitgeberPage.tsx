@@ -1,9 +1,11 @@
 import {
   ArrowRight, UserCheck, TrendingUp, Target, Search, CheckCircle, Users,
-  XCircle, Building2, ClipboardList, Handshake, BarChart3
+  XCircle, Building2, ClipboardList, Handshake, BarChart3,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import ContactForm from '../components/ui/ContactForm'
+import Eyebrow from '../components/sections/Eyebrow'
 import './ArbeitgeberPage.css'
 
 const problems = [
@@ -25,10 +27,10 @@ const usps = [
 ]
 
 const steps = [
-  { num: '1', icon: <ClipboardList size={28} />, title: 'Bedarf verstehen', desc: 'Wir erfassen nicht nur die offene Stelle, sondern die tatsächlichen Rahmenbedingungen Ihrer Einrichtung.' },
-  { num: '2', icon: <UserCheck size={28} />, title: 'Passendes Wechselprofil vorstellen', desc: 'Sie erhalten Profile von Pflegekräften, die fachlich und von ihren Erwartungen her zu Ihnen passen.' },
-  { num: '3', icon: <Handshake size={28} />, title: 'Gespräch & Abgleich', desc: 'Nur sinnvolle Matches werden weiterverfolgt — kein Zeitverlust durch unpassende Gespräche.' },
-  { num: '4', icon: <CheckCircle size={28} />, title: 'Besetzung mit höherer Passung', desc: 'Ziel ist eine Besetzung, die nicht nur kurzfristig funktioniert, sondern langfristig hält.' },
+  { num: '01', icon: <ClipboardList size={24} />, title: 'Bedarf verstehen', desc: 'Wir erfassen nicht nur die offene Stelle, sondern die tatsächlichen Rahmenbedingungen deiner Einrichtung.' },
+  { num: '02', icon: <UserCheck size={24} />, title: 'Passendes Profil vorstellen', desc: 'Du bekommst Pflegekräfte, die fachlich und von ihren Erwartungen her zu deinem Haus passen.' },
+  { num: '03', icon: <Handshake size={24} />, title: 'Gespräch und Abgleich', desc: 'Nur sinnvolle Matches werden weiterverfolgt — kein Zeitverlust durch unpassende Gespräche.' },
+  { num: '04', icon: <CheckCircle size={24} />, title: 'Besetzung mit Passung', desc: 'Ziel ist eine Besetzung, die nicht nur kurzfristig funktioniert, sondern langfristig hält.' },
 ]
 
 export default function ArbeitgeberPage() {
@@ -36,43 +38,41 @@ export default function ArbeitgeberPage() {
     <div className="employer-page">
       {/* ======== HERO ======== */}
       <section className="employer-hero">
-        <div className="hero-bg">
-          <div className="employer-hero-gradient" />
-          <div className="hero-mesh" />
-        </div>
+        <div className="employer-hero-gradient" />
         <div className="container employer-hero-inner">
           <div className="employer-hero-content">
-            <span className="section-badge">Für Arbeitgeber</span>
-            <h1 className="hero-title">
-              Weniger Fluktuation<br />
-              beginnt mit <span className="gradient-text">besserer Passung</span>.
+            <Eyebrow>Für Einrichtungen</Eyebrow>
+            <h1 className="employer-hero-title">
+              Weniger Fluktuation beginnt mit{' '}
+              <em>besserer Passung</em>.
             </h1>
-            <p className="hero-subtitle">
-              Wir vermitteln keine Masse, sondern wechselbereite Pflegekräfte mit klaren 
-              Erwartungen und echter Passung zu Ihrer Einrichtung.
+            <p className="employer-hero-sub">
+              Wir vermitteln keine Masse, sondern wechselbereite Pflegekräfte mit klaren
+              Erwartungen und echter Passung zu deinem Haus. Diskret. Verbindlich. Auf Augenhöhe.
             </p>
-            <div className="hero-actions">
-              <a href="#kontakt" className="btn btn--primary btn--lg" id="employer-hero-cta">
+            <div className="employer-hero-cta">
+              <Link to="/kontakt?typ=einrichtung" className="btn btn--primary btn--lg">
                 <Building2 size={20} />
-                Kontakt aufnehmen
-              </a>
-              <a href="#vorteile" className="btn btn--secondary btn--lg">
-                Ihre Vorteile entdecken
+                Erstgespräch vereinbaren
+              </Link>
+              <a href="#vorteile" className="btn btn--ghost btn--lg">
+                Vorteile entdecken →
               </a>
             </div>
+            <p className="employer-hero-note">15 Minuten · Diskret · Unverbindlich</p>
           </div>
 
           <div className="employer-hero-stats">
             <div className="stat-card">
-              <span className="stat-num">48h</span>
+              <span className="stat-num">48<em>h</em></span>
               <span className="stat-label">Erste Rückmeldung</span>
             </div>
             <div className="stat-card">
-              <span className="stat-num">100%</span>
+              <span className="stat-num">100<em>%</em></span>
               <span className="stat-label">Vorqualifizierte Profile</span>
             </div>
             <div className="stat-card">
-              <span className="stat-num">0€</span>
+              <span className="stat-num">0<em>€</em></span>
               <span className="stat-label">Vorabkosten</span>
             </div>
           </div>
@@ -83,9 +83,15 @@ export default function ArbeitgeberPage() {
       <section className="section" id="problem">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Die Realität</span>
-              <h2 className="section-title">Arbeitgeber haben kein Recruiting-Problem —<br />sondern ein <span className="gradient-text">Passungsproblem</span>.</h2>
+            <div className="section__head">
+              <Eyebrow>Die Realität</Eyebrow>
+              <h2 className="section__title">
+                Du hast kein Recruiting-Problem — du hast ein Passungsproblem.
+              </h2>
+              <p className="section__lead">
+                Klassische Vermittler liefern Profile, aber selten echte Passung. Das Ergebnis:
+                endlose Besetzungszyklen, steigende Kosten, frustrierte Stammteams.
+              </p>
             </div>
           </ScrollReveal>
 
@@ -93,34 +99,27 @@ export default function ArbeitgeberPage() {
             <div className="employer-problems">
               {problems.map((p, i) => (
                 <div className="employer-problem-item" key={i}>
-                  <XCircle size={20} />
+                  <XCircle size={18} />
                   <span>{p}</span>
                 </div>
               ))}
             </div>
           </ScrollReveal>
-
-          <ScrollReveal>
-            <div className="problem-bottom">
-              <p>
-                Klassische Vermittler liefern Profile — aber selten echte Passung. 
-                Das Ergebnis: Endlose Besetzungszyklen und steigende Kosten.
-              </p>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
-      {/* ======== APPROACH ======== */}
-      <section className="section section--alt" id="ansatz">
+      {/* ======== APPROACH COMPARISON ======== */}
+      <section className="section section--soft" id="ansatz">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Unser Ansatz</span>
-              <h2 className="section-title"><span className="gradient-text">Wechselprofile</span> statt Bewerbungsmasse</h2>
-              <p className="section-subtitle">
-                Wir denken Vermittlung anders: Nicht „Qualifikation + freie Stelle = passt schon", 
-                sondern tiefes Matching auf Basis von echten Wechselmotiven.
+            <div className="section__head">
+              <Eyebrow>Unser Ansatz</Eyebrow>
+              <h2 className="section__title">
+                Wechselprofile statt Bewerbungsmasse.
+              </h2>
+              <p className="section__lead">
+                Nicht „Qualifikation + freie Stelle = passt schon", sondern tiefes Matching
+                auf Basis echter Wechselmotive — auf beiden Seiten.
               </p>
             </div>
           </ScrollReveal>
@@ -128,7 +127,7 @@ export default function ArbeitgeberPage() {
           <ScrollReveal>
             <div className="approach-comparison">
               <div className="approach-col approach-col--old">
-                <h3><XCircle size={20} /> Klassisch denken</h3>
+                <h3><XCircle size={16} /> Klassisch denken</h3>
                 <ol>
                   <li>Offene Stelle</li>
                   <li>Kandidat mit passender Qualifikation</li>
@@ -136,11 +135,9 @@ export default function ArbeitgeberPage() {
                   <li>Abschluss</li>
                 </ol>
               </div>
-              <div className="approach-divider">
-                <span>vs.</span>
-              </div>
+              <div className="approach-divider"><span>vs.</span></div>
               <div className="approach-col approach-col--new">
-                <h3><CheckCircle size={20} /> Medilane denkt</h3>
+                <h3><CheckCircle size={16} /> Medilane denkt</h3>
                 <ol>
                   <li>Warum will die Pflegekraft wechseln?</li>
                   <li>Was braucht sie wirklich?</li>
@@ -158,17 +155,19 @@ export default function ArbeitgeberPage() {
       <section className="section" id="vorteile">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Ihre Vorteile</span>
-              <h2 className="section-title">Warum Einrichtungen auf <span className="gradient-text">Medilane</span> setzen</h2>
+            <div className="section__head">
+              <Eyebrow>Was du davon hast</Eyebrow>
+              <h2 className="section__title">
+                Warum Einrichtungen auf Medilane setzen.
+              </h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid-3 benefits-cards">
+          <div className="employer-usps">
             {usps.map((usp, i) => (
-              <ScrollReveal key={i} delay={i % 3 + 1}>
-                <div className="benefit-card">
-                  <div className="benefit-icon-wrap">{usp.icon}</div>
+              <ScrollReveal key={i} delay={(i % 3) + 1}>
+                <div className="employer-usp">
+                  <div className="employer-usp-icon">{usp.icon}</div>
                   <h3>{usp.title}</h3>
                   <p>{usp.desc}</p>
                 </div>
@@ -179,12 +178,14 @@ export default function ArbeitgeberPage() {
       </section>
 
       {/* ======== ABLAUF ======== */}
-      <section className="section section--alt" id="ablauf">
+      <section className="section section--soft" id="ablauf">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Der Ablauf</span>
-              <h2 className="section-title">So finden wir die <span className="gradient-text">richtige Pflegekraft</span> für Sie</h2>
+            <div className="section__head">
+              <Eyebrow>Der Ablauf</Eyebrow>
+              <h2 className="section__title">
+                So finden wir die richtige Pflegekraft für dich.
+              </h2>
             </div>
           </ScrollReveal>
 
@@ -209,14 +210,17 @@ export default function ArbeitgeberPage() {
           <div className="contact-split">
             <ScrollReveal>
               <div className="contact-info">
-                <span className="section-badge">Kontakt</span>
-                <h2 className="section-title" style={{ textAlign: 'left' }}>Sprechen Sie mit uns über Ihren <span className="gradient-text">Bedarf</span></h2>
+                <Eyebrow>Kontakt</Eyebrow>
+                <h2 className="section__title" style={{ textAlign: 'left' }}>
+                  Sprich mit uns über deinen Bedarf.
+                </h2>
                 <p className="contact-desc">
-                  Ob einzelne Stellen oder langfristiger Recruiting-Partner — wir freuen uns auf den Austausch. 
-                  Beschreiben Sie kurz Ihren Bedarf, wir melden uns innerhalb von 24 Stunden.
+                  Ob einzelne Stellen oder langfristiger Recruiting-Partner — wir freuen uns auf
+                  den Austausch. Beschreibe kurz deine Situation, wir melden uns innerhalb von 24
+                  Stunden.
                 </p>
                 <ul className="contact-checklist">
-                  <li><CheckCircle size={18} /> Unverbindliche Erstberatung</li>
+                  <li><CheckCircle size={18} /> Unverbindliches Erstgespräch</li>
                   <li><CheckCircle size={18} /> Keine Vorabkosten</li>
                   <li><CheckCircle size={18} /> Persönlicher Ansprechpartner</li>
                   <li><CheckCircle size={18} /> Rückmeldung in 24 Stunden</li>
@@ -225,7 +229,7 @@ export default function ArbeitgeberPage() {
             </ScrollReveal>
             <ScrollReveal delay={2}>
               <div className="contact-form-wrapper">
-                <ContactForm />
+                <ContactForm type="einrichtung" source="arbeitgeber-hub" />
               </div>
             </ScrollReveal>
           </div>
@@ -233,16 +237,16 @@ export default function ArbeitgeberPage() {
       </section>
 
       {/* ======== FINAL CTA ======== */}
-      <section className="section final-cta-section">
+      <section className="section">
         <div className="container">
           <ScrollReveal>
             <div className="final-cta-box">
               <h2>Bereit für bessere Besetzungen?</h2>
               <p>
-                Lernen Sie unser Matching-Modell kennen und gewinnen Sie Pflegekräfte,
-                die wirklich in Ihre Einrichtung passen.
+                Lerne unser Matching-Modell kennen und finde Pflegekräfte, die wirklich
+                zu deinem Haus passen.
               </p>
-              <a href="#kontakt" className="btn btn--inverse btn--lg" id="employer-final-cta">
+              <a href="#kontakt" className="btn btn--inverse btn--lg">
                 Jetzt Kontakt aufnehmen <ArrowRight size={20} />
               </a>
             </div>

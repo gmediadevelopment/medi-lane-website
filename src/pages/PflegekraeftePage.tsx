@@ -1,47 +1,60 @@
 import {
   ArrowRight, Shield, Clock, Heart, Target, Handshake, ShieldCheck, Briefcase,
   AlertTriangle, CalendarX, UserX, BatteryLow, Timer, HeartCrack,
-  Search, ClipboardList, CheckCircle, Users
+  ClipboardList, CheckCircle, Users,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import FAQAccordion from '../components/ui/FAQAccordion'
+import Eyebrow from '../components/sections/Eyebrow'
 import { getFunnelUrl } from '../lib/tracking'
 import teamImage from '../assets/team-caring.png'
 import './PflegekraeftePage.css'
 
 const painPoints = [
-  { icon: <CalendarX size={24} />, title: 'Chaotische Dienstpläne', desc: 'Ständige Änderungen, kaum Planbarkeit.' },
-  { icon: <AlertTriangle size={24} />, title: 'Zu viele Einspringdienste', desc: 'Dauerhaft erreichbar, kein Ausgleich.' },
-  { icon: <UserX size={24} />, title: 'Schlechte Führung', desc: 'Kein Verständnis, kein Rückhalt von oben.' },
-  { icon: <Users size={24} />, title: 'Teamprobleme', desc: 'Konflikte, Unterbesetzung, schlechte Stimmung.' },
-  { icon: <BatteryLow size={24} />, title: 'Überlastung', desc: 'Körperlich und mental am Limit.' },
-  { icon: <Timer size={24} />, title: 'Zu wenig Zeit', desc: 'Keine Zeit für Patienten und Bewohner.' },
-  { icon: <HeartCrack size={24} />, title: 'Fehlende Wertschätzung', desc: 'Engagement wird nicht gesehen.' },
-  { icon: <ArrowRight size={24} />, title: 'Wiederholte Fehlwechsel', desc: 'Neuer Job, gleiche Probleme.' },
+  { icon: <CalendarX size={20} />, title: 'Chaotische Dienstpläne', desc: 'Ständige Änderungen, kaum Planbarkeit.' },
+  { icon: <AlertTriangle size={20} />, title: 'Zu viele Einspringdienste', desc: 'Dauerhaft erreichbar, kein Ausgleich.' },
+  { icon: <UserX size={20} />, title: 'Schlechte Führung', desc: 'Kein Verständnis, kein Rückhalt von oben.' },
+  { icon: <Users size={20} />, title: 'Teamprobleme', desc: 'Konflikte, Unterbesetzung, schlechte Stimmung.' },
+  { icon: <BatteryLow size={20} />, title: 'Überlastung', desc: 'Körperlich und mental am Limit.' },
+  { icon: <Timer size={20} />, title: 'Zu wenig Zeit', desc: 'Keine Zeit für Patienten und Bewohner.' },
+  { icon: <HeartCrack size={20} />, title: 'Fehlende Wertschätzung', desc: 'Engagement wird nicht gesehen.' },
+  { icon: <ArrowRight size={20} />, title: 'Wiederholte Fehlwechsel', desc: 'Neuer Job, gleiche Probleme.' },
 ]
 
 const usps = [
-  { icon: <Handshake size={24} />, title: 'Wechselbegleitung', desc: 'Nicht nur ein Job-Link, sondern echte Begleitung beim Übergang in Ihren neuen Job.' },
-  { icon: <ShieldCheck size={24} />, title: 'Diskret & unverbindlich', desc: 'Orientieren Sie sich frei, ohne sich festlegen zu müssen. Ihr Arbeitgeber erfährt nichts.' },
-  { icon: <ClipboardList size={24} />, title: 'Wechselprofil statt CV', desc: 'Wünsche, No-Gos und Prioritäten zählen — nicht nur Ihr Lebenslauf und Ihr Berufstitel.' },
-  { icon: <Target size={24} />, title: 'Passung vor Geschwindigkeit', desc: 'Ziel ist nicht der schnellste Wechsel, sondern ein wirklich sinnvoller Wechsel.' },
-  { icon: <Shield size={24} />, title: 'Weniger Fehlwechsel', desc: 'Durch die tiefere Erfassung Ihrer Wechselmotive sinkt das Risiko, wieder falsch zu landen.' },
-  { icon: <Briefcase size={24} />, title: 'Echte Arbeitsrealität', desc: 'Dienstplan, Team, Führung, Arbeitsweg und Arbeitsmodell werden ernst genommen.' },
+  { icon: <Handshake size={22} />, title: 'Wechselbegleitung', desc: 'Nicht nur ein Job-Link, sondern echte Begleitung beim Übergang in deinen neuen Job.' },
+  { icon: <ShieldCheck size={22} />, title: 'Diskret und unverbindlich', desc: 'Orientiere dich frei, ohne dich festlegen zu müssen. Dein Arbeitgeber erfährt nichts.' },
+  { icon: <ClipboardList size={22} />, title: 'Wechselprofil statt CV', desc: 'Wünsche, No-Gos und Prioritäten zählen — nicht nur dein Lebenslauf und Berufstitel.' },
+  { icon: <Target size={22} />, title: 'Passung vor Geschwindigkeit', desc: 'Ziel ist nicht der schnellste Wechsel, sondern ein wirklich sinnvoller.' },
+  { icon: <Shield size={22} />, title: 'Weniger Fehlwechsel', desc: 'Durch die tiefere Erfassung deiner Wechselmotive sinkt das Risiko, wieder falsch zu landen.' },
+  { icon: <Briefcase size={22} />, title: 'Echte Arbeitsrealität', desc: 'Dienstplan, Team, Führung, Arbeitsweg und Arbeitsmodell werden ernst genommen.' },
 ]
 
 const steps = [
-  { num: '1', icon: <ClipboardList size={28} />, title: 'Wechselprofil anlegen', desc: 'Geben Sie berufliche Daten, Wünsche, Prioritäten und Wechselgründe an.' },
-  { num: '2', icon: <Search size={28} />, title: 'Profilanalyse', desc: 'Ihr Profil wird strukturiert ausgewertet: Qualifikation, Region, Schichtwünsche, No-Gos.' },
-  { num: '3', icon: <Target size={28} />, title: 'Matching', desc: 'Abgleich mit offenen Stellen und passenden Arbeitgebern.' },
-  { num: '4', icon: <CheckCircle size={28} />, title: 'Vorauswahl', desc: 'Nur passende Optionen, keine beliebige Jobflut.' },
-  { num: '5', icon: <Handshake size={28} />, title: 'Begleitung', desc: 'Wir begleiten Sie, bis klar ist, welcher Arbeitgeber wirklich passt.' },
+  { num: '01', title: 'Wechselprofil anlegen', desc: 'Berufliche Daten, Wünsche, Prioritäten und Wechselgründe. Drei Minuten.' },
+  { num: '02', title: 'Profilanalyse', desc: 'Wir werten dein Profil strukturiert aus: Qualifikation, Region, Schichtwünsche, No-Gos.' },
+  { num: '03', title: 'Matching', desc: 'Abgleich mit offenen Stellen und passenden Arbeitgebern auf sechs Dimensionen.' },
+  { num: '04', title: 'Vorauswahl', desc: 'Du siehst nur Optionen, die wirklich zu dir passen — keine Jobflut.' },
+  { num: '05', title: 'Begleitung', desc: 'Wir bleiben da, bis klar ist, welcher Arbeitgeber wirklich passt.' },
+]
+
+const profileItems = [
+  'Wechselgründe',
+  'No-Gos',
+  'Wünsche an Führung und Team',
+  'Bevorzugte Arbeitsmodelle',
+  'Gewünschte Bereiche',
+  'Schichtwünsche',
+  'Regionale Vorstellungen',
+  'Prioritäten (Gehalt, Dienstplan, Arbeitsweg)',
 ]
 
 const faqItems = [
   { question: 'Ist der Service kostenlos für mich?', answer: 'Ja, für Pflegekräfte ist Medilane vollständig kostenlos. Wir finanzieren uns über den Arbeitgeber bei erfolgreicher Vermittlung.' },
-  { question: 'Muss ich dafür meinen aktuellen Job kündigen?', answer: 'Nein. Sie erstellen zunächst nur Ihr Wechselprofil. Ein tatsächlicher Wechsel findet nur statt, wenn Sie sich aktiv dafür entscheiden.' },
-  { question: 'Erfährt mein Arbeitgeber davon?', answer: 'Nein. Ihr Profil wird anonymisiert und erst nach Ihrer ausdrücklichen Zustimmung an einen Arbeitgeber weitergegeben.' },
-  { question: 'Wie lange dauert es, bis ich Angebote bekomme?', answer: 'In der Regel erhalten Sie innerhalb von 48 Stunden eine erste Rückmeldung mit passenden Optionen.' },
+  { question: 'Muss ich dafür meinen aktuellen Job kündigen?', answer: 'Nein. Du erstellst zunächst nur dein Wechselprofil. Ein tatsächlicher Wechsel passiert nur, wenn du aktiv zustimmst.' },
+  { question: 'Erfährt mein Arbeitgeber davon?', answer: 'Nein. Dein Profil wird anonymisiert behandelt und erst nach deiner ausdrücklichen Zustimmung an einen Arbeitgeber weitergegeben.' },
+  { question: 'Wie lange dauert es, bis ich Angebote bekomme?', answer: 'In der Regel hörst du innerhalb von 48 Stunden von uns mit ersten passenden Optionen.' },
   { question: 'Was, wenn ich noch unsicher bin?', answer: 'Kein Problem. Viele Pflegekräfte nutzen das Wechselprofil zur Orientierung. Es gibt keinen Druck und keine Verpflichtung.' },
   { question: 'Welche Bereiche deckt ihr ab?', answer: 'Stationäre Pflege, ambulante Pflege, Klinik, außerklinische Intensivpflege und betreutes Wohnen. Mehr Bereiche kommen laufend dazu.' },
 ]
@@ -51,35 +64,36 @@ export default function PflegekraeftePage() {
     <div className="nurse-page">
       {/* ======== HERO ======== */}
       <section className="nurse-hero">
-        <div className="hero-bg">
-          <div className="hero-gradient" />
-          <div className="hero-mesh" />
-        </div>
+        <div className="nurse-hero-gradient" />
         <div className="container nurse-hero-inner">
           <div className="nurse-hero-content">
-            <span className="section-badge">Für Pflegekräfte</span>
-            <h1 className="hero-title">
-              Nicht einfach wechseln.<br />
-              <span className="gradient-text">Besser wechseln.</span>
+            <Eyebrow>Für Pflegekräfte</Eyebrow>
+            <h1 className="nurse-hero-title">
+              Nicht einfach wechseln. Wechsel <em>besser</em>.
             </h1>
-            <p className="hero-subtitle">
-              Finden Sie einen Pflegejob, der nicht nur fachlich, sondern auch menschlich 
-              und organisatorisch zu Ihnen passt. Diskret, kostenlos und mit persönlicher Begleitung.
+            <p className="nurse-hero-sub">
+              Finde einen Pflegejob, der nicht nur fachlich, sondern auch menschlich und
+              organisatorisch zu dir passt. Diskret, kostenlos und mit persönlicher Begleitung.
             </p>
-            <div className="hero-actions">
-              <a href={getFunnelUrl('website', 'organic', 'nurse_hero')} className="btn btn--primary btn--lg" id="nurse-hero-cta">
-                Wechselprofil erstellen — kostenlos
+            <div className="nurse-hero-cta">
+              <a
+                href={getFunnelUrl('website', 'organic', 'nurse_hero')}
+                className="btn btn--primary btn--lg"
+              >
+                Wechselprofil erstellen
                 <ArrowRight size={20} />
               </a>
+              <Link to="/wechselberatung" className="btn btn--ghost btn--lg">
+                Mehr erfahren →
+              </Link>
             </div>
-            <div className="hero-trust">
-              <div className="trust-item"><Shield size={16} /><span>DSGVO-konform</span></div>
-              <div className="trust-dot" />
-              <div className="trust-item"><Clock size={16} /><span>3 Min. Aufwand</span></div>
-              <div className="trust-dot" />
-              <div className="trust-item"><Heart size={16} /><span>100% kostenlos</span></div>
+            <div className="nurse-hero-trust">
+              <span className="trust-pill"><Shield size={14} /> DSGVO-konform</span>
+              <span className="trust-pill"><Clock size={14} /> 3 Minuten</span>
+              <span className="trust-pill"><Heart size={14} /> 100 % kostenlos</span>
             </div>
           </div>
+
           <div className="nurse-hero-image">
             <img src={teamImage} alt="Pflegeteam im Gespräch" />
           </div>
@@ -87,12 +101,15 @@ export default function PflegekraeftePage() {
       </section>
 
       {/* ======== PAIN POINTS ======== */}
-      <section className="section" id="probleme">
+      <section className="section section--soft" id="probleme">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Kennen Sie das?</span>
-              <h2 className="section-title">Viele Pflegekräfte wollen nicht raus aus der Pflege —<br />sondern raus aus <span className="gradient-text">ihrem aktuellen Setting</span>.</h2>
+            <div className="section__head">
+              <Eyebrow>Kennst du das?</Eyebrow>
+              <h2 className="section__title">
+                Viele Pflegekräfte wollen nicht raus aus der Pflege — sondern raus aus ihrem
+                aktuellen Setting.
+              </h2>
             </div>
           </ScrollReveal>
 
@@ -111,37 +128,38 @@ export default function PflegekraeftePage() {
           </div>
 
           <ScrollReveal>
-            <div className="pain-result">
-              <p>
-                Das Ergebnis: Viele wechseln den Arbeitgeber, landen aber wieder in ähnlichen Strukturen —
-                weil sie nur auf offene Stellen schauen und nicht auf die <strong>tatsächliche Passung</strong>.
-              </p>
-            </div>
+            <p className="pain-result">
+              Das Ergebnis: Viele wechseln den Arbeitgeber, landen aber wieder in ähnlichen
+              Strukturen — weil sie nur auf offene Stellen schauen und nicht auf die
+              tatsächliche Passung.
+            </p>
           </ScrollReveal>
         </div>
       </section>
 
       {/* ======== WECHSELPROFIL ======== */}
-      <section className="section section--alt" id="wechselprofil">
+      <section className="section" id="wechselprofil">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Unser Ansatz</span>
-              <h2 className="section-title">Ihr <span className="gradient-text">Wechselprofil</span> — mehr als ein Lebenslauf</h2>
-              <p className="section-subtitle">
-                Wir erfassen nicht nur Qualifikationen, sondern Ihre echte Arbeitsrealität. 
-                Damit Sie einen Job finden, der wirklich zu Ihnen passt.
+            <div className="section__head">
+              <Eyebrow>Unser Ansatz</Eyebrow>
+              <h2 className="section__title">
+                Dein Wechselprofil — mehr als ein Lebenslauf.
+              </h2>
+              <p className="section__lead">
+                Wir erfassen nicht nur Qualifikationen, sondern deine echte Arbeitsrealität.
+                Damit du einen Job findest, der wirklich passt.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="profile-features">
-              {['Wechselgründe', 'No-Gos', 'Wünsche an Führung & Team', 'Bevorzugte Arbeitsmodelle', 'Gewünschte Bereiche', 'Schichtwünsche', 'Regionale Vorstellungen', 'Prioritäten (Gehalt, Dienstplan, Arbeitsweg...)'].map((item, i) => (
-                <div className="profile-tag" key={i}>
-                  <CheckCircle size={16} />
+              {profileItems.map(item => (
+                <span className="profile-tag" key={item}>
+                  <CheckCircle size={14} />
                   {item}
-                </div>
+                </span>
               ))}
             </div>
           </ScrollReveal>
@@ -149,20 +167,22 @@ export default function PflegekraeftePage() {
       </section>
 
       {/* ======== USPs ======== */}
-      <section className="section" id="vorteile">
+      <section className="section section--soft" id="vorteile">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Ihre Vorteile</span>
-              <h2 className="section-title">Warum Pflegekräfte <span className="gradient-text">Medilane</span> wählen</h2>
+            <div className="section__head">
+              <Eyebrow>Deine Vorteile</Eyebrow>
+              <h2 className="section__title">
+                Warum Pflegekräfte mit uns wechseln.
+              </h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid-3 benefits-cards">
+          <div className="nurse-usps">
             {usps.map((usp, i) => (
-              <ScrollReveal key={i} delay={i % 3 + 1}>
-                <div className="benefit-card">
-                  <div className="benefit-icon-wrap">{usp.icon}</div>
+              <ScrollReveal key={i} delay={(i % 3) + 1}>
+                <div className="nurse-usp">
+                  <div className="nurse-usp-icon">{usp.icon}</div>
                   <h3>{usp.title}</h3>
                   <p>{usp.desc}</p>
                 </div>
@@ -173,35 +193,35 @@ export default function PflegekraeftePage() {
       </section>
 
       {/* ======== ABLAUF ======== */}
-      <section className="section section--alt" id="ablauf">
+      <section className="section" id="ablauf">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Der Ablauf</span>
-              <h2 className="section-title">In 5 Schritten zum <span className="gradient-text">passenden Job</span></h2>
+            <div className="section__head">
+              <Eyebrow>Der Ablauf</Eyebrow>
+              <h2 className="section__title">
+                In fünf Schritten zum passenden Job.
+              </h2>
             </div>
           </ScrollReveal>
 
-          <div className="process-timeline">
+          <div className="nurse-steps">
             {steps.map((step, i) => (
-              <ScrollReveal key={i} delay={i + 1}>
-                <div className="timeline-item">
-                  <div className="timeline-marker">
-                    <span className="timeline-num">{step.num}</span>
-                  </div>
-                  <div className="timeline-content">
-                    <div className="timeline-icon">{step.icon}</div>
-                    <h3>{step.title}</h3>
-                    <p>{step.desc}</p>
-                  </div>
+              <ScrollReveal key={i} delay={(i % 5) + 1}>
+                <div className="nurse-step">
+                  <div className="nurse-step-num">{step.num}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
 
           <ScrollReveal>
-            <div className="steps-cta" style={{ textAlign: 'center', marginTop: 'var(--space-10)' }}>
-              <a href={getFunnelUrl('website', 'organic', 'nurse_steps')} className="btn btn--primary btn--lg" id="nurse-steps-cta">
+            <div className="nurse-steps-cta">
+              <a
+                href={getFunnelUrl('website', 'organic', 'nurse_steps')}
+                className="btn btn--primary btn--lg"
+              >
                 Jetzt starten — kostenlos <ArrowRight size={20} />
               </a>
             </div>
@@ -210,12 +230,12 @@ export default function PflegekraeftePage() {
       </section>
 
       {/* ======== FAQ ======== */}
-      <section className="section" id="faq">
+      <section className="section section--soft" id="faq">
         <div className="container">
           <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Häufige Fragen</span>
-              <h2 className="section-title">Ihre Fragen — <span className="gradient-text">unsere Antworten</span></h2>
+            <div className="section__head section__head--center">
+              <Eyebrow>Häufige Fragen</Eyebrow>
+              <h2 className="section__title">Deine Fragen — unsere Antworten.</h2>
             </div>
           </ScrollReveal>
           <ScrollReveal>
@@ -225,19 +245,21 @@ export default function PflegekraeftePage() {
       </section>
 
       {/* ======== FINAL CTA ======== */}
-      <section className="section final-cta-section">
+      <section className="section">
         <div className="container">
           <ScrollReveal>
             <div className="final-cta-box">
-              <h2>Sie verdienen einen Job,<br />der zu Ihrem Leben passt.</h2>
+              <h2>Du verdienst einen Job, der zu deinem Leben passt.</h2>
               <p>
-                Erstellen Sie jetzt Ihr Wechselprofil und finden Sie den Pflegejob, 
-                der nicht nur fachlich, sondern auch menschlich und organisatorisch zu Ihnen passt.
+                Erstelle jetzt dein Wechselprofil und finde den Pflegejob, der nicht nur
+                fachlich, sondern auch menschlich und organisatorisch zu dir passt.
               </p>
-              <a href={getFunnelUrl('website', 'organic', 'nurse_final')} className="btn btn--white btn--lg" id="nurse-final-cta">
+              <a
+                href={getFunnelUrl('website', 'organic', 'nurse_final')}
+                className="btn btn--inverse btn--lg"
+              >
                 Wechselprofil erstellen <ArrowRight size={20} />
               </a>
-              <span className="final-cta-note">Kostenlos · Diskret · Unverbindlich</span>
             </div>
           </ScrollReveal>
         </div>
