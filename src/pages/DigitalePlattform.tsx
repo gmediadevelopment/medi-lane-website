@@ -243,7 +243,7 @@ export default function DigitalePlattform() {
               <h2>Pilot-Partner gesucht</h2>
               <p>
                 Wir suchen Einrichtungen, Träger und Förderpartner, die das Modell früh mitgestalten
-                wollen. Im Gegenzug erhalten Sie früheren Zugang, mitwirken bei Funktionsumfang
+                wollen. Im Gegenzug bekommst du früheren Zugang, kannst Funktionsumfang mitgestalten
                 und exklusive Pilotkonditionen.
               </p>
               <Link to="/kontakt?typ=partner" className="btn btn--primary">
@@ -263,7 +263,7 @@ export default function DigitalePlattform() {
               <h2>Konzept und Roadmap als Vorabunterlage</h2>
               <p>
                 Wir teilen das CareOS-Konzept transparent — Datenmodell, Funktionsumfang und
-                Roadmap. Schreiben Sie uns für die aktuelle Version.
+                Roadmap. Schreib uns für die aktuelle Version.
               </p>
               <Link to="/kontakt?typ=partner" className="btn btn--white btn--lg">
                 Konzept anfordern

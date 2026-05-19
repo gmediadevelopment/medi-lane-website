@@ -19,7 +19,7 @@ const TABS: Array<{
 
 const COPY: Record<ContactFormType, { headline: string; body: string; bullets: string[] }> = {
   einrichtung: {
-    headline: 'Sprechen wir über Ihre Personalbesetzung',
+    headline: 'Sprechen wir über deine Personalbesetzung',
     body: 'Im kostenlosen Erstgespräch klären wir Bedarf, aktuelle Herausforderungen und ob PflegeMatch 180 oder die Stabilitätsberatung zu Ihrer Situation passen.',
     bullets: [
       'Unverbindliches Erstgespräch',
@@ -29,18 +29,18 @@ const COPY: Record<ContactFormType, { headline: string; body: string; bullets: s
     ],
   },
   pflegekraft: {
-    headline: 'Wechseln Sie nicht irgendwohin — wechseln Sie passend',
-    body: 'Sagen Sie uns kurz, worum es Ihnen geht. Wir melden uns vertraulich und unverbindlich, hören zu und prüfen, ob wir einen passenden Arbeitgeber für Sie finden können.',
+    headline: 'Wechsel nicht irgendwohin — wechsel passend',
+    body: 'Sag uns kurz, worum es geht. Wir melden uns vertraulich und unverbindlich, hören zu und prüfen, ob wir einen passenden Arbeitgeber für dich finden können.',
     bullets: [
       'Für Pflegekräfte 100 % kostenlos',
       'Vertrauliche Behandlung Ihrer Daten',
-      'Keine Profilweitergabe ohne Ihre Zustimmung',
+      'Keine Profilweitergabe ohne deine Zustimmung',
       'Auch unverbindliche Orientierung möglich',
     ],
   },
   partner: {
     headline: 'Pilot, Förderung oder Plattformpartner',
-    body: 'Sie kommen aus einer Förderstelle, einem Verband, einer Hochschule oder einem Trägerverbund? Wir freuen uns über den Austausch zu Konzept, Pilotmodell und Skalierung.',
+    body: 'Du kommst aus einer Förderstelle, einem Verband, einer Hochschule oder einem Trägerverbund? Wir freuen uns über den Austausch zu Konzept, Pilotmodell und Skalierung.',
     bullets: [
       'Konzeptunterlagen auf Anfrage',
       'Pilot- und Demogespräche möglich',
@@ -81,7 +81,7 @@ export default function Kontakt() {
             <span className="gradient-text">über das, was passt</span>
           </>
         }
-        subtitle="Wählen Sie aus, wer Sie sind — wir holen Sie an der richtigen Stelle ab."
+        subtitle="Wähle aus, wer du bist — wir holen dich an der richtigen Stelle ab."
       />
 
       {/* TYP-SWITCH */}

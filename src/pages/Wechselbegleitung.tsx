@@ -216,7 +216,7 @@ export default function Wechselbegleitung() {
                 <span className="gradient-text">Check-in-Phasen</span>
               </h2>
               <p className="section-subtitle">
-                Jeder Check-in folgt einem festen Themenraster. Sie wissen vorher, was abgefragt
+                Jeder Check-in folgt einem festen Themenraster. Du weißt vorher, was abgefragt
                 wird — und bekommen am Ende eine knappe schriftliche Zusammenfassung.
               </p>
             </div>
@@ -344,7 +344,7 @@ export default function Wechselbegleitung() {
               <h2>180 Tage Begleitung — als Standard, nicht als Option</h2>
               <p>
                 Die Wechselbegleitung ist fester Bestandteil von PflegeMatch 180. Im Erstgespräch
-                klären wir, wie sie konkret in Ihren Ablauf passt.
+                klären wir, wie sie konkret in deinen Ablauf passt.
               </p>
               <Link to="/kontakt?typ=einrichtung" className="btn btn--white btn--lg">
                 Kostenloses Erstgespräch

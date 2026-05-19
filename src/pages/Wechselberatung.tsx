@@ -11,21 +11,21 @@ import './Wechselberatung.css'
 const promises = [
   {
     icon: <Heart size={28} />,
-    title: 'Sie müssen nicht den erstbesten Job nehmen',
+    title: 'Du musst nicht den erstbesten Job nehmen',
     description:
-      'Sie wechseln nicht oft. Es darf also etwas dauern, bis das Richtige dabei ist — wir nehmen uns die Zeit.',
+      'Du wechselst nicht oft. Es darf also etwas dauern, bis das Richtige dabei ist — wir nehmen uns die Zeit.',
   },
   {
     icon: <Compass size={28} />,
-    title: 'Ihre Dienstplanwünsche sind wichtig',
+    title: 'Deine Dienstplanwünsche sind wichtig',
     description:
-      'Wir fragen nicht nur, ob Sie früh oder spät arbeiten — sondern was Planbarkeit für Sie wirklich bedeutet.',
+      'Wir fragen nicht nur, ob du früh oder spät arbeitest — sondern was Planbarkeit für dich wirklich bedeutet.',
   },
   {
     icon: <ShieldCheck size={28} />,
-    title: 'Ihre Belastungsgrenzen werden ernst genommen',
+    title: 'Deine Belastungsgrenzen werden ernst genommen',
     description:
-      'No-Gos sind keine Schwäche, sondern Information. Was Sie ausschließen, gehört in den Match.',
+      'No-Gos sind keine Schwäche, sondern Information. Was du ausschließt, gehört in den Match.',
   },
   {
     icon: <MessagesSquare size={28} />,
@@ -35,7 +35,7 @@ const promises = [
   },
   {
     icon: <HandHeart size={28} />,
-    title: 'Wir begleiten Sie auch nach dem Start',
+    title: 'Wir begleiten dich auch nach dem Start',
     description:
       'In den ersten 180 Tagen bleiben wir Ansprechpartner. Wenn etwas hakt, wird es früh angesprochen — nicht erst in der Kündigung.',
   },
@@ -45,7 +45,7 @@ const ablauf = [
   {
     nr: '1',
     title: 'Unverbindliches Gespräch',
-    desc: 'Sie erzählen, was sich beruflich verändern soll. Wir hören zu. Kein Druck, kein Verkauf.',
+    desc: 'Du erzählst, was sich beruflich verändern soll. Wir hören zu. Kein Druck, kein Verkauf.',
   },
   {
     nr: '2',
@@ -55,12 +55,12 @@ const ablauf = [
   {
     nr: '3',
     title: 'Passende Einrichtung finden',
-    desc: 'Wir prüfen unsere Mandate. Sie sehen nur Einrichtungen, die wirklich zu Ihren Punkten passen.',
+    desc: 'Wir prüfen unsere Mandate. Du siehst nur Einrichtungen, die wirklich zu deinen Punkten passen.',
   },
   {
     nr: '4',
     title: 'Vorstellung begleiten',
-    desc: 'Wir bereiten das Gespräch mit Ihnen vor — auch die Fragen, die sonst niemand stellt.',
+    desc: 'Wir bereiten das Gespräch mit dir vor — auch die Fragen, die sonst niemand stellt.',
   },
   {
     nr: '5',
@@ -83,17 +83,17 @@ const faqItems = [
   {
     question: 'Werden meine Daten an meinen aktuellen Arbeitgeber gegeben?',
     answer:
-      'Niemals. Ihre Daten bleiben bei uns. Eine Weitergabe an potenzielle neue Einrichtungen erfolgt nur nach ausdrücklicher Abstimmung mit Ihnen.',
+      'Niemals. Deine Daten bleiben bei uns. Eine Weitergabe an potenzielle neue Einrichtungen erfolgt nur nach ausdrücklicher Abstimmung mit dir.',
   },
   {
     question: 'Kann ich bestimmte Dienstzeiten oder Bereiche ausschließen?',
     answer:
-      'Ja, genau darum geht es im Matching. Ihre Wünsche und No-Gos werden vorab klar — und sind Teil der Auswahl, nicht ein lästiges Detail im Gespräch.',
+      'Ja, genau darum geht es im Matching. Deine Wünsche und No-Gos werden vorab klar — und sind Teil der Auswahl, nicht ein lästiges Detail im Gespräch.',
   },
   {
     question: 'Was, wenn ich nach dem Wechsel doch nicht zufrieden bin?',
     answer:
-      'Dann melden Sie sich. In den ersten 180 Tagen sind wir Ansprechpartner und können moderieren, Erwartungen neu klären oder im Zweifel auch nach einer anderen Lösung suchen.',
+      'Dann meld dich. In den ersten 180 Tagen sind wir Ansprechpartner und können moderieren, Erwartungen neu klären oder im Zweifel auch nach einer anderen Lösung suchen.',
   },
 ]
 
@@ -104,11 +104,11 @@ export default function Wechselberatung() {
         badge="Für Pflegekräfte"
         title={
           <>
-            Wechseln Sie nicht einfach den Arbeitgeber.<br />
-            Wechseln Sie <span className="gradient-text">passend</span>.
+            Wechsel nicht einfach den Arbeitgeber.<br />
+            Wechsel <span className="gradient-text">passend</span>.
           </>
         }
-        subtitle="Ein Pflegejob-Wechsel ist mehr als eine neue Stellenbeschreibung. Wir helfen Ihnen, eine Einrichtung zu finden, die zu Ihrem Alltag, Ihren Grenzen und Ihren Vorstellungen passt — und begleiten Sie auch nach dem Start."
+        subtitle="Ein Pflegejob-Wechsel ist mehr als eine neue Stellenbeschreibung. Wir helfen dir, eine Einrichtung zu finden, die zu deinem Alltag, deinen Grenzen und deinen Vorstellungen passt — und begleiten dich auch nach dem Start."
         actions={
           <>
             <Link to="/arbeitgeber-finden" className="btn btn--primary btn--lg">
@@ -141,7 +141,7 @@ export default function Wechselberatung() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge">Was wir Ihnen versprechen</span>
+              <span className="section-badge">Was wir dir versprechen</span>
               <h2 className="section-title">
                 Fünf Dinge, die wir{' '}
                 <span className="gradient-text">anders machen</span>
@@ -174,8 +174,8 @@ export default function Wechselberatung() {
             <div className="quote-block">
               <Quote size={32} className="quote-icon" />
               <p className="quote-text">
-                Wir vermitteln Sie nicht irgendwohin. Wir prüfen, ob die Stelle wirklich zu Ihnen
-                passt — und sagen Ihnen ehrlich, wenn etwas nicht stimmt.
+                Wir vermitteln dich nicht irgendwohin. Wir prüfen, ob die Stelle wirklich zu dir
+                passt — und sagen es dir ehrlich, wenn etwas nicht stimmt.
               </p>
               <p className="quote-attrib">Unser Versprechen an jede Pflegekraft</p>
             </div>
@@ -235,7 +235,7 @@ export default function Wechselberatung() {
             <div className="final-cta-box">
               <h2>Bereit für den nächsten Schritt?</h2>
               <p>
-                Erstellen Sie Ihr Wechselprofil oder vereinbaren Sie ein unverbindliches Gespräch.
+                Erstelle dein Wechselprofil oder vereinbare ein unverbindliches Gespräch.
                 Beides ist kostenlos und nichts davon ist verpflichtend.
               </p>
               <div className="final-cta-actions">

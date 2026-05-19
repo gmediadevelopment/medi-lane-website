@@ -14,7 +14,7 @@ const pilotInhalt = [
     icon: <Target size={28} />,
     title: 'Matching & Match-Bericht',
     description:
-      'Sechs Match-Dimensionen, transparenter Bericht je Vorstellung. Sie sehen direkt, wie wir entscheiden — und können den Output mit klassischer Vermittlung vergleichen.',
+      'Sechs Match-Dimensionen, transparenter Bericht je Vorstellung. Du siehst direkt, wie wir entscheiden — und kannst den Output mit klassischer Vermittlung vergleichen.',
   },
   {
     icon: <CalendarCheck size={28} />,
@@ -205,7 +205,7 @@ export default function DemoAnfragen() {
         <div className="container container--narrow">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge">Was Sie bekommen</span>
+              <span className="section-badge">Was du bekommst</span>
               <h2 className="section-title">
                 Konzept, Datenmodell und{' '}
                 <span className="gradient-text">Wirkungsbericht</span>
@@ -250,7 +250,7 @@ export default function DemoAnfragen() {
                   <span className="gradient-text">unverbindlich anfragen</span>
                 </h2>
                 <p>
-                  Schildern Sie kurz, aus welcher Rolle Sie kommen und was Sie konkret prüfen
+                  Schildere kurz, aus welcher Rolle du kommst und was du konkret prüfen möchtest
                   möchten. Wir melden uns mit Konzeptunterlagen und schlagen einen Termin vor —
                   in der Regel innerhalb von zwei Werktagen.
                 </p>

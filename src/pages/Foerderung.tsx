@@ -131,7 +131,7 @@ export default function Foerderung() {
                   Leistung im Einzelfall förderfähig ist, entscheidet immer die zuständige Stelle
                   (Krankenkasse, BAFA, Landesförderbank, Ministerium). Wir liefern auf Wunsch
                   Leistungsbeschreibung, Kostenvoranschlag und Nachweis­dokumentation, mit denen
-                  Sie selbst oder Ihre Beratung den Antrag stellen können.
+                  du selbst oder deine Beratung den Antrag stellen kannst.
                 </p>
               </div>
             </div>
@@ -205,8 +205,8 @@ export default function Foerderung() {
             <div className="section-header">
               <span className="section-badge">So unterstützen wir</span>
               <h2 className="section-title">
-                Was Sie für{' '}
-                <span className="gradient-text">Ihren Förderantrag</span> bekommen
+                Was du für{' '}
+                <span className="gradient-text">deinen Förderantrag</span> bekommst
               </h2>
             </div>
           </ScrollReveal>
@@ -245,7 +245,7 @@ export default function Foerderung() {
                 <FileText size={20} />
                 <div>
                   <h4>Nachweisdokumentation</h4>
-                  <p>Reports und Belege, mit denen Sie die Maßnahme abrechnen können.</p>
+                  <p>Reports und Belege, mit denen du die Maßnahme abrechnen kannst.</p>
                 </div>
               </li>
             </ul>
@@ -260,7 +260,7 @@ export default function Foerderung() {
             <div className="final-cta-box">
               <h2>Förderfähigkeit gemeinsam prüfen</h2>
               <p>
-                Schildern Sie uns Ihre Situation — wir sagen ehrlich, welche Bestandteile fördernah
+                Schildere uns deine Situation — wir sagen ehrlich, welche Bestandteile fördernah
                 aufgesetzt werden können und welche nicht. Ohne überzogene Versprechen.
               </p>
               <Link to="/kontakt?typ=einrichtung" className="btn btn--white btn--lg">

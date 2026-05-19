@@ -132,7 +132,7 @@ export default function Stabilitaetsberatung() {
                 <span className="gradient-text">kombiniert</span> nutzbar sind
               </h2>
               <p className="section-subtitle">
-                Sie buchen nur die Module, die zu Ihrer Situation passen. Jedes Modul endet mit
+                Du buchst nur die Module, die zu deiner Situation passen. Jedes Modul endet mit
                 konkreten Maßnahmen, Zuständigkeiten und Kennzahlen.
               </p>
             </div>
@@ -151,7 +151,7 @@ export default function Stabilitaetsberatung() {
               </div>
               <h2>Am Ende steht ein konkreter Maßnahmenplan</h2>
               <p>
-                Beratung muss handlungsorientiert sein, nicht theoretisch. Sie erhalten:
+                Beratung muss handlungsorientiert sein, nicht theoretisch. Du bekommst:
               </p>
               <ul>
                 <li>Priorisierte Empfehlungen mit Aufwand und Wirkung</li>
@@ -202,8 +202,8 @@ export default function Stabilitaetsberatung() {
                   <span className="gradient-text">unverbindlich anfragen</span>
                 </h2>
                 <p className="contact-desc">
-                  Schildern Sie uns kurz Ihre Situation. Wir melden uns innerhalb von 24 Stunden
-                  und prüfen, welches Modul zu Ihrem Bedarf passt — und ob fördernahe Bestandteile
+                  Schildere uns kurz deine Situation. Wir melden uns innerhalb von 24 Stunden
+                  und prüfen, welches Modul zu deinem Bedarf passt — und ob fördernahe Bestandteile
                   enthalten sein können.
                 </p>
               </div>

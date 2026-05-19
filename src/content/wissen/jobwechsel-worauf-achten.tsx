@@ -6,8 +6,8 @@ const Body = () => (
     <p className="article-lead">
       Ein Pflegejob-Wechsel ist eine große Entscheidung. Wenn er gut wird, verändert er den
       Alltag spürbar. Wenn er schief geht, verstärkt er genau die Probleme, vor denen man
-      weg wollte. Worauf es vor dem Wechsel ankommt — und welche Fragen Sie sich stellen
-      sollten, bevor Sie unterschreiben.
+      weg wolltest. Worauf es vor dem Wechsel ankommt — und welche Fragen du dir stellen
+      solltest, bevor du unterschreibst.
     </p>
 
     <h2>Warum schnelle Wechsel oft wieder enttäuschen</h2>
@@ -18,11 +18,11 @@ const Body = () => (
       Einrichtung mit denselben Strukturen.
     </p>
 
-    <h2>Drei Fragen, die Sie zuerst sich selbst beantworten sollten</h2>
+    <h2>Drei Fragen, die du zuerst dir selbst beantworten solltest</h2>
 
     <h3>1. Was darf sich auf keinen Fall wiederholen?</h3>
     <p>
-      Das ist die wichtigste Frage vor jedem Wechsel. Schreiben Sie 3–5 Punkte auf —
+      Das ist die wichtigste Frage vor jedem Wechsel. Schreib 3–5 Punkte auf —
       konkret, nicht abstrakt. „Mehr Wertschätzung" ist zu vage. „Maximal zwei
       Wochenenddienste pro Monat, kein Einspringen aus dem Frei nach 19 Uhr" ist konkret.
       Genau diese Punkte sind im neuen Job nicht verhandelbar.
@@ -32,22 +32,22 @@ const Body = () => (
     <p>
       Nicht „alles", sondern zwei bis drei Dinge: Vielleicht ein anderer Fachbereich, vielleicht
       mehr Verantwortung, vielleicht Praxisanleitung, vielleicht einfach ein planbarer
-      Dienstplan. Wenn Sie das nicht klar haben, wird auch der nächste Arbeitgeber es nicht
+      Dienstplan. Wenn du das nicht klar hast, wird auch der nächste Arbeitgeber es nicht
       raten.
     </p>
 
-    <h3>3. Was sind Sie bereit, dafür zu geben?</h3>
+    <h3>3. Was bist du bereit, dafür zu geben?</h3>
     <p>
       Ein längerer Fahrweg für mehr Stabilität? Ein anderer Bereich für bessere Führung?
       Vorübergehend weniger Verantwortung für bessere Einarbeitung? Wechsel bedeuten fast
       immer Tausch — wer das vorher klärt, verhandelt entspannter.
     </p>
 
-    <h2>Was Sie im Vorstellungsgespräch ansprechen sollten</h2>
+    <h2>Was du im Vorstellungsgespräch ansprechen solltest</h2>
     <p>
       Viele Pflegekräfte schweigen über die kritischen Punkte und hoffen, dass es „schon
-      passt". Das ist genau der Mechanismus, der zur Probezeitkündigung führt. Sprechen Sie
-      Ihre 3–5 No-Gos im ersten Gespräch an. Wenn der zukünftige Arbeitgeber sie nicht halten
+      passt". Das ist genau der Mechanismus, der zur Probezeitkündigung führt. Sprich
+      deine 3–5 No-Gos im ersten Gespräch an. Wenn der zukünftige Arbeitgeber sie nicht halten
       kann, ist das eine wertvolle Information — und keine Schwäche Ihrerseits.
     </p>
 
@@ -59,13 +59,13 @@ const Body = () => (
       <li>Im Vorstellungsgespräch nach Dienstplanrhythmus der letzten 8 Wochen fragen</li>
       <li>Nach Einarbeitung mit Namen und Zeitplan fragen, nicht nur „Wir haben einen Mentor"</li>
       <li>Mit aktuellen Mitarbeitenden des Bereichs sprechen, wenn möglich</li>
-      <li>Erwartungen schriftlich abgleichen, bevor Sie unterschreiben</li>
+      <li>Erwartungen schriftlich abgleichen, bevor du unterschreibst</li>
     </ul>
 
     <div className="article-cta">
-      <h3>Wenn Sie wechseln wollen</h3>
+      <h3>Wenn du wechseln willst</h3>
       <p>
-        Wir begleiten Pflegekräfte vor und nach dem Wechsel. Im Vorgespräch klären wir Ihre
+        Wir begleiten Pflegekräfte vor und nach dem Wechsel. Im Vorgespräch klären wir deine
         No-Gos. Im Match prüfen wir, ob der Arbeitgeber sie halten kann. In den ersten 180
         Tagen bleiben wir Ansprechpartner.
       </p>
@@ -78,9 +78,9 @@ const Body = () => (
 
 const article: ArticleMeta = {
   slug: 'jobwechsel-in-der-pflege-worauf-sie-achten-sollten',
-  title: 'Jobwechsel in der Pflege: Worauf Sie achten sollten',
+  title: 'Jobwechsel in der Pflege: Worauf du achten solltest',
   description:
-    'Ein guter Wechsel beginnt mit ehrlicher Klärung — bei sich selbst. Drei Fragen und eine Checkliste, bevor Sie unterschreiben.',
+    'Ein guter Wechsel beginnt mit ehrlicher Klärung — bei dir selbst. Drei Fragen und eine Checkliste, bevor du unterschreibst.',
   category: 'wechsel',
   audience: 'pflegekraefte',
   readingMinutes: 5,

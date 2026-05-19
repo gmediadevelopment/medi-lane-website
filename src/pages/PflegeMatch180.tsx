@@ -31,7 +31,7 @@ const pillars = [
     icon: <Building2 size={28} />,
     title: 'Arbeitgeber-Profiling',
     description:
-      'Wir erfassen, welche Bedingungen Ihre Einrichtung tatsächlich bieten kann — nicht nur das, was in der Stellenanzeige steht.',
+      'Wir erfassen, welche Bedingungen deine Einrichtung tatsächlich bieten kann — nicht nur das, was in der Stellenanzeige steht.',
     bullets: [
       'Reale Dienstplan- und Einsatzlogik',
       'Einarbeitungsstruktur und Mentoren',
@@ -60,7 +60,7 @@ const processSteps = [
     icon: <ClipboardCheck size={22} />,
     title: 'Mandatsaufnahme',
     description:
-      'Wir verstehen Ihre Einrichtung in der Tiefe: Stellenprofil, Dienstplanrealität, Teamstruktur, Führungsstil, No-Gos.',
+      'Wir verstehen deine Einrichtung in der Tiefe: Stellenprofil, Dienstplanrealität, Teamstruktur, Führungsstil, No-Gos.',
   },
   {
     marker: '2',
@@ -81,7 +81,7 @@ const processSteps = [
     icon: <FileText size={22} />,
     title: 'Match-Bericht',
     description:
-      'Sie erhalten keine Profilflut, sondern einen begründeten Match-Bericht mit Chancen, Risiken und Gesprächsempfehlungen.',
+      'Du bekommst keine Profilflut, sondern einen begründeten Match-Bericht mit Chancen, Risiken und Gesprächsempfehlungen.',
   },
   {
     marker: '5',
@@ -102,7 +102,7 @@ const processSteps = [
     icon: <ShieldCheck size={22} />,
     title: 'Abschlussreport',
     description:
-      'Verbleib, Zufriedenheit, Learnings — Sie lernen aus jedem Match, nicht nur aus dem erfolgreichen.',
+      'Verbleib, Zufriedenheit, Learnings — du lernst aus jedem Match, nicht nur aus dem erfolgreichen.',
   },
 ]
 
@@ -186,7 +186,7 @@ const faqItems = [
   {
     question: 'Was unterscheidet PflegeMatch 180 von klassischer Vermittlung?',
     answer:
-      'Klassische Vermittlung optimiert auf Geschwindigkeit und Abschluss. PflegeMatch 180 endet nicht bei der Unterschrift — Sie bekommen einen begründeten Match-Bericht statt eines Lebenslaufs und 180 Tage aktive Begleitung. Das Ziel ist nicht die Besetzung, sondern der Verbleib.',
+      'Klassische Vermittlung optimiert auf Geschwindigkeit und Abschluss. PflegeMatch 180 endet nicht bei der Unterschrift — du bekommst einen begründeten Match-Bericht statt eines Lebenslaufs und 180 Tage aktive Begleitung. Das Ziel ist nicht die Besetzung, sondern der Verbleib.',
   },
   {
     question: 'Was kostet PflegeMatch 180?',
@@ -201,7 +201,7 @@ const faqItems = [
   {
     question: 'Wie schnell findet ihr eine passende Pflegekraft?',
     answer:
-      'Wir priorisieren Passung gegenüber Geschwindigkeit. Erfahrungsgemäß sehen Sie innerhalb von zwei bis vier Wochen erste qualifizierte Match-Berichte — falsche Eilbesetzungen sind in der Pflege teurer als ein paar Wochen Suche.',
+      'Wir priorisieren Passung gegenüber Geschwindigkeit. Erfahrungsgemäß siehst du innerhalb von zwei bis vier Wochen erste qualifizierte Match-Berichte — falsche Eilbesetzungen sind in der Pflege teurer als ein paar Wochen Suche.',
   },
   {
     question: 'Für welche Einrichtungen lohnt sich PflegeMatch 180 besonders?',
@@ -211,7 +211,7 @@ const faqItems = [
   {
     question: 'Was, wenn unsere Einrichtung die zugesagten Bedingungen nicht halten kann?',
     answer:
-      'Das ist genau einer der Punkte, die wir vor der Vermittlung klären. Wir nehmen nur Versprechen in den Match auf, die haltbar sind. Wo wir strukturelle Risiken sehen, schlagen wir die optionale Stabilitätsberatung vor — das schützt am Ende auch Ihren Ruf als Arbeitgeber.',
+      'Das ist genau einer der Punkte, die wir vor der Vermittlung klären. Wir nehmen nur Versprechen in den Match auf, die haltbar sind. Wo wir strukturelle Risiken sehen, schlagen wir die optionale Stabilitätsberatung vor — das schützt am Ende auch deinen Ruf als Arbeitgeber.',
   },
 ]
 
@@ -352,12 +352,12 @@ export default function PflegeMatch180() {
               <div className="match-report-text">
                 <span className="section-badge">Der Match-Bericht</span>
                 <h2 className="section-title" style={{ textAlign: 'left' }}>
-                  Sie bekommen{' '}
+                  Du bekommst{' '}
                   <span className="gradient-text">begründete Matches</span>,
                   keine Profilflut.
                 </h2>
                 <p className="match-report-desc">
-                  Jede Vorstellung erfolgt mit einem strukturierten Match-Bericht. Sie sehen nicht
+                  Jede Vorstellung erfolgt mit einem strukturierten Match-Bericht. Du siehst nicht
                   nur, wer fachlich passen könnte, sondern verstehen warum — und welche Punkte
                   vor dem Start geklärt werden sollten.
                 </p>
@@ -472,7 +472,7 @@ export default function PflegeMatch180() {
         <div className="container">
           <ScrollReveal>
             <div className="final-cta-box">
-              <h2>Lassen Sie uns prüfen, ob PflegeMatch 180 zu Ihnen passt.</h2>
+              <h2>Lass uns prüfen, ob PflegeMatch 180 zu dir passt.</h2>
               <p>
                 Im kostenlosen Erstgespräch klären wir Bedarf, Rahmenbedingungen und nächste Schritte —
                 unverbindlich und vertraulich.

@@ -12,7 +12,7 @@ const trustSignals = [
   {
     icon: <Lock size={24} />,
     title: 'Vertraulich',
-    desc: 'Ihre Daten gehen nicht an Ihren aktuellen Arbeitgeber. Weitergabe nur mit Ihrer Zustimmung.',
+    desc: 'Deine Daten gehen nicht an deinen aktuellen Arbeitgeber. Weitergabe nur mit deiner Zustimmung.',
   },
   {
     icon: <Clock size={24} />,
@@ -27,30 +27,30 @@ const trustSignals = [
   {
     icon: <Eye size={24} />,
     title: 'Keine Profilflut',
-    desc: 'Sie sehen nur Einrichtungen, die wir aktiv für Sie geprüft haben.',
+    desc: 'Du siehst nur Einrichtungen, die wir aktiv für dich geprüft haben.',
   },
 ]
 
 const nextSteps = [
   {
     nr: '1',
-    title: 'Sie schicken Ihr Profil',
+    title: 'Du schickst dein Profil',
     desc: 'Wenige Felder, fünf Minuten. Wir bekommen den ersten Eindruck — fachlich und menschlich.',
   },
   {
     nr: '2',
     title: 'Wir melden uns vertraulich',
-    desc: 'Innerhalb von 1–2 Werktagen, telefonisch oder per Mail — Sie entscheiden, wann es passt.',
+    desc: 'Innerhalb von 1–2 Werktagen, telefonisch oder per Mail — du entscheidest, wann es passt.',
   },
   {
     nr: '3',
     title: 'Wechselgespräch in Ruhe',
-    desc: 'Wir gehen Ihre Wünsche, Belastungsgrenzen und No-Gos durch — ohne Druck und Verkaufsmodus.',
+    desc: 'Wir gehen deine Wünsche, Belastungsgrenzen und No-Gos durch — ohne Druck und Verkaufsmodus.',
   },
   {
     nr: '4',
     title: 'Wenn passend: konkrete Einrichtung',
-    desc: 'Sie sehen einen Vorschlag mit ehrlicher Einschätzung von Chancen und kritischen Punkten.',
+    desc: 'Du siehst einen Vorschlag mit ehrlicher Einschätzung von Chancen und kritischen Punkten.',
   },
 ]
 
@@ -62,11 +62,11 @@ export default function ArbeitgeberFinden() {
         title={
           <>
             Wir finden Pflegeeinrichtungen,<br />
-            die zu Ihren{' '}
+            die zu deinen{' '}
             <span className="gradient-text">Vorstellungen passen</span>
           </>
         }
-        subtitle="Sagen Sie uns kurz, was Ihnen wichtig ist. Wir prüfen, welche Einrichtungen aus unseren Mandaten zu Ihnen passen könnten — und melden uns vertraulich innerhalb von 1–2 Werktagen."
+        subtitle="Sag uns kurz, was dir wichtig ist. Wir prüfen, welche Einrichtungen aus unseren Mandaten zu dir passen könnten — und melden uns vertraulich innerhalb von 1–2 Werktagen."
         actions={
           <>
             <a href="#wechselprofil" className="btn btn--primary btn--lg">
@@ -99,7 +99,7 @@ export default function ArbeitgeberFinden() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge">Was Sie erwartet</span>
+              <span className="section-badge">Was dich erwartet</span>
               <h2 className="section-title">
                 Wir machen das anders als{' '}
                 <span className="gradient-text">die meisten Vermittler</span>
@@ -127,25 +127,25 @@ export default function ArbeitgeberFinden() {
           <div className="finden-form-split">
             <ScrollReveal>
               <div className="finden-form-info">
-                <span className="section-badge">Ihr Wechselprofil</span>
+                <span className="section-badge">Dein Wechselprofil</span>
                 <h2 className="section-title" style={{ textAlign: 'left' }}>
                   Wir hören erst zu, bevor wir{' '}
                   <span className="gradient-text">irgendwen vorschlagen</span>
                 </h2>
                 <p className="finden-form-desc">
                   Die folgenden Angaben reichen uns für den ersten Eindruck. Alles weitere
-                  besprechen wir persönlich — in dem Tempo, das für Sie passt.
+                  besprechen wir persönlich — in dem Tempo, das für dich passt.
                 </p>
 
                 <ul className="finden-form-bullets">
                   <li>
-                    <MessagesSquare size={18} /> Sie entscheiden über Tempo und nächsten Schritt
+                    <MessagesSquare size={18} /> Du entscheidest über Tempo und nächsten Schritt
                   </li>
                   <li>
-                    <Lock size={18} /> Vertrauliche Behandlung, keine Profilweitergabe ohne Ihre Zustimmung
+                    <Lock size={18} /> Vertrauliche Behandlung, keine Profilweitergabe ohne deine Zustimmung
                   </li>
                   <li>
-                    <Search size={18} /> Wir prüfen aktiv passende Einrichtungen — Sie filtern nicht selbst
+                    <Search size={18} /> Wir prüfen aktiv passende Einrichtungen — du filterst nicht selbst
                   </li>
                   <li>
                     <HandHeart size={18} /> 180-Tage-Begleitung auch nach dem Wechsel
@@ -174,8 +174,8 @@ export default function ArbeitgeberFinden() {
                 <span className="gradient-text">passiert</span>
               </h2>
               <p className="section-subtitle">
-                Vier Schritte, die wir transparent machen — damit Sie wissen, worauf Sie sich
-                einlassen, bevor Sie senden.
+                Vier Schritte, die wir transparent machen — damit du weißt, worauf du dich
+                einlässt, bevor du sendest.
               </p>
             </div>
           </ScrollReveal>

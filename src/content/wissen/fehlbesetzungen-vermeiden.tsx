@@ -47,7 +47,7 @@ const Body = () => (
 
     <h2>Was im Match-Bericht stehen sollte</h2>
     <p>
-      Wenn Sie mit einem Vermittler arbeiten, ist die einfachste Qualitätskontrolle: Steht
+      Wenn du mit einem Vermittler arbeitest, ist die einfachste Qualitätskontrolle: Steht
       im Match-Bericht nur die Qualifikation oder auch die kritischen Passungspunkte? Eine
       seriöse Vorauswahl benennt mindestens drei Risikofaktoren je Kandidat — fachlich,
       organisatorisch, kulturell. Wer alles grün anstreicht, hat nicht gut hingeschaut.

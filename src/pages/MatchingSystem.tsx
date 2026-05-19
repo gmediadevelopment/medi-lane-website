@@ -209,7 +209,7 @@ export default function MatchingSystem() {
               </h2>
               <p className="section-subtitle">
                 Jeder Match landet in einer von vier Stufen. Das ist keine automatische Entscheidung,
-                sondern eine strukturierte Entscheidungsgrundlage für Sie.
+                sondern eine strukturierte Entscheidungsgrundlage für dich.
               </p>
             </div>
           </ScrollReveal>
@@ -244,8 +244,8 @@ export default function MatchingSystem() {
                 Probezeit, wenn die Kosten schon entstanden sind.
               </p>
               <p>
-                Konkret heißt das: Sie führen weniger, aber bessere Vorstellungsgespräche, treffen
-                informierte Entscheidungen und können kritische Punkte direkt im Interview
+                Konkret heißt das: du führst weniger, aber bessere Vorstellungsgespräche, triffst
+                informierte Entscheidungen und kannst kritische Punkte direkt im Interview
                 ansprechen statt sie zu übersehen.
               </p>
             </div>
@@ -261,7 +261,7 @@ export default function MatchingSystem() {
               <h2>Matching-Prozess kennenlernen</h2>
               <p>
                 Im Erstgespräch zeigen wir die Fragebögen und einen Beispiel-Match-Bericht.
-                So sehen Sie konkret, was Sie bekommen, bevor Sie sich festlegen.
+                So siehst du konkret, was du bekommst, bevor du dich festlegst.
               </p>
               <Link to="/kontakt?typ=einrichtung" className="btn btn--white btn--lg">
                 Beispiel anfordern

@@ -37,12 +37,12 @@ const EMPTY: FormState = {
 
 const SUCCESS_COPY: Record<ContactFormType, { headline: string; body: string }> = {
   einrichtung: {
-    headline: 'Vielen Dank für Ihre Anfrage!',
-    body: 'Wir melden uns innerhalb von 24 Stunden bei Ihnen, um ein erstes Gespräch zu vereinbaren.',
+    headline: 'Vielen Dank für deine Anfrage!',
+    body: 'Wir melden uns innerhalb von 24 Stunden bei dir, um ein erstes Gespräch zu vereinbaren.',
   },
   pflegekraft: {
-    headline: 'Danke — wir melden uns bei Ihnen.',
-    body: 'Wir nehmen in Kürze unverbindlich Kontakt mit Ihnen auf. Ihre Angaben werden vertraulich behandelt.',
+    headline: 'Danke — wir melden uns bei dir.',
+    body: 'Wir nehmen in Kürze unverbindlich Kontakt mit dir auf. Deine Angaben werden vertraulich behandelt.',
   },
   partner: {
     headline: 'Anfrage erhalten.',
@@ -150,7 +150,7 @@ export default function ContactForm({
     } catch (err: unknown) {
       console.error('Contact form error:', err)
       setErrorMessage(
-        'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie direkt an info@medi-lane.de.'
+        'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es erneut oder schreib direkt an info@medi-lane.de.'
       )
       setStatus('error')
     }
@@ -188,7 +188,7 @@ export default function ContactForm({
             id="contact-name"
             value={formData.name}
             onChange={e => setFormData({ ...formData, name: e.target.value })}
-            placeholder="Ihr Name"
+            placeholder="Dein Name"
             required
           />
         </div>
@@ -298,7 +298,7 @@ export default function ContactForm({
               id="contact-organisation"
               value={formData.organisation}
               onChange={e => setFormData({ ...formData, organisation: e.target.value })}
-              placeholder="Ihre Organisation"
+              placeholder="Deine Organisation"
               required
             />
           </div>
@@ -325,10 +325,10 @@ export default function ContactForm({
           onChange={e => setFormData({ ...formData, nachricht: e.target.value })}
           placeholder={
             type === 'einrichtung'
-              ? 'Beschreiben Sie kurz Ihren Bedarf...'
+              ? 'Beschreib kurz deinen Bedarf...'
               : type === 'pflegekraft'
-                ? 'Was ist Ihnen beim nächsten Job wichtig? Was darf sich nicht wiederholen?'
-                : 'Beschreiben Sie Ihr Anliegen, Pilot- oder Förderkontext...'
+                ? 'Was ist dir beim nächsten Job wichtig? Was darf sich nicht wiederholen?'
+                : 'Beschreib dein Anliegen, Pilot- oder Förderkontext...'
           }
           rows={4}
           required={type !== 'pflegekraft'}
@@ -336,7 +336,7 @@ export default function ContactForm({
       </div>
 
       <p className="form-consent">
-        Mit dem Absenden bestätigen Sie, dass wir Sie zur Bearbeitung Ihrer Anfrage kontaktieren dürfen.
+        Mit dem Absenden bestätigst du, dass wir dich zur Bearbeitung deiner Anfrage kontaktieren dürfen.
         Details siehe <a href="/datenschutz">Datenschutz</a>.
       </p>
 
