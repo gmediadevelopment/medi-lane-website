@@ -5,7 +5,7 @@ interface AvailabilityBarProps {
 }
 
 export default function AvailabilityBar({
-  label = 'Aktiv vermittelnd · NRW · Berlin · München · Hamburg',
+  label = 'Aktuell aktiv in NRW',
   className = '',
   style,
 }: AvailabilityBarProps) {

@@ -39,10 +39,6 @@
   transition: transform var(--transition-base);
 }
 
-.pillars--amber .pillar-card::before {
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
-}
-
 .pillar-card:hover {
   border-color: var(--color-primary-lighter);
   box-shadow: var(--shadow-lg);
@@ -51,10 +47,6 @@
 
 .pillar-card:hover::before {
   transform: scaleX(1);
-}
-
-.pillars--amber .pillar-card:hover {
-  border-color: var(--color-accent-light);
 }
 
 .pillar-number {
@@ -70,13 +62,6 @@
   opacity: 0.9;
 }
 
-.pillars--amber .pillar-number {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .pillar-icon {
   width: 52px;
   height: 52px;
@@ -89,11 +74,6 @@
   margin-bottom: var(--space-4);
 }
 
-.pillars--amber .pillar-icon {
-  background: var(--color-warning-light);
-  color: var(--color-accent-dark);
-}
-
 .pillar-subtitle {
   font-size: var(--text-xs);
   font-weight: var(--font-bold);
@@ -101,10 +81,6 @@
   letter-spacing: 0.08em;
   color: var(--color-primary);
   margin-bottom: var(--space-2);
-}
-
-.pillars--amber .pillar-subtitle {
-  color: var(--color-accent-dark);
 }
 
 .pillar-title {
@@ -144,10 +120,6 @@
   top: 0;
   color: var(--color-primary);
   font-weight: var(--font-bold);
-}
-
-.pillars--amber .pillar-bullets li::before {
-  color: var(--color-accent-dark);
 }
 
 @media (max-width: 1024px) {

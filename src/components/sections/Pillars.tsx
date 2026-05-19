@@ -13,12 +13,11 @@ interface Pillar {
 
 interface PillarsProps {
   pillars: Pillar[]
-  accent?: 'primary' | 'amber'
 }
 
-export default function Pillars({ pillars, accent = 'primary' }: PillarsProps) {
+export default function Pillars({ pillars }: PillarsProps) {
   return (
-    <div className={`pillars pillars--${accent} pillars--count-${pillars.length}`}>
+    <div className={`pillars pillars--count-${pillars.length}`}>
       {pillars.map((p, i) => (
         <ScrollReveal key={i} delay={i + 1}>
           <div className="pillar-card">

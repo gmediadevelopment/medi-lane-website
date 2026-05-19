@@ -32,17 +32,17 @@
 }
 
 .kategorie-card--amber::before {
-  background: var(--color-accent);
+  background: var(--ink);
 }
 
 .kategorie-card:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
 .kategorie-card--amber:hover {
-  border-color: var(--color-accent-light);
+  border-color: var(--ink);
 }
 
 .kategorie-card:hover::before {
@@ -99,8 +99,8 @@
 }
 
 .match-level--warn .match-level-icon {
-  background: var(--color-warning-light);
-  color: var(--color-accent-dark);
+  background: #FDF8EC;
+  color: var(--warning);
 }
 
 .match-level--bad .match-level-icon {

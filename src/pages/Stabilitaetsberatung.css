@@ -89,8 +89,8 @@
 }
 
 .foerder-hint {
-  background: var(--color-warning-light);
-  border-left: 4px solid var(--color-accent);
+  background: var(--slate-50);
+  border-left: 4px solid var(--teal);
   padding: var(--space-8);
   border-radius: var(--radius-lg);
 }

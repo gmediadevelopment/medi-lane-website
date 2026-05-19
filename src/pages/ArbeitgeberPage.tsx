@@ -42,17 +42,17 @@ export default function ArbeitgeberPage() {
         </div>
         <div className="container employer-hero-inner">
           <div className="employer-hero-content">
-            <span className="section-badge section-badge--amber">Für Arbeitgeber</span>
+            <span className="section-badge">Für Arbeitgeber</span>
             <h1 className="hero-title">
               Weniger Fluktuation<br />
-              beginnt mit <span className="gradient-text--amber">besserer Passung</span>.
+              beginnt mit <span className="gradient-text">besserer Passung</span>.
             </h1>
             <p className="hero-subtitle">
               Wir vermitteln keine Masse, sondern wechselbereite Pflegekräfte mit klaren 
               Erwartungen und echter Passung zu Ihrer Einrichtung.
             </p>
             <div className="hero-actions">
-              <a href="#kontakt" className="btn btn--accent btn--lg" id="employer-hero-cta">
+              <a href="#kontakt" className="btn btn--primary btn--lg" id="employer-hero-cta">
                 <Building2 size={20} />
                 Kontakt aufnehmen
               </a>
@@ -84,8 +84,8 @@ export default function ArbeitgeberPage() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge section-badge--amber">Die Realität</span>
-              <h2 className="section-title">Arbeitgeber haben kein Recruiting-Problem —<br />sondern ein <span className="gradient-text--amber">Passungsproblem</span>.</h2>
+              <span className="section-badge">Die Realität</span>
+              <h2 className="section-title">Arbeitgeber haben kein Recruiting-Problem —<br />sondern ein <span className="gradient-text">Passungsproblem</span>.</h2>
             </div>
           </ScrollReveal>
 
@@ -116,8 +116,8 @@ export default function ArbeitgeberPage() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge section-badge--amber">Unser Ansatz</span>
-              <h2 className="section-title"><span className="gradient-text--amber">Wechselprofile</span> statt Bewerbungsmasse</h2>
+              <span className="section-badge">Unser Ansatz</span>
+              <h2 className="section-title"><span className="gradient-text">Wechselprofile</span> statt Bewerbungsmasse</h2>
               <p className="section-subtitle">
                 Wir denken Vermittlung anders: Nicht „Qualifikation + freie Stelle = passt schon", 
                 sondern tiefes Matching auf Basis von echten Wechselmotiven.
@@ -159,8 +159,8 @@ export default function ArbeitgeberPage() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge section-badge--amber">Ihre Vorteile</span>
-              <h2 className="section-title">Warum Einrichtungen auf <span className="gradient-text--amber">Medilane</span> setzen</h2>
+              <span className="section-badge">Ihre Vorteile</span>
+              <h2 className="section-title">Warum Einrichtungen auf <span className="gradient-text">Medilane</span> setzen</h2>
             </div>
           </ScrollReveal>
 
@@ -168,7 +168,7 @@ export default function ArbeitgeberPage() {
             {usps.map((usp, i) => (
               <ScrollReveal key={i} delay={i % 3 + 1}>
                 <div className="benefit-card">
-                  <div className="benefit-icon-wrap benefit-icon-wrap--amber">{usp.icon}</div>
+                  <div className="benefit-icon-wrap">{usp.icon}</div>
                   <h3>{usp.title}</h3>
                   <p>{usp.desc}</p>
                 </div>
@@ -183,8 +183,8 @@ export default function ArbeitgeberPage() {
         <div className="container">
           <ScrollReveal>
             <div className="section-header">
-              <span className="section-badge section-badge--amber">Der Ablauf</span>
-              <h2 className="section-title">So finden wir die <span className="gradient-text--amber">richtige Pflegekraft</span> für Sie</h2>
+              <span className="section-badge">Der Ablauf</span>
+              <h2 className="section-title">So finden wir die <span className="gradient-text">richtige Pflegekraft</span> für Sie</h2>
             </div>
           </ScrollReveal>
 
@@ -209,8 +209,8 @@ export default function ArbeitgeberPage() {
           <div className="contact-split">
             <ScrollReveal>
               <div className="contact-info">
-                <span className="section-badge section-badge--amber">Kontakt</span>
-                <h2 className="section-title" style={{ textAlign: 'left' }}>Sprechen Sie mit uns über Ihren <span className="gradient-text--amber">Bedarf</span></h2>
+                <span className="section-badge">Kontakt</span>
+                <h2 className="section-title" style={{ textAlign: 'left' }}>Sprechen Sie mit uns über Ihren <span className="gradient-text">Bedarf</span></h2>
                 <p className="contact-desc">
                   Ob einzelne Stellen oder langfristiger Recruiting-Partner — wir freuen uns auf den Austausch. 
                   Beschreiben Sie kurz Ihren Bedarf, wir melden uns innerhalb von 24 Stunden.
@@ -236,13 +236,13 @@ export default function ArbeitgeberPage() {
       <section className="section final-cta-section">
         <div className="container">
           <ScrollReveal>
-            <div className="final-cta-box final-cta-box--amber">
+            <div className="final-cta-box">
               <h2>Bereit für bessere Besetzungen?</h2>
               <p>
-                Lernen Sie unser Matching-Modell kennen und gewinnen Sie Pflegekräfte, 
+                Lernen Sie unser Matching-Modell kennen und gewinnen Sie Pflegekräfte,
                 die wirklich in Ihre Einrichtung passen.
               </p>
-              <a href="#kontakt" className="btn btn--white btn--lg" id="employer-final-cta">
+              <a href="#kontakt" className="btn btn--inverse btn--lg" id="employer-final-cta">
                 Jetzt Kontakt aufnehmen <ArrowRight size={20} />
               </a>
             </div>

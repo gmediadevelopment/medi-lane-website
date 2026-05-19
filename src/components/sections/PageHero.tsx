@@ -6,7 +6,7 @@ interface PageHeroProps {
   title: ReactNode
   subtitle?: ReactNode
   actions?: ReactNode
-  variant?: 'primary' | 'amber' | 'dark'
+  variant?: 'primary' | 'dark'
   trust?: ReactNode
   meta?: ReactNode
 }
@@ -27,11 +27,7 @@ export default function PageHero({
         <div className="page-hero-mesh" />
       </div>
       <div className="container page-hero-inner">
-        {badge && (
-          <span className={`section-badge ${variant === 'amber' ? 'section-badge--amber' : ''}`}>
-            {badge}
-          </span>
-        )}
+        {badge && <span className="section-badge">{badge}</span>}
         <h1 className="page-hero-title">{title}</h1>
         {subtitle && <p className="page-hero-subtitle">{subtitle}</p>}
         {actions && <div className="page-hero-actions">{actions}</div>}

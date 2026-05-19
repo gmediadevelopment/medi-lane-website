@@ -13,16 +13,14 @@ interface TimelineStep {
 interface ProcessTimelineProps {
   steps: TimelineStep[]
   variant?: 'horizontal' | 'vertical'
-  accent?: 'primary' | 'amber'
 }
 
 export default function ProcessTimeline({
   steps,
   variant = 'vertical',
-  accent = 'primary',
 }: ProcessTimelineProps) {
   return (
-    <div className={`process-timeline process-timeline--${variant} process-timeline--${accent}`}>
+    <div className={`process-timeline process-timeline--${variant}`}>
       {steps.map((step, i) => (
         <ScrollReveal key={i} delay={(i % 4) + 1}>
           <div className="timeline-step">

@@ -105,18 +105,18 @@
 }
 
 .article-tag--einrichtungen {
-  background: var(--color-primary-lightest);
-  color: var(--color-primary-darkest);
+  background: var(--slate-100);
+  color: var(--slate-700);
 }
 
 .article-tag--pflegekraefte {
-  background: var(--color-warning-light);
-  color: var(--color-accent-dark);
+  background: var(--teal-tint);
+  color: var(--teal-deep);
 }
 
 .article-tag--beide {
-  background: var(--color-info-light);
-  color: #1D4ED8;
+  background: var(--slate-50);
+  color: var(--slate-700);
 }
 
 .article-reading {
