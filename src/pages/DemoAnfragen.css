@@ -25,9 +25,8 @@
 }
 
 .demo-kpi:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .demo-kpi-value {
@@ -74,9 +73,8 @@
 }
 
 .geeignet-card:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .geeignet-icon {
@@ -119,9 +117,8 @@
 }
 
 .demo-step:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .demo-step-nr {

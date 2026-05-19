@@ -19,9 +19,8 @@
 }
 
 .promise-card:hover {
-  border-color: var(--color-primary-lighter);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-md);
 }
 
 .promise-icon {
@@ -99,9 +98,8 @@
 }
 
 .ablauf-card:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .ablauf-nr {

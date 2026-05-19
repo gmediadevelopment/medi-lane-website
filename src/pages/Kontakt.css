@@ -127,9 +127,8 @@
 }
 
 .kontakt-quicklink:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .kontakt-quicklink h3 {

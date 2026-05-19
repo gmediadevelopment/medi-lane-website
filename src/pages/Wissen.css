@@ -79,9 +79,8 @@
 }
 
 .article-card:hover {
-  border-color: var(--color-primary-lighter);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-md);
 }
 
 .article-card-meta {

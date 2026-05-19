@@ -19,9 +19,8 @@
 }
 
 .trust-card:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .trust-icon {
@@ -126,9 +125,8 @@
 }
 
 .next-step:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--ink);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .next-step-nr {
