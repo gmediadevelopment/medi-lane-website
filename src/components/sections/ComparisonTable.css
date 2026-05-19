@@ -1,114 +1,129 @@
 /* ============================================
    COMPARISON TABLE
+   Shared 3-column comparison surface used across the site.
    ============================================ */
 
-.comparison-wrapper {
-  max-width: 960px;
+.compare {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--white);
+  max-width: 1080px;
   margin: 0 auto;
 }
 
-.comparison-table {
-  background: white;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-gray-200);
-}
-
-.comp-header {
+.compare__head {
   display: grid;
-  grid-template-columns: 1.2fr 1.4fr 1.4fr;
-  background: var(--color-gray-900);
-  color: white;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--border);
 }
 
-.comp-header .comp-cell {
-  padding: var(--space-5) var(--space-6);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-base);
+.compare__head-cell {
+  padding: 24px 28px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate-500);
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.comp-header .comp-label {
-  background: var(--color-gray-800);
+.compare__head-cell--brand {
+  background: var(--ink);
+  color: var(--white);
 }
 
-.comp-header .comp-old {
-  background: var(--color-gray-700);
-  color: var(--color-gray-300);
-}
-
-.comp-header .comp-new {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: white;
-}
-
-.comp-row {
-  display: grid;
-  grid-template-columns: 1.2fr 1.4fr 1.4fr;
-  border-top: 1px solid var(--color-gray-200);
-}
-
-.comp-row:hover {
-  background: var(--color-gray-50);
-}
-
-.comp-cell {
-  padding: var(--space-5) var(--space-6);
-  font-size: var(--text-base);
-  line-height: var(--leading-snug);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.comp-label {
-  font-weight: var(--font-semibold);
-  color: var(--color-gray-900);
-  background: var(--color-gray-50);
-}
-
-.comp-old {
-  color: var(--color-gray-500);
-}
-
-.comp-new {
-  color: var(--color-gray-800);
-  font-weight: var(--font-medium);
-  background: var(--color-primary-lightest);
-}
-
-.comp-icon {
+.compare__head-cell--brand .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
   flex-shrink: 0;
 }
 
-.comp-icon--no {
-  color: var(--color-gray-400);
+.compare__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  border-top: 1px solid var(--border);
 }
 
-.comp-icon--yes {
-  color: var(--color-primary);
+.compare__row:first-of-type {
+  border-top: none;
 }
 
-@media (max-width: 768px) {
-  .comp-header,
-  .comp-row {
+.compare__cell {
+  padding: 22px 28px;
+  font-size: 14px;
+  color: var(--slate-700);
+  line-height: 1.5;
+}
+
+.compare__cell--label {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.compare__cell--brand {
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 400;
+  position: relative;
+}
+
+.compare__cell--brand::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background: var(--teal);
+}
+
+@media (max-width: 720px) {
+  .compare__head { display: none; }
+
+  .compare__row {
     grid-template-columns: 1fr;
   }
 
-  .comp-header .comp-label {
-    display: none;
+  .compare__cell {
+    padding: 18px 22px;
   }
 
-  .comp-cell {
-    padding: var(--space-4);
-    font-size: var(--text-sm);
+  .compare__cell--label {
+    background: var(--ink);
+    color: var(--white);
+    font-size: 13px;
+    letter-spacing: 0.02em;
   }
 
-  .comp-row .comp-label {
-    background: var(--color-gray-900);
-    color: white;
-    font-weight: var(--font-bold);
+  .compare__cell:not(.compare__cell--label):not(.compare__cell--brand)::before {
+    content: "Klassisch";
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--slate-500);
+    margin-bottom: 8px;
+  }
+
+  .compare__cell--brand::before {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    display: block;
+    content: "Medilane";
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
   }
 }

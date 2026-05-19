@@ -1,4 +1,3 @@
-import { CheckCircle, XCircle } from 'lucide-react'
 import './ComparisonTable.css'
 
 interface ComparisonRow {
@@ -15,31 +14,26 @@ interface ComparisonTableProps {
 
 export default function ComparisonTable({
   rows,
-  classicHeader = 'Klassisch',
-  medilaneHeader = 'Medilane',
+  classicHeader = 'Klassische Vermittlung',
+  medilaneHeader = 'Medilane PflegeMatch 180',
 }: ComparisonTableProps) {
   return (
-    <div className="comparison-wrapper">
-      <div className="comparison-table">
-        <div className="comp-header">
-          <div className="comp-cell comp-label"></div>
-          <div className="comp-cell comp-old">{classicHeader}</div>
-          <div className="comp-cell comp-new">{medilaneHeader}</div>
+    <div className="compare">
+      <div className="compare__head">
+        <div className="compare__head-cell">&nbsp;</div>
+        <div className="compare__head-cell">{classicHeader}</div>
+        <div className="compare__head-cell compare__head-cell--brand">
+          <span className="dot" />
+          {medilaneHeader}
         </div>
-        {rows.map((row, i) => (
-          <div className="comp-row" key={i}>
-            <div className="comp-cell comp-label">{row.label}</div>
-            <div className="comp-cell comp-old">
-              <XCircle size={16} className="comp-icon comp-icon--no" />
-              {row.classic}
-            </div>
-            <div className="comp-cell comp-new">
-              <CheckCircle size={16} className="comp-icon comp-icon--yes" />
-              {row.medilane}
-            </div>
-          </div>
-        ))}
       </div>
+      {rows.map(row => (
+        <div className="compare__row" key={row.label}>
+          <div className="compare__cell compare__cell--label">{row.label}</div>
+          <div className="compare__cell">{row.classic}</div>
+          <div className="compare__cell compare__cell--brand">{row.medilane}</div>
+        </div>
+      ))}
     </div>
   )
 }

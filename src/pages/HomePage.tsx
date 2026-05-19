@@ -4,6 +4,7 @@ import Eyebrow from '../components/sections/Eyebrow'
 import AvailabilityBar from '../components/sections/AvailabilityBar'
 import ImageSlot from '../components/sections/ImageSlot'
 import { MatchReport } from '../components/sections/MatchReport'
+import ComparisonTable from '../components/sections/ComparisonTable'
 import heroTeam from '../assets/hero-team.png'
 import './HomePage.css'
 
@@ -372,13 +373,13 @@ function AudienceSplit() {
    ====================================================================== */
 function Comparison() {
   const rows = [
-    ['Vermittlungsfokus',           'Lebenslauf, Verfügbarkeit, Gehalt',     'Gesamtpassung: Fachlich, Dienstplan, Team, Belastung, Führung'],
-    ['Was du als Einrichtung bekommst', 'Profilstapel zur Sichtung',         'Begründeter Match-Bericht mit Risiken und Startbedingungen'],
-    ['Was nach Unterschrift passiert',  'Vermittler ist raus',               '180-Tage-Begleitung mit Check-ins an Tag 7/30/60/100/180'],
-    ['Dienstplanrealität',          'Wird selten geprüft',                   'Vor Vorstellung abgeglichen — keine schöngefärbten Versprechen'],
-    ['Risiken vor Start',           'Bleiben oft unsichtbar',                'Werden im Bericht benannt — grün, gelb, rot'],
-    ['Wenn es nach Tag 14 hakt',    'Problem der Einrichtung',               'Konfliktmoderation, Erwartungs-Neujustierung, Frühwarnung'],
-    ['Erfolgsmaß',                  'Vertragsunterschrift',                  'Verbleib nach 180 Tagen, gemessen und dokumentiert'],
+    { label: 'Vermittlungsfokus',            classic: 'Lebenslauf, Verfügbarkeit, Gehalt', medilane: 'Gesamtpassung: Fachlich, Dienstplan, Team, Belastung, Führung' },
+    { label: 'Was du als Einrichtung bekommst', classic: 'Profilstapel zur Sichtung',      medilane: 'Begründeter Match-Bericht mit Risiken und Startbedingungen' },
+    { label: 'Was nach Unterschrift passiert',  classic: 'Vermittler ist raus',            medilane: '180-Tage-Begleitung mit Check-ins an Tag 7/30/60/100/180' },
+    { label: 'Dienstplanrealität',           classic: 'Wird selten geprüft',               medilane: 'Vor Vorstellung abgeglichen — keine schöngefärbten Versprechen' },
+    { label: 'Risiken vor Start',            classic: 'Bleiben oft unsichtbar',            medilane: 'Werden im Bericht benannt — grün, gelb, rot' },
+    { label: 'Wenn es nach Tag 14 hakt',     classic: 'Problem der Einrichtung',           medilane: 'Konfliktmoderation, Erwartungs-Neujustierung, Frühwarnung' },
+    { label: 'Erfolgsmaß',                   classic: 'Vertragsunterschrift',              medilane: 'Verbleib nach 180 Tagen, gemessen und dokumentiert' },
   ]
   return (
     <section className="section section--soft">
@@ -390,22 +391,7 @@ function Comparison() {
           </h2>
         </div>
 
-        <div className="compare">
-          <div className="compare__head">
-            <div className="compare__head-cell">&nbsp;</div>
-            <div className="compare__head-cell">Klassische Vermittlung</div>
-            <div className="compare__head-cell compare__head-cell--brand">
-              <span className="dot" />Medilane PflegeMatch 180
-            </div>
-          </div>
-          {rows.map(([topic, classic, medi]) => (
-            <div key={topic} className="compare__row">
-              <div className="compare__cell compare__cell--label">{topic}</div>
-              <div className="compare__cell">{classic}</div>
-              <div className="compare__cell compare__cell--brand">{medi}</div>
-            </div>
-          ))}
-        </div>
+        <ComparisonTable rows={rows} />
       </div>
     </section>
   )
