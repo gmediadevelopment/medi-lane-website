@@ -237,12 +237,17 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* clip (not hidden) — prevents horizontal page-shift without
+     creating a scroll container that would break position: sticky */
+  overflow-x: clip;
 }
 
 html, body {
   margin: 0;
   padding: 0;
   background: var(--white);
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -255,7 +260,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -434,11 +439,11 @@ h3 em,
 .hero-title em,
 .hero__title em {
   font-style: normal;
-  position: relative;
-  white-space: nowrap;
   color: var(--ink);
 }
 
+/* Accent dot flows inline after the word — no nowrap, no absolute
+   positioning, so it can never push a heading wider than the viewport. */
 h1 em::after,
 h2 em::after,
 h3 em::after,
@@ -448,14 +453,13 @@ h3 em::after,
 .hero-title em::after,
 .hero__title em::after {
   content: "";
-  position: absolute;
-  right: -0.18em;
-  bottom: 0.18em;
-  width: 0.12em;
-  height: 0.12em;
+  display: inline-block;
+  width: 0.13em;
+  height: 0.13em;
+  margin-left: 0.14em;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 0 calc(6px * var(--accent-intensity)) rgba(13, 148, 136, 0.18);
+  box-shadow: 0 0 0 calc(5px * var(--accent-intensity)) rgba(13, 148, 136, 0.16);
 }
 
 .section--dark h1 em,

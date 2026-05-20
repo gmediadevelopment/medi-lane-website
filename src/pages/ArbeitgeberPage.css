@@ -22,20 +22,17 @@
 
 .employer-hero-title em {
   font-style: normal;
-  position: relative;
-  white-space: nowrap;
 }
 
 .employer-hero-title em::after {
   content: "";
-  position: absolute;
-  right: -0.18em;
-  bottom: 0.18em;
-  width: 0.12em;
-  height: 0.12em;
+  display: inline-block;
+  margin-left: 0.14em;
+  width: 0.13em;
+  height: 0.13em;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.18);
+  box-shadow: 0 0 0 5px rgba(13, 148, 136, 0.16);
 }
 
 .employer-hero-sub {
