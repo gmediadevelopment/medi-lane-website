@@ -515,30 +515,14 @@ h3 em::after,
 }
 .section-badge--amber::before { background: var(--ink); }
 
+/* Legacy highlight wrapper — renders as plain heading ink.
+   The brand accent dot is reserved for <em> at the end of a heading. */
 .gradient-text,
 .gradient-text--amber {
-  color: var(--ink);
+  color: inherit;
   background: none;
   -webkit-text-fill-color: currentColor;
-  position: relative;
-  white-space: nowrap;
 }
-
-.gradient-text::after,
-.gradient-text--amber::after {
-  content: "";
-  position: absolute;
-  right: -0.5em;
-  bottom: 0.18em;
-  width: 0.12em;
-  height: 0.12em;
-  border-radius: 50%;
-  background: var(--teal);
-  box-shadow: 0 0 0 calc(6px * var(--accent-intensity)) rgba(13, 148, 136, 0.18);
-}
-
-.section--dark .gradient-text,
-.section--ink .gradient-text { color: var(--white); }
 
 /* ============================================================
    BUTTONS

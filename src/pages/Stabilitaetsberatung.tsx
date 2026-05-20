@@ -7,6 +7,7 @@ import PageHero from '../components/sections/PageHero'
 import Pillars from '../components/sections/Pillars'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import ContactForm from '../components/ui/ContactForm'
+import './Stabilitaetsberatung.css'
 
 const triggers = [
   'Viele Probezeitabbrüche in den letzten 12 Monaten',
