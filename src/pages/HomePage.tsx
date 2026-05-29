@@ -5,11 +5,13 @@ import AvailabilityBar from '../components/sections/AvailabilityBar'
 import ImageSlot from '../components/sections/ImageSlot'
 import { MatchReport } from '../components/sections/MatchReport'
 import ComparisonTable from '../components/sections/ComparisonTable'
+import { getFunnelUrl } from '../lib/tracking'
 import heroTeam from '../assets/hero-team.png'
 import './HomePage.css'
 
 const PRIMARY = '/kontakt?typ=einrichtung'
-const PFLEGEKRAFT = '/kontakt?typ=pflegekraft'
+const FUNNEL_HERO = getFunnelUrl('website', 'organic', 'home_hero')
+const FUNNEL_FINAL = getFunnelUrl('website', 'organic', 'home_final')
 
 /* ======================================================================
    TRUST STRIP
@@ -522,13 +524,13 @@ function FinalCTA() {
               <span>Erstgespräch für Einrichtungen</span>
               <span className="arrow" aria-hidden="true">→</span>
             </Link>
-            <Link
-              to={PFLEGEKRAFT}
+            <a
+              href={FUNNEL_FINAL}
               className="btn btn--ghost btn--lg final-cta__ghost"
             >
-              <span>Als Pflegekraft starten</span>
+              <span>Wechselprofil als Pflegekraft erstellen</span>
               <span className="arrow" aria-hidden="true">→</span>
-            </Link>
+            </a>
             <span className="final-cta__note">Antwort innerhalb von 24 Stunden · info@medi-lane.de</span>
           </div>
         </div>
@@ -561,9 +563,9 @@ function HeroB() {
               <Link to={PRIMARY} className="btn btn--primary btn--lg">
                 Erstgespräch vereinbaren <span className="arrow" aria-hidden="true">→</span>
               </Link>
-              <Link to={PFLEGEKRAFT} className="btn btn--ghost btn--lg">
-                Als Pflegekraft starten →
-              </Link>
+              <a href={FUNNEL_HERO} className="btn btn--ghost btn--lg">
+                Wechselprofil erstellen →
+              </a>
             </div>
             <p className="hero__note">15 Minuten · Diskret · Unverbindlich</p>
             <div className="hero__avail">

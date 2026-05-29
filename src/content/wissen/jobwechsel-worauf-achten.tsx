@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
+import { getFunnelUrl } from '../../lib/tracking'
 import type { ArticleMeta } from './types'
+
+const FUNNEL = getFunnelUrl('website', 'organic', 'article_jobwechsel')
 
 const Body = () => (
   <>
@@ -69,9 +71,9 @@ const Body = () => (
         No-Gos. Im Match prüfen wir, ob der Arbeitgeber sie halten kann. In den ersten 180
         Tagen bleiben wir Ansprechpartner.
       </p>
-      <Link to="/arbeitgeber-finden" className="btn btn--primary">
+      <a href={FUNNEL} className="btn btn--primary">
         Wechselprofil erstellen
-      </Link>
+      </a>
     </div>
   </>
 )

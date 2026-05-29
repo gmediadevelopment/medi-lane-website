@@ -6,7 +6,11 @@ import {
 import PageHero from '../components/sections/PageHero'
 import ScrollReveal from '../components/ui/ScrollReveal'
 import FAQAccordion from '../components/ui/FAQAccordion'
+import { getFunnelUrl } from '../lib/tracking'
 import './Wechselberatung.css'
+
+const FUNNEL_HERO = getFunnelUrl('website', 'organic', 'wechselberatung_hero')
+const FUNNEL_FINAL = getFunnelUrl('website', 'organic', 'wechselberatung_final')
 
 const promises = [
   {
@@ -111,10 +115,10 @@ export default function Wechselberatung() {
         subtitle="Ein Pflegejob-Wechsel ist mehr als eine neue Stellenbeschreibung. Wir helfen dir, eine Einrichtung zu finden, die zu deinem Alltag, deinen Grenzen und deinen Vorstellungen passt — und begleiten dich auch nach dem Start."
         actions={
           <>
-            <Link to="/arbeitgeber-finden" className="btn btn--primary btn--lg">
+            <a href={FUNNEL_HERO} className="btn btn--primary btn--lg">
               <HandHeart size={20} />
               Wechselprofil erstellen
-            </Link>
+            </a>
             <Link to="/kontakt?typ=pflegekraft" className="btn btn--secondary btn--lg">
               Unverbindliches Gespräch
               <ArrowRight size={20} />
@@ -239,9 +243,12 @@ export default function Wechselberatung() {
                 Beides ist kostenlos und nichts davon ist verpflichtend.
               </p>
               <div className="final-cta-actions">
-                <Link to="/arbeitgeber-finden" className="btn btn--white btn--lg">
+                <a href={FUNNEL_FINAL} className="btn btn--white btn--lg">
                   Wechselprofil erstellen
                   <ArrowRight size={20} />
+                </a>
+                <Link to="/kontakt?typ=pflegekraft" className="btn btn--ghost btn--lg final-cta__ghost">
+                  Lieber per Formular
                 </Link>
               </div>
             </div>

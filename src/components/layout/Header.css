@@ -124,6 +124,30 @@
   line-height: 1.4;
 }
 
+/* External-funnel item in dropdown — slightly elevated visual */
+.site-nav__item--funnel {
+  background: var(--teal-tint);
+}
+.site-nav__item--funnel:hover {
+  background: var(--teal-tint);
+}
+.site-nav__item--funnel .site-nav__item-title {
+  color: var(--teal-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.site-nav__item--funnel .site-nav__item-desc {
+  color: var(--slate-700);
+}
+.site-nav__item-arrow {
+  transition: transform var(--dur-fast) var(--ease-out);
+  display: inline-block;
+}
+.site-nav__item--funnel:hover .site-nav__item-arrow {
+  transform: translateX(3px);
+}
+
 .site-nav__cta {
   display: flex;
   align-items: center;

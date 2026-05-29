@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import Lockup from '../sections/Lockup'
 import AvailabilityBar from '../sections/AvailabilityBar'
+import { getFunnelUrl } from '../../lib/tracking'
 import './Footer.css'
+
+const FUNNEL = getFunnelUrl('website', 'organic', 'footer')
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -38,7 +41,8 @@ export default function Footer() {
             <h4>Für Pflegekräfte</h4>
             <Link to="/pflegekraefte">Übersicht</Link>
             <Link to="/wechselberatung">Wechselberatung</Link>
-            <Link to="/arbeitgeber-finden">Arbeitgeber finden</Link>
+            <a href={FUNNEL}>Wechselprofil erstellen →</a>
+            <Link to="/arbeitgeber-finden">Lieber per Formular</Link>
           </div>
 
           <div className="site-footer__col">

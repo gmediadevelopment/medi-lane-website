@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import Lockup from '../sections/Lockup'
+import { getFunnelUrl } from '../../lib/tracking'
 import './Header.css'
 
 interface NavItem {
   to: string
   title: string
   desc: string
+  external?: boolean
 }
 
 interface NavGroup {
@@ -31,9 +33,10 @@ const EINRICHTUNGEN: NavGroup = {
 const PFLEGEKRAEFTE: NavGroup = {
   label: 'Für Pflegekräfte',
   items: [
-    { to: '/pflegekraefte',          title: 'Übersicht',         desc: 'Wie Medilane für dich arbeitet' },
-    { to: '/wechselberatung',        title: 'Wechselberatung',   desc: 'Wechseln ohne böse Überraschung' },
-    { to: '/arbeitgeber-finden',     title: 'Arbeitgeber finden', desc: 'Eine Stelle, die zu deinem Leben passt' },
+    { to: '/pflegekraefte',                          title: 'Übersicht',             desc: 'Wie Medilane für dich arbeitet' },
+    { to: '/wechselberatung',                        title: 'Wechselberatung',       desc: 'Wechseln ohne böse Überraschung' },
+    { to: getFunnelUrl('website', 'organic', 'header'), title: 'Wechselprofil erstellen', desc: 'In 3 Minuten direkt im Portal anlegen', external: true },
+    { to: '/arbeitgeber-finden',                     title: 'Lieber per Formular?',  desc: 'Profil per Kontaktformular einreichen' },
   ],
 }
 
@@ -86,18 +89,31 @@ export default function Header() {
                 <span className="site-nav__caret">▾</span>
               </button>
               <div className="site-nav__dropdown" role="menu">
-                {group.items.map(item => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={`site-nav__item ${
-                      location.pathname === item.to ? 'site-nav__item--active' : ''
-                    }`}
-                  >
-                    <span className="site-nav__item-title">{item.title}</span>
-                    <span className="site-nav__item-desc">{item.desc}</span>
-                  </Link>
-                ))}
+                {group.items.map(item =>
+                  item.external ? (
+                    <a
+                      key={item.to}
+                      href={item.to}
+                      className="site-nav__item site-nav__item--funnel"
+                    >
+                      <span className="site-nav__item-title">
+                        {item.title} <span className="site-nav__item-arrow" aria-hidden="true">→</span>
+                      </span>
+                      <span className="site-nav__item-desc">{item.desc}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={`site-nav__item ${
+                        location.pathname === item.to ? 'site-nav__item--active' : ''
+                      }`}
+                    >
+                      <span className="site-nav__item-title">{item.title}</span>
+                      <span className="site-nav__item-desc">{item.desc}</span>
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           ))}
@@ -116,9 +132,12 @@ export default function Header() {
           </Link>
 
           <div className="site-nav__cta">
-            <Link to="/kontakt?typ=pflegekraft" className="btn btn--secondary btn--sm">
-              Als Pflegekraft starten
-            </Link>
+            <a
+              href={getFunnelUrl('website', 'organic', 'header_cta')}
+              className="btn btn--secondary btn--sm"
+            >
+              Wechselprofil erstellen
+            </a>
             <Link to="/kontakt?typ=einrichtung" className="btn btn--primary btn--sm">
               Erstgespräch
             </Link>

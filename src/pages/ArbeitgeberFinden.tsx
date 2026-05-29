@@ -1,12 +1,14 @@
-import { Link } from 'react-router-dom'
 import {
   ArrowRight, Lock, Clock, Eye, MessagesSquare, Search,
-  HandHeart, UserCheck, CheckCircle,
+  HandHeart, UserCheck, CheckCircle, Sparkles,
 } from 'lucide-react'
 import PageHero from '../components/sections/PageHero'
 import ContactForm from '../components/ui/ContactForm'
 import ScrollReveal from '../components/ui/ScrollReveal'
+import { getFunnelUrl } from '../lib/tracking'
 import './ArbeitgeberFinden.css'
+
+const FUNNEL = getFunnelUrl('website', 'organic', 'arbeitgeber_finden')
 
 const trustSignals = [
   {
@@ -69,14 +71,14 @@ export default function ArbeitgeberFinden() {
         subtitle="Sag uns kurz, was dir wichtig ist. Wir prüfen, welche Einrichtungen aus unseren Mandaten zu dir passen könnten — und melden uns vertraulich innerhalb von 1–2 Werktagen."
         actions={
           <>
-            <a href="#wechselprofil" className="btn btn--primary btn--lg">
-              <UserCheck size={20} />
-              Profil ausfüllen
+            <a href={FUNNEL} className="btn btn--primary btn--lg">
+              <Sparkles size={20} />
+              Direkt im Portal anlegen
             </a>
-            <Link to="/wechselberatung" className="btn btn--secondary btn--lg">
-              Vorher mehr erfahren
-              <ArrowRight size={20} />
-            </Link>
+            <a href="#wechselprofil" className="btn btn--secondary btn--lg">
+              <UserCheck size={20} />
+              Lieber per Formular
+            </a>
           </>
         }
         trust={
@@ -93,6 +95,29 @@ export default function ArbeitgeberFinden() {
           </>
         }
       />
+
+      {/* DIRECT FUNNEL CTA — primary path */}
+      <section className="section" style={{ paddingTop: 'var(--sp-9)', paddingBottom: 'var(--sp-9)' }}>
+        <div className="container container--narrow">
+          <ScrollReveal>
+            <div className="funnel-callout">
+              <div className="funnel-callout__copy">
+                <span className="section-badge">Schneller geht's direkt</span>
+                <h2>Lege dein Wechselprofil in unserem Portal an.</h2>
+                <p>
+                  Drei Minuten, klar strukturiert, direkt in deinem eigenen Bereich. Du kannst
+                  Wünsche und No-Gos jederzeit anpassen — und siehst Vorschläge sobald wir passende
+                  Einrichtungen für dich haben.
+                </p>
+              </div>
+              <a href={FUNNEL} className="btn btn--primary btn--lg funnel-callout__cta">
+                Zum Portal
+                <ArrowRight size={20} />
+              </a>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
       {/* TRUST SIGNALS */}
       <section className="section">
@@ -121,20 +146,20 @@ export default function ArbeitgeberFinden() {
         </div>
       </section>
 
-      {/* FORM */}
+      {/* FORM (alternative path) */}
       <section className="section section--alt" id="wechselprofil">
         <div className="container">
           <div className="finden-form-split">
             <ScrollReveal>
               <div className="finden-form-info">
-                <span className="section-badge">Dein Wechselprofil</span>
+                <span className="section-badge">Alternative: per Formular</span>
                 <h2 className="section-title" style={{ textAlign: 'left' }}>
-                  Wir hören erst zu, bevor wir{' '}
-                  <span className="gradient-text">irgendwen vorschlagen</span>
+                  Lieber kurz und persönlich? Schreib uns.
                 </h2>
                 <p className="finden-form-desc">
-                  Die folgenden Angaben reichen uns für den ersten Eindruck. Alles weitere
-                  besprechen wir persönlich — in dem Tempo, das für dich passt.
+                  Du kannst auch einfach ein paar Zeilen schicken. Wir melden uns vertraulich
+                  innerhalb von 1–2 Werktagen und gehen den Rest gemeinsam durch — in dem Tempo,
+                  das für dich passt.
                 </p>
 
                 <ul className="finden-form-bullets">

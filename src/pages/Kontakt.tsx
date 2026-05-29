@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { Building2, UserCheck, Handshake, Mail, Phone, Clock, ShieldCheck, CheckCircle } from 'lucide-react'
+import {
+  Building2, UserCheck, Handshake, Mail, Phone, Clock, ShieldCheck,
+  CheckCircle, Sparkles, ArrowRight,
+} from 'lucide-react'
 import PageHero from '../components/sections/PageHero'
 import ContactForm, { type ContactFormType } from '../components/ui/ContactForm'
 import ScrollReveal from '../components/ui/ScrollReveal'
+import { getFunnelUrl } from '../lib/tracking'
 import './Kontakt.css'
+
+const FUNNEL = getFunnelUrl('website', 'organic', 'kontakt_pflegekraft')
 
 const TABS: Array<{
   id: ContactFormType
@@ -105,6 +111,23 @@ export default function Kontakt() {
               )
             })}
           </div>
+
+          {activeTab === 'pflegekraft' && (
+            <ScrollReveal>
+              <div className="kontakt-funnel-callout">
+                <div className="kontakt-funnel-callout__icon">
+                  <Sparkles size={22} />
+                </div>
+                <div className="kontakt-funnel-callout__copy">
+                  <strong>Schneller geht's direkt im Portal</strong>
+                  <span>Wechselprofil in 3 Minuten anlegen — Vorschläge bekommst du sobald wir passende Einrichtungen für dich haben.</span>
+                </div>
+                <a href={FUNNEL} className="btn btn--primary btn--sm kontakt-funnel-callout__cta">
+                  Zum Portal <ArrowRight size={16} />
+                </a>
+              </div>
+            </ScrollReveal>
+          )}
 
           <div className="contact-split">
             <ScrollReveal>
