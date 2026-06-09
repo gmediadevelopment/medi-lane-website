@@ -1,20 +1,18 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useState, useMemo, type FormEvent } from 'react'
 import {
-  ArrowLeft, ArrowRight, CheckCircle, Loader, AlertCircle, Send,
+  ArrowLeft, ArrowRight, CheckCircle, Loader, AlertCircle, Send, Calendar,
 } from 'lucide-react'
 import { trackEvent, trackConversion, captureUtmParams } from '../../lib/tracking'
-import { NO_GO_OPTIONS } from './Wechselwuensche'
 import './WechselwuenscheForm.css'
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 5
 
 const STEP_LABELS = [
   'Situation',
-  'Wünsche',
-  'No-Gos',
   'Was suchst du',
   'Qualifikation',
   'Kontakt',
+  'Termin',
 ]
 
 const SITUATION_OPTIONS = [
@@ -22,19 +20,6 @@ const SITUATION_OPTIONS = [
   'Ich bin offen für passende Angebote',
   'Ich bin unzufrieden, aber noch unsicher',
   'Ich möchte mich erstmal unverbindlich orientieren',
-]
-
-const VERBESSERUNG_OPTIONS = [
-  'Dienstplan und Planbarkeit',
-  'Gehalt',
-  'Team und Arbeitsklima',
-  'Führung und Kommunikation',
-  'Arbeitsbelastung',
-  'Arbeitsweg',
-  'Arbeitszeiten',
-  'Fachbereich',
-  'Entwicklungsmöglichkeiten',
-  'Vereinbarkeit mit Familie und Privatleben',
 ]
 
 const BEREICH_OPTIONS = [
@@ -47,12 +32,19 @@ const BEREICH_OPTIONS = [
   'Verwaltung',
 ]
 
+/* Pflegehelfer wird bewusst NICHT angeboten — Medilane vermittelt
+   ausschließlich examinierte Fachkräfte. */
 const QUALI_OPTIONS = [
-  'Pflegefachkraft (examiniert)',
-  'Pflegehelfer/in',
-  'Altenpfleger/in',
+  'Examinierte Pflegefachkraft',
+  'Altenpfleger/in (examiniert)',
   'Gesundheits- und Krankenpfleger/in',
-  'Anderes',
+  'Andere examinierte Fachkraft',
+]
+
+const ZEITFENSTER_OPTIONS: Array<{ id: 'vormittag' | 'mittag' | 'nachmittag'; label: string; sub: string }> = [
+  { id: 'vormittag',    label: 'Vormittag',    sub: '9–12 Uhr' },
+  { id: 'mittag',       label: 'Mittag',       sub: '12–15 Uhr' },
+  { id: 'nachmittag',   label: 'Nachmittag',   sub: '15–18 Uhr' },
 ]
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
@@ -60,8 +52,6 @@ const CONTACT_EMAIL = 'info@medi-lane.de'
 
 interface FormData {
   situation: string
-  verbesserung: string[]
-  nogos: string[]
   arbeitszeit: '' | 'vollzeit' | 'teilzeit' | 'minijob' | 'egal'
   stundenwunsch: string
   bereich: string[]
@@ -74,14 +64,14 @@ interface FormData {
   email: string
   telefon: string
   kontaktart: 'email' | 'telefon' | 'beides'
-  kontaktzeit: string
+  terminDatum: string
+  terminZeitfenster: '' | 'vormittag' | 'mittag' | 'nachmittag'
+  terminKommentar: string
   ausschluss: string
 }
 
 const INITIAL: FormData = {
   situation: '',
-  verbesserung: [],
-  nogos: [],
   arbeitszeit: '',
   stundenwunsch: '',
   bereich: [],
@@ -94,12 +84,30 @@ const INITIAL: FormData = {
   email: '',
   telefon: '',
   kontaktart: 'email',
-  kontaktzeit: '',
+  terminDatum: '',
+  terminZeitfenster: '',
+  terminKommentar: '',
   ausschluss: '',
 }
 
 interface WechselwuenscheFormProps {
+  /** No-Gos aus der Pill-Sektion oberhalb — werden im Lead mitgesendet,
+      tauchen aber NICHT als eigener Form-Schritt auf. */
   preselectedNoGos: string[]
+}
+
+function formatDate(iso: string): string {
+  if (!iso) return ''
+  try {
+    return new Date(iso).toLocaleDateString('de-DE', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+  } catch {
+    return iso
+  }
 }
 
 export default function WechselwuenscheForm({ preselectedNoGos }: WechselwuenscheFormProps) {
@@ -109,17 +117,19 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
   const [errorMessage, setErrorMessage] = useState('')
   const [utm, setUtm] = useState<Record<string, string>>({})
 
-  // Capture UTM on mount + sync no-go preselection
   useEffect(() => {
     setUtm(captureUtmParams())
   }, [])
 
-  useEffect(() => {
-    if (preselectedNoGos.length > 0 && data.nogos.length === 0) {
-      setData(prev => ({ ...prev, nogos: preselectedNoGos }))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [preselectedNoGos])
+  const { minDate, maxDate } = useMemo(() => {
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(today.getDate() + 1)
+    const in30 = new Date(today)
+    in30.setDate(today.getDate() + 30)
+    const fmt = (d: Date) => d.toISOString().slice(0, 10)
+    return { minDate: fmt(tomorrow), maxDate: fmt(in30) }
+  }, [])
 
   const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined
 
@@ -127,26 +137,22 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
     setData(prev => ({ ...prev, [key]: value }))
   }
 
-  const toggleMulti = (key: 'verbesserung' | 'nogos' | 'bereich', value: string) => {
-    setData(prev => {
-      const current = prev[key]
-      return {
-        ...prev,
-        [key]: current.includes(value)
-          ? current.filter(v => v !== value)
-          : [...current, value],
-      }
-    })
+  const toggleBereich = (value: string) => {
+    setData(prev => ({
+      ...prev,
+      bereich: prev.bereich.includes(value)
+        ? prev.bereich.filter(v => v !== value)
+        : [...prev.bereich, value],
+    }))
   }
 
   const canAdvance = (): boolean => {
     switch (step) {
       case 0: return data.situation !== ''
-      case 1: return data.verbesserung.length > 0
-      case 2: return data.nogos.length > 0
-      case 3: return data.arbeitszeit !== '' && data.region.trim() !== '' && data.wechselzeitpunkt !== ''
-      case 4: return data.qualifikation !== ''
-      case 5: return data.name.trim() !== '' && (data.email.trim() !== '' || data.telefon.trim() !== '')
+      case 1: return data.arbeitszeit !== '' && data.region.trim() !== '' && data.wechselzeitpunkt !== ''
+      case 2: return data.qualifikation !== ''
+      case 3: return data.name.trim() !== '' && (data.email.trim() !== '' || data.telefon.trim() !== '')
+      case 4: return data.terminDatum !== '' && data.terminZeitfenster !== ''
       default: return false
     }
   }
@@ -156,7 +162,9 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
     trackEvent('lp_step_completed', { step: step + 1 })
     if (step < TOTAL_STEPS - 1) {
       setStep(step + 1)
-      window.scrollTo({ top: document.getElementById('formular')?.offsetTop ?? 0, behavior: 'smooth' })
+      requestAnimationFrame(() => {
+        document.getElementById('formular')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     }
   }
 
@@ -168,29 +176,36 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
     const lines = [
       `Wechselwünsche-Lead (LP /lp/wechselwuensche)`,
       ``,
-      `Situation: ${data.situation}`,
-      `Verbesserungswünsche: ${data.verbesserung.join(', ')}`,
-      `No-Gos: ${data.nogos.join(', ')}`,
+      `--- Terminwunsch ---`,
+      `Datum: ${formatDate(data.terminDatum)}`,
+      `Zeitfenster: ${data.terminZeitfenster}`,
+      data.terminKommentar && `Hinweis: ${data.terminKommentar}`,
       ``,
+      `--- Situation ---`,
+      `Situation: ${data.situation}`,
+      preselectedNoGos.length > 0 && `No-Gos (aus Pill-Sektion): ${preselectedNoGos.join(', ')}`,
+      ``,
+      `--- Was gesucht wird ---`,
       `Arbeitszeit: ${data.arbeitszeit}`,
       data.stundenwunsch && `Stunden: ${data.stundenwunsch}`,
-      `Bereich: ${data.bereich.join(', ')}`,
+      `Bereich: ${data.bereich.join(', ') || '—'}`,
       `Region: ${data.region}`,
       `Wechselzeitpunkt: ${data.wechselzeitpunkt}`,
+      data.ausschluss && `Auszuschließen: ${data.ausschluss}`,
       ``,
+      `--- Qualifikation ---`,
       `Qualifikation: ${data.qualifikation}`,
       data.weiterbildung && `Weiterbildung: ${data.weiterbildung}`,
       data.berufsjahre && `Berufsjahre: ${data.berufsjahre}`,
       ``,
+      `--- Kontakt ---`,
       `Name: ${data.name}`,
       data.email && `E-Mail: ${data.email}`,
       data.telefon && `Telefon: ${data.telefon}`,
       `Bevorzugte Kontaktart: ${data.kontaktart}`,
-      data.kontaktzeit && `Bester Kontakt-Zeitpunkt: ${data.kontaktzeit}`,
-      data.ausschluss && `Auszuschließen: ${data.ausschluss}`,
     ].filter(Boolean).join('\n')
 
-    const subject = `Wechselwünsche-Lead via LP — ${data.name}`
+    const subject = `Termin ${formatDate(data.terminDatum)} ${data.terminZeitfenster} — Wechselwünsche-Lead ${data.name}`
     return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`
   }
 
@@ -209,28 +224,34 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
     setStatus('loading')
     const payload: Record<string, string | number | undefined> = {
       access_key: accessKey,
-      subject: `Wechselwünsche-Lead via LP — ${data.name}`,
+      subject: `Termin ${formatDate(data.terminDatum)} ${data.terminZeitfenster} — ${data.name}`,
       from_name: 'Medilane Landingpage',
       botcheck: '',
       anfrage_typ: 'pflegekraft_lp',
       quelle: 'lp_wechselwuensche',
+
+      termin_datum: data.terminDatum,
+      termin_datum_formatiert: formatDate(data.terminDatum),
+      termin_zeitfenster: data.terminZeitfenster,
+      termin_kommentar: data.terminKommentar || undefined,
+
       situation: data.situation,
-      verbesserung: data.verbesserung.join(' · '),
-      nogos: data.nogos.join(' · '),
+      nogos_aus_lp: preselectedNoGos.length > 0 ? preselectedNoGos.join(' · ') : undefined,
       arbeitszeit: data.arbeitszeit,
       stundenwunsch: data.stundenwunsch || undefined,
       bereich: data.bereich.join(' · ') || undefined,
       region: data.region,
       wechselzeitpunkt: data.wechselzeitpunkt,
+      ausschluss: data.ausschluss || undefined,
       qualifikation: data.qualifikation,
       weiterbildung: data.weiterbildung || undefined,
       berufsjahre: data.berufsjahre || undefined,
+
       name: data.name,
       email: data.email || undefined,
       telefon: data.telefon || undefined,
       kontaktart: data.kontaktart,
-      kontaktzeit: data.kontaktzeit || undefined,
-      ausschluss: data.ausschluss || undefined,
+
       ...utm,
     }
 
@@ -244,8 +265,8 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
       if (!res.ok || !json.success) throw new Error(json.message || 'submission_failed')
 
       trackEvent('lp_form_submit', {
-        nogo_count: data.nogos.length,
-        verbesserung_count: data.verbesserung.length,
+        termin_zeitfenster: data.terminZeitfenster,
+        nogo_count: preselectedNoGos.length,
       })
       trackConversion()
       setStatus('success')
@@ -265,17 +286,18 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
         <div className="wlpf-success__icon">
           <CheckCircle size={40} />
         </div>
-        <h3>Danke. Wir haben deine Wünsche.</h3>
+        <h3>Termin gesichert. Wir melden uns.</h3>
         <p>
-          Wir gleichen sie jetzt mit unseren Mandaten ab und melden uns innerhalb von 1–2
-          Werktagen vertraulich. Falls dir noch etwas Wichtiges einfällt: einfach kurze
-          Antwort auf unsere Mail.
+          Wir rufen dich am <strong>{formatDate(data.terminDatum)}</strong> im
+          {' '}<strong>{ZEITFENSTER_OPTIONS.find(z => z.id === data.terminZeitfenster)?.label}</strong>
+          {' '}vertraulich an. Falls dir bis dahin noch etwas einfällt: einfach kurze Antwort
+          auf unsere Bestätigungsmail.
         </p>
       </div>
     )
   }
 
-  /* =================== Form Steps =================== */
+  /* =================== Form =================== */
   return (
     <form className="wlpf" onSubmit={submit}>
       {/* Progress */}
@@ -312,65 +334,13 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
         </div>
       )}
 
-      {/* =================== STEP 2 — Verbesserung =================== */}
+      {/* =================== STEP 2 — Konkret =================== */}
       {step === 1 && (
-        <div className="wlpf-step">
-          <h3 className="wlpf-question">Was sollte sich beim nächsten Job verbessern?</h3>
-          <p className="wlpf-hint">Mehrfachauswahl möglich. Wähle, was dir wirklich wichtig ist.</p>
-          <div className="wlpf-chips">
-            {VERBESSERUNG_OPTIONS.map(opt => {
-              const active = data.verbesserung.includes(opt)
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  className={`wlpf-chip ${active ? 'wlpf-chip--active' : ''}`}
-                  onClick={() => toggleMulti('verbesserung', opt)}
-                >
-                  {active ? <CheckCircle size={14} /> : null}
-                  {opt}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* =================== STEP 3 — No-Gos =================== */}
-      {step === 2 && (
-        <div className="wlpf-step">
-          <h3 className="wlpf-question">Was darf sich nicht wiederholen?</h3>
-          <p className="wlpf-hint">
-            {preselectedNoGos.length > 0
-              ? `Wir haben deine ${preselectedNoGos.length} Auswahl aus der Pillen-Sektion oben vorbelegt. Ergänze oder ändere frei.`
-              : 'Mehrfachauswahl möglich. Was darf in der neuen Stelle keinesfalls wieder vorkommen?'}
-          </p>
-          <div className="wlpf-chips">
-            {NO_GO_OPTIONS.map(opt => {
-              const active = data.nogos.includes(opt)
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  className={`wlpf-chip ${active ? 'wlpf-chip--active' : ''}`}
-                  onClick={() => toggleMulti('nogos', opt)}
-                >
-                  {active ? <CheckCircle size={14} /> : null}
-                  {opt}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* =================== STEP 4 — Konkret =================== */}
-      {step === 3 && (
         <div className="wlpf-step">
           <h3 className="wlpf-question">Was suchst du konkret?</h3>
 
           <div className="wlpf-field">
-            <label>Arbeitszeit</label>
+            <label>Arbeitszeit *</label>
             <div className="wlpf-options wlpf-options--row">
               {(['vollzeit', 'teilzeit', 'minijob', 'egal'] as const).map(opt => (
                 <button
@@ -399,8 +369,7 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
           </div>
 
           <div className="wlpf-field">
-            <label>Welche Bereiche kommen für dich infrage?</label>
-            <p className="wlpf-hint">Mehrfachauswahl, optional.</p>
+            <label>Welche Bereiche kommen infrage? (optional)</label>
             <div className="wlpf-chips">
               {BEREICH_OPTIONS.map(opt => {
                 const active = data.bereich.includes(opt)
@@ -409,7 +378,7 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
                     key={opt}
                     type="button"
                     className={`wlpf-chip ${active ? 'wlpf-chip--active' : ''}`}
-                    onClick={() => toggleMulti('bereich', opt)}
+                    onClick={() => toggleBereich(opt)}
                   >
                     {active ? <CheckCircle size={14} /> : null}
                     {opt}
@@ -450,7 +419,7 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
           </div>
 
           <div className="wlpf-field">
-            <label htmlFor="wlpf-ausschluss">Möchtest du Einrichtungen oder Träger ausschließen? (optional)</label>
+            <label htmlFor="wlpf-ausschluss">Bestimmte Einrichtungen oder Träger ausschließen? (optional)</label>
             <input
               id="wlpf-ausschluss"
               type="text"
@@ -462,10 +431,13 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
         </div>
       )}
 
-      {/* =================== STEP 5 — Qualifikation =================== */}
-      {step === 4 && (
+      {/* =================== STEP 3 — Qualifikation (ohne Pflegehelfer) =================== */}
+      {step === 2 && (
         <div className="wlpf-step">
           <h3 className="wlpf-question">Was ist deine Qualifikation?</h3>
+          <p className="wlpf-hint">
+            Wir vermitteln derzeit ausschließlich examinierte Pflegefachkräfte.
+          </p>
 
           <div className="wlpf-field">
             <div className="wlpf-options">
@@ -513,13 +485,13 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
         </div>
       )}
 
-      {/* =================== STEP 6 — Kontaktdaten =================== */}
-      {step === 5 && (
+      {/* =================== STEP 4 — Kontakt =================== */}
+      {step === 3 && (
         <div className="wlpf-step">
           <h3 className="wlpf-question">Wie können wir dich erreichen?</h3>
           <p className="wlpf-hint">
-            Wir nutzen deine Daten ausschließlich, um dich vertraulich zu kontaktieren — und
-            geben sie nicht an Einrichtungen weiter, ohne dass du zustimmst.
+            Im nächsten Schritt buchst du direkt einen Termin für einen vertraulichen Anruf
+            durch uns. Deine Daten geben wir nicht weiter, ohne dass du zustimmst.
           </p>
 
           <div className="wlpf-field">
@@ -557,33 +529,90 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
             </div>
           </div>
           <p className="wlpf-hint wlpf-hint--small">
-            Mindestens eine Kontaktmöglichkeit angeben (E-Mail oder Telefon).
+            Mindestens eine Kontaktmöglichkeit (E-Mail oder Telefon).
+          </p>
+
+          <div className="wlpf-field">
+            <label htmlFor="wlpf-kontaktart">Bevorzugte Kontaktart</label>
+            <select
+              id="wlpf-kontaktart"
+              value={data.kontaktart}
+              onChange={e => update('kontaktart', e.target.value as FormData['kontaktart'])}
+            >
+              <option value="email">E-Mail</option>
+              <option value="telefon">Telefon</option>
+              <option value="beides">Beides ist okay</option>
+            </select>
+          </div>
+        </div>
+      )}
+
+      {/* =================== STEP 5 — Termin =================== */}
+      {step === 4 && (
+        <div className="wlpf-step">
+          <div className="wlpf-termin-head">
+            <Calendar size={20} />
+            <h3 className="wlpf-question">Wann sollen wir dich anrufen?</h3>
+          </div>
+          <p className="wlpf-hint">
+            15 Minuten reichen für ein erstes Gespräch. Vertraulich, unverbindlich. Wenn der
+            Wunschtermin nicht passt, schlagen wir kurz Alternativen vor.
           </p>
 
           <div className="wlpf-row">
             <div className="wlpf-field">
-              <label htmlFor="wlpf-kontaktart">Bevorzugte Kontaktart</label>
-              <select
-                id="wlpf-kontaktart"
-                value={data.kontaktart}
-                onChange={e => update('kontaktart', e.target.value as FormData['kontaktart'])}
-              >
-                <option value="email">E-Mail</option>
-                <option value="telefon">Telefon</option>
-                <option value="beides">Beides ist okay</option>
-              </select>
+              <label htmlFor="wlpf-datum">Wunschdatum *</label>
+              <input
+                id="wlpf-datum"
+                type="date"
+                value={data.terminDatum}
+                onChange={e => update('terminDatum', e.target.value)}
+                min={minDate}
+                max={maxDate}
+                required
+              />
             </div>
             <div className="wlpf-field">
-              <label htmlFor="wlpf-zeit">Bester Zeitpunkt für Kontakt (optional)</label>
+              <label htmlFor="wlpf-kommentar">Hinweis (optional)</label>
               <input
-                id="wlpf-zeit"
+                id="wlpf-kommentar"
                 type="text"
-                placeholder="z. B. werktags ab 16 Uhr"
-                value={data.kontaktzeit}
-                onChange={e => update('kontaktzeit', e.target.value)}
+                placeholder="z. B. nicht zwischen 13 und 14 Uhr"
+                value={data.terminKommentar}
+                onChange={e => update('terminKommentar', e.target.value)}
               />
             </div>
           </div>
+
+          <div className="wlpf-field">
+            <label>Zeitfenster *</label>
+            <div className="wlpf-slot-grid">
+              {ZEITFENSTER_OPTIONS.map(z => {
+                const active = data.terminZeitfenster === z.id
+                return (
+                  <button
+                    key={z.id}
+                    type="button"
+                    className={`wlpf-slot ${active ? 'wlpf-slot--active' : ''}`}
+                    onClick={() => update('terminZeitfenster', z.id)}
+                  >
+                    <span className="wlpf-slot__label">{z.label}</span>
+                    <span className="wlpf-slot__sub">{z.sub}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {data.terminDatum && data.terminZeitfenster && (
+            <div className="wlpf-termin-preview">
+              <CheckCircle size={16} />
+              <span>
+                Wir rufen dich am <strong>{formatDate(data.terminDatum)}</strong> im{' '}
+                <strong>{ZEITFENSTER_OPTIONS.find(z => z.id === data.terminZeitfenster)?.label} ({ZEITFENSTER_OPTIONS.find(z => z.id === data.terminZeitfenster)?.sub})</strong> an.
+              </span>
+            </div>
+          )}
 
           <p className="wlpf-consent">
             Mit dem Absenden bestätigst du, dass wir dich vertraulich zu deinem Wechselwunsch
@@ -635,7 +664,7 @@ export default function WechselwuenscheForm({ preselectedNoGos }: Wechselwuensch
             ) : (
               <>
                 <Send size={18} />
-                Meine Wechselwünsche absenden
+                Jetzt besser wechseln
               </>
             )}
           </button>

@@ -196,7 +196,7 @@ export default function Wechselwuensche() {
                   scrollToForm('hero')
                 }}
               >
-                Jetzt Wechselwünsche eintragen
+                Jetzt besser wechseln
                 <ArrowRight size={20} />
               </a>
             </div>
@@ -284,8 +284,8 @@ export default function Wechselwuensche() {
               Was soll sich bei deinem nächsten Job nicht wiederholen?
             </h2>
             <p className="wlp-head__lead">
-              Klick einfach an, was bei dir war. Wir nehmen das ins Formular mit — du musst es
-              dort nicht noch einmal eingeben.
+              Klick an, was bei dir war. Diese Auswahl nehmen wir in dein Erstgespräch
+              mit auf — wir wissen dann sofort, worauf wir achten müssen.
             </p>
           </div>
 
@@ -323,9 +323,7 @@ export default function Wechselwuensche() {
                 scrollToForm('no_go_pills')
               }}
             >
-              {selectedNoGos.length > 0
-                ? `Diese ${selectedNoGos.length} No-Gos ins Formular mitnehmen`
-                : 'Wechselwünsche im Formular eintragen'}
+              Jetzt besser wechseln
               <ArrowRight size={20} />
             </a>
           </div>
@@ -403,7 +401,7 @@ export default function Wechselwuensche() {
                 scrollToForm('risk_section')
               }}
             >
-              Wechselwünsche jetzt eintragen
+              Jetzt besser wechseln
               <ArrowRight size={20} />
             </a>
           </div>
@@ -489,9 +487,11 @@ export default function Wechselwuensche() {
                   scrollToForm('final_cta')
                 }}
               >
-                Jetzt Wechselwünsche eintragen
+                Jetzt besser wechseln
                 <ArrowRight size={20} />
               </a>
+
+              {/* Doppel-CTA wäre redundant — der Funnel-Link bleibt als kleine Alternative */}
               <a href={PHONE_HREF} className="wlp-final__phone">
                 <Phone size={14} />
                 Lieber direkt sprechen? {PHONE_DISPLAY} · Mo–Fr 9–18 Uhr
@@ -539,7 +539,7 @@ export default function Wechselwuensche() {
               scrollToForm('sticky')
             }}
           >
-            Wechselwünsche eintragen <ArrowRight size={16} />
+            Jetzt besser wechseln <ArrowRight size={16} />
           </a>
         </div>
       )}

@@ -479,6 +479,7 @@
   grid-template-columns: 1.4fr 1fr;
   gap: var(--sp-10);
   align-items: start;
+  min-width: 0;
 }
 
 .wlp-form-card {
@@ -487,6 +488,9 @@
   border-radius: var(--radius-xl);
   padding: var(--sp-9);
   box-shadow: var(--shadow-md);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .wlp-trust {

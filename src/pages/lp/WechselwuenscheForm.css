@@ -1,11 +1,14 @@
 /* ============================================================
-   LP Multi-Step Wizard
+   LP Multi-Step Wizard — Mobile-safe, kein horizontaler Overflow
    ============================================================ */
 
 .wlpf {
   display: flex;
   flex-direction: column;
   gap: var(--sp-7);
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ---------- Progress bar ---------- */
@@ -13,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 .wlpf-progress__meta {
@@ -23,9 +27,11 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 500;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
 }
 
-.wlpf-progress__step { color: var(--teal); }
+.wlpf-progress__step { color: var(--teal); white-space: nowrap; }
 .wlpf-progress__label { color: var(--slate-500); }
 
 .wlpf-progress__bar {
@@ -47,6 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-6);
+  min-width: 0;
 }
 
 .wlpf-question {
@@ -76,6 +83,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .wlpf-field label {
@@ -88,6 +96,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-5);
+  min-width: 0;
 }
 
 @media (max-width: 540px) {
@@ -104,6 +113,10 @@
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   padding: 12px 14px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: border-color var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-fast) var(--ease-out);
   outline: none;
@@ -118,11 +131,12 @@
 
 .wlpf-field input::placeholder { color: var(--slate-400); }
 
-/* ---------- Radio-style "options" (single-choice cards) ---------- */
+/* ---------- Radio-style "options" ---------- */
 .wlpf-options {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 .wlpf-options--row {
@@ -146,6 +160,9 @@
   line-height: 1.35;
   transition: border-color var(--dur-fast) var(--ease-out),
               background var(--dur-fast) var(--ease-out);
+  min-width: 0;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 .wlpf-option:hover {
@@ -153,10 +170,15 @@
 }
 
 .wlpf-option--compact {
-  flex: 1 1 auto;
-  min-width: 120px;
-  padding: 10px 14px;
+  flex: 1 1 calc(50% - 5px);
+  min-width: 0;
+  padding: 12px 14px;
   font-size: 14px;
+  justify-content: flex-start;
+}
+
+@media (min-width: 540px) {
+  .wlpf-option--compact { flex: 1 1 auto; }
 }
 
 .wlpf-option__radio {
@@ -188,11 +210,12 @@
   background: var(--teal);
 }
 
-/* ---------- Chip-style multi-select ---------- */
+/* ---------- Chips ---------- */
 .wlpf-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  min-width: 0;
 }
 
 .wlpf-chip {
@@ -202,13 +225,16 @@
   background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-pill);
-  padding: 9px 16px;
+  padding: 9px 14px;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   color: var(--ink);
   cursor: pointer;
-  line-height: 1.2;
+  line-height: 1.3;
+  max-width: 100%;
+  word-break: break-word;
+  text-align: left;
   transition: border-color var(--dur-fast) var(--ease-out),
               background var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out);
@@ -222,7 +248,85 @@
   color: var(--white);
 }
 
-.wlpf-chip--active svg { color: var(--teal); }
+.wlpf-chip--active svg { color: var(--teal); flex-shrink: 0; }
+
+/* ---------- Termin step specifics ---------- */
+.wlpf-termin-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--teal-deep);
+}
+.wlpf-termin-head svg { color: var(--teal); }
+.wlpf-termin-head .wlpf-question { margin: 0; }
+
+.wlpf-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  min-width: 0;
+}
+
+@media (max-width: 540px) {
+  .wlpf-slot-grid { grid-template-columns: 1fr; }
+}
+
+.wlpf-slot {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 12px;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+  min-width: 0;
+}
+
+.wlpf-slot:hover { border-color: var(--ink); }
+
+.wlpf-slot__label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.wlpf-slot__sub {
+  font-size: 12px;
+  color: var(--slate-500);
+}
+
+.wlpf-slot--active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.wlpf-slot--active .wlpf-slot__label { color: var(--white); }
+.wlpf-slot--active .wlpf-slot__sub { color: var(--teal); }
+
+.wlpf-termin-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--teal-tint);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.wlpf-termin-preview svg {
+  color: var(--teal-deep);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.wlpf-termin-preview strong { font-weight: 500; }
 
 /* ---------- Consent ---------- */
 .wlpf-consent {
@@ -257,6 +361,7 @@
   gap: var(--sp-4);
   padding-top: var(--sp-5);
   border-top: 1px solid var(--border);
+  flex-wrap: wrap;
 }
 
 .wlpf-nav > span { display: inline-block; }
@@ -299,6 +404,7 @@
   max-width: 52ch;
   margin: 0 auto;
 }
+.wlpf-success p strong { color: var(--ink); font-weight: 500; }
 
 /* ---------- Spin ---------- */
 .spin { animation: spin 1s linear infinite; }
