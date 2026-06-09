@@ -1,0 +1,308 @@
+/* ============================================================
+   LP Multi-Step Wizard
+   ============================================================ */
+
+.wlpf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-7);
+}
+
+/* ---------- Progress bar ---------- */
+.wlpf-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wlpf-progress__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.wlpf-progress__step { color: var(--teal); }
+.wlpf-progress__label { color: var(--slate-500); }
+
+.wlpf-progress__bar {
+  height: 4px;
+  background: var(--slate-100);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.wlpf-progress__bar-fill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 999px;
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+/* ---------- Step container ---------- */
+.wlpf-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.wlpf-question {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.wlpf-hint {
+  font-size: 14px;
+  color: var(--slate-500);
+  line-height: 1.5;
+  margin: -8px 0 0;
+}
+
+.wlpf-hint--small {
+  font-size: 12px;
+  margin: -4px 0 0;
+}
+
+/* ---------- Field / row ---------- */
+.wlpf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wlpf-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.wlpf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+}
+
+@media (max-width: 540px) {
+  .wlpf-row { grid-template-columns: 1fr; }
+}
+
+.wlpf-field input,
+.wlpf-field select,
+.wlpf-field textarea {
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+  outline: none;
+}
+
+.wlpf-field input:focus,
+.wlpf-field select:focus,
+.wlpf-field textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+}
+
+.wlpf-field input::placeholder { color: var(--slate-400); }
+
+/* ---------- Radio-style "options" (single-choice cards) ---------- */
+.wlpf-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wlpf-options--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.wlpf-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.35;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+
+.wlpf-option:hover {
+  border-color: var(--ink);
+}
+
+.wlpf-option--compact {
+  flex: 1 1 auto;
+  min-width: 120px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.wlpf-option__radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--slate-300);
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+
+.wlpf-option--selected {
+  border-color: var(--ink);
+  background: var(--slate-50);
+}
+
+.wlpf-option--selected .wlpf-option__radio {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.wlpf-option--selected .wlpf-option__radio::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+/* ---------- Chip-style multi-select ---------- */
+.wlpf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wlpf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  line-height: 1.2;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+.wlpf-chip:hover { border-color: var(--ink); }
+
+.wlpf-chip--active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.wlpf-chip--active svg { color: var(--teal); }
+
+/* ---------- Consent ---------- */
+.wlpf-consent {
+  font-size: 12px;
+  color: var(--slate-500);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.wlpf-consent a {
+  color: var(--teal-deep);
+  text-decoration: underline;
+}
+
+/* ---------- Error ---------- */
+.wlpf-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #FEF2F2;
+  color: var(--danger);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+}
+
+/* ---------- Nav ---------- */
+.wlpf-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+
+.wlpf-nav > span { display: inline-block; }
+
+@media (max-width: 540px) {
+  .wlpf-nav { flex-direction: column-reverse; align-items: stretch; }
+  .wlpf-nav .btn { width: 100%; justify-content: center; }
+}
+
+/* ---------- Success ---------- */
+.wlpf-success {
+  text-align: center;
+  padding: var(--sp-9) var(--sp-7);
+}
+
+.wlpf-success__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--teal-tint);
+  color: var(--teal-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--sp-5);
+}
+
+.wlpf-success h3 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--sp-4);
+}
+
+.wlpf-success p {
+  font-size: 15px;
+  color: var(--slate-700);
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+/* ---------- Spin ---------- */
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

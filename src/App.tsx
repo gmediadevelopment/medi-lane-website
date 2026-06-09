@@ -30,11 +30,15 @@ import Wissen from './pages/Wissen'
 import Artikel from './pages/Artikel'
 import DemoAnfragen from './pages/DemoAnfragen'
 
+// Pages — Landingpages (standalone)
+import Wechselwuensche from './pages/lp/Wechselwuensche'
+
 export default function App() {
   return (
     <Routes>
-      {/* Google Ads LP — NO header/footer for max performance */}
+      {/* Google Ads LPs — standalone, kein WebsiteLayout */}
       <Route path="/lp/pflege" element={<GoogleAdsLP />} />
+      <Route path="/lp/wechselwuensche" element={<Wechselwuensche />} />
 
       {/* Public Website — with Header + Footer */}
       <Route element={<WebsiteLayout />}>
