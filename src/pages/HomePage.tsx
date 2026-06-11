@@ -6,7 +6,14 @@ import ImageSlot from '../components/sections/ImageSlot'
 import { MatchReport } from '../components/sections/MatchReport'
 import ComparisonTable from '../components/sections/ComparisonTable'
 import { getFunnelUrl } from '../lib/tracking'
-import heroTeam from '../assets/hero-team.png'
+
+// Echte Pflege-Fotos aus dem kuratieren Unsplash-Pool
+import heroSpaziergang from '../assets/photos/spaziergang-pflegerin-seniorin-rollator-allee-hochformat.jpg'
+import audienceEinrichtungen from '../assets/photos/pflegerin-bett-machen-krankenzimmer-arbeit-querformat.jpg'
+import audiencePflegekraefte from '../assets/photos/haende-detail-teebecher-reichen-dokumentarisch-querformat.jpg'
+import quotePortrait from '../assets/photos/seniorin-rollstuhl-pflegerin-rueckenansicht-stille-hochformat.jpg'
+import momentBreak from '../assets/photos/pflegerin-hand-schulter-seniorin-fenster-querformat.jpg'
+
 import './HomePage.css'
 
 const PRIMARY = '/kontakt?typ=einrichtung'
@@ -295,6 +302,30 @@ function Timeline180() {
 }
 
 /* ======================================================================
+   MOMENT BREAK — warmer Foto-Atemzug zwischen Text-Sektionen
+   ====================================================================== */
+function MomentBreak() {
+  return (
+    <section className="home-moment">
+      <div className="container container--wide">
+        <div className="home-moment__inner">
+          <img
+            src={momentBreak}
+            alt="Pflegerin legt eine Hand sanft auf die Schulter einer Bewohnerin am Fenster"
+          />
+          <div className="home-moment__overlay">
+            <p className="home-moment__quote">
+              Eine Stelle ist mehr als ein Vertrag.<br />
+              Sie ist der Alltag, den du dir <em>wünschst</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
    AUDIENCE SPLIT
    ====================================================================== */
 function AudienceSplit() {
@@ -312,8 +343,9 @@ function AudienceSplit() {
           <Link to="/arbeitgeber" className="audience-card">
             <ImageSlot
               className="audience-card__img"
-              tag="Bildplatzhalter · Querformat"
-              caption="Wohnbereichsleitung im Gespräch — ruhig, konzentriert."
+              src={audienceEinrichtungen}
+              alt="Pflegekraft im Bereich, konzentriert beim Bett richten"
+              caption="Pflegekraft im Bereich — konzentriert, im Alltag."
             />
             <div className="audience-card__body">
               <span className="audience-card__eyebrow">
@@ -340,8 +372,9 @@ function AudienceSplit() {
           <Link to="/pflegekraefte" className="audience-card">
             <ImageSlot
               className="audience-card__img"
-              tag="Bildplatzhalter · Querformat"
-              caption="Hände bei der Dokumentation — Ruhe, nicht Eile."
+              src={audiencePflegekraefte}
+              alt="Hände, die einen Teebecher überreichen — dokumentarisches Detail"
+              caption="Hände, die übergeben — Ruhe, nicht Eile."
             />
             <div className="audience-card__body">
               <span className="audience-card__eyebrow">
@@ -409,8 +442,9 @@ function QuoteBlock() {
         <div className="quote-block">
           <ImageSlot
             className="quote-block__media"
-            tag="Bildplatzhalter · Porträt 4:5"
-            caption="Ruhiges Porträt einer Pflegekraft im Alltagslicht. Keine Pose, keine Inszenierung."
+            src={quotePortrait}
+            alt="Pflegekraft mit Bewohnerin im Rollstuhl, Rückenansicht im Alltagslicht"
+            caption="Ein stiller Moment — Pflege als Haltung, nicht als Pose."
           />
           <div className="quote-block__copy">
             <Eyebrow>Stimmen</Eyebrow>
@@ -574,7 +608,10 @@ function HeroB() {
           </div>
 
           <div className="hero__image">
-            <img src={heroTeam} alt="Pflegeteam mit Bewohnerin im Empfangsbereich" />
+            <img
+              src={heroSpaziergang}
+              alt="Pflegerin begleitet ältere Dame mit Rollator durch eine sonnige Allee"
+            />
             <div className="hero__image-overlay">
               <div className="avatar">LH</div>
               <div className="who">
@@ -602,6 +639,7 @@ export default function HomePage() {
       <ThreePillars />
       <MatchReportSection />
       <Timeline180 />
+      <MomentBreak />
       <AudienceSplit />
       <Comparison />
       <QuoteBlock />
