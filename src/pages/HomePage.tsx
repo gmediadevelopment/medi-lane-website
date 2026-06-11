@@ -259,27 +259,25 @@ function MatchReportSection() {
 }
 
 /* ======================================================================
-   TIMELINE 180
+   SO FUNKTIONIERT MEDILANE — 5 Schritte
    ====================================================================== */
 function Timeline180() {
   const nodes = [
-    { day: 'Vor Start', title: 'Erwartungs-\nabgleich',      desc: 'Dienstplanwunsch, Einarbeitung, Ansprechpartner, No-Gos.' },
-    { day: 'Tag 07',    title: 'Ankommen',                   desc: 'Erster Eindruck, Teamkontakt, Dienstplan, Überforderung.' },
-    { day: 'Tag 30',    title: 'Integration',                desc: 'Realität vs. Erwartung, Einarbeitung, Belastung.' },
-    { day: 'Tag 60',    title: 'Risikocheck',                desc: 'Zweifel, Konflikte, Zusatzdienste, Fehlzeiten.' },
-    { day: 'Tag 100',   title: 'Probezeit-\nStabilisierung', desc: 'Entscheidungssicherheit vor Probezeitende absichern.' },
-    { day: 'Tag 180',   title: 'Abschluss-\nbericht',        desc: 'Verbleib, Zufriedenheit, Learnings, Empfehlungen.' },
+    { day: 'Schritt 1', title: 'Einrichtung eintragen',    desc: 'In wenigen Minuten, kostenlos und unverbindlich.' },
+    { day: 'Schritt 2', title: 'Anforderungen erfassen',   desc: 'Rahmenbedingungen, Team, Fachbereich, Erwartungen.' },
+    { day: 'Schritt 3', title: 'Vorschläge erhalten',      desc: 'Passende Pflegekräfte, systematisch abgeglichen.' },
+    { day: 'Schritt 4', title: 'Matchbericht prüfen',      desc: 'Transparent nachvollziehbar, Kriterium für Kriterium.' },
+    { day: 'Schritt 5', title: 'Nur bei Interesse Kontakt', desc: 'Sie entscheiden. Ohne Druck, ohne Verpflichtung.' },
   ]
   return (
     <section className="section">
       <div className="container">
         <div className="section__head">
-          <Eyebrow>180-Tage-Wechselbegleitung</Eyebrow>
-          <h2 className="section__title">Die kritischen Wochen sind die ersten. Wir bleiben da.</h2>
+          <Eyebrow>So funktioniert Medilane</Eyebrow>
+          <h2 className="section__title">In fünf klaren Schritten zur passenden Besetzung.</h2>
           <p className="section__lead">
             Viele Vermittlungen scheitern nicht bei der Unterschrift, sondern in den ersten
-            Wochen danach. Genau dort setzen wir an — mit strukturierten Check-ins und einem
-            Frühwarnsystem.
+            Wochen danach.
           </p>
         </div>
 
@@ -287,7 +285,7 @@ function Timeline180() {
           {nodes.map((n, i) => (
             <div
               key={i}
-              className={`timeline__node ${i === 1 || i === 4 ? 'timeline__node--active' : ''}`}
+              className={`timeline__node ${i === 0 || i === 4 ? 'timeline__node--active' : ''}`}
             >
               <span className="timeline__day">{n.day}</span>
               <span className="timeline__dot" />
