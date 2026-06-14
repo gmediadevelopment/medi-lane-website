@@ -1,488 +1,566 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight, Target, Building2, ClipboardCheck, CalendarClock, FileText,
-  HandHeart, Compass, ShieldCheck, AlertOctagon, CheckCircle, XCircle,
-  Briefcase, Users, MessagesSquare,
-} from 'lucide-react'
-import PageHero from '../components/sections/PageHero'
-import Pillars from '../components/sections/Pillars'
-import ProcessTimeline from '../components/sections/ProcessTimeline'
-import ComparisonTable from '../components/sections/ComparisonTable'
-import ScrollReveal from '../components/ui/ScrollReveal'
-import FAQAccordion from '../components/ui/FAQAccordion'
+import Eyebrow from '../components/sections/Eyebrow'
+import AvailabilityBar from '../components/sections/AvailabilityBar'
+import { getFunnelUrl } from '../lib/tracking'
+
+// Grafiken — Angebotsseite Einrichtungen
+import gfxHero from '../assets/photos/grafiken-angebotsseite-firmen/hero-match-stay-180-pflegekraft-einrichtung-querformat.png'
+import gfxProblem from '../assets/photos/grafiken-angebotsseite-firmen/problem-fehlmatch-rote-kreuze-pflegekraft-leitung-querformat.png'
+import gfxAnsatz from '../assets/photos/grafiken-angebotsseite-firmen/ansatz-passung-gruene-haken-pflegekraft-leitung-querformat.png'
+import gfxMatchingSystem from '../assets/photos/grafiken-angebotsseite-firmen/matching-system-score-94-prozent-dimensionen-querformat.png'
+import gfxMatchReport from '../assets/photos/grafiken-angebotsseite-firmen/match-report-dashboard-kandidaten-leitung-laptop-querformat.png'
+import gfxBegleitung from '../assets/photos/grafiken-angebotsseite-firmen/wechselbegleitung-180-tage-timeline-querformat.png'
+import gfxNutzen from '../assets/photos/grafiken-angebotsseite-firmen/nutzen-vier-vorteilskarten-festanstellung-kontinuitaet-querformat.png'
+
+// Echte Pflege-Fotos
+import heroPortrait from '../assets/photos/pflegerin-tablet-seniorin-rollstuhl-beratung-hochformat.jpg'
+import momentFoto from '../assets/photos/pflegerin-senior-lachen-augenhoehe-warm-querformat.jpg'
+
 import './PflegeMatch180.css'
 
-const pillars = [
+const PRIMARY = '/kontakt?typ=einrichtung'
+const FUNNEL = getFunnelUrl('website', 'organic', 'matchstay_pflegekraft')
+
+/* ----------------------------- Daten ----------------------------- */
+
+const trustItems = [
+  'Festanstellung statt Zeitarbeit',
+  'Matching auf beiden Seiten',
+  'Match-Profil mit Match-Score',
+  '180-Tage-Wechselbegleitung',
+  'Verbleib statt Abschluss',
+]
+
+const problemPoints = [
+  'Dienstplan und Realität klaffen auseinander',
+  'Führung und Teamkultur passen nicht zur Erwartung',
+  'Pendelweg oder Belastung werden unterschätzt',
+  'Zusagen aus dem Bewerbungsgespräch halten nicht',
+]
+
+const ansatzPoints = [
+  'Warum die Pflegekraft wechseln möchte',
+  'Welche Bedingungen ihr wirklich wichtig sind',
+  'Welche Punkte für sie nicht verhandelbar sind',
+  'Welche Rahmenbedingungen deine Einrichtung real bietet',
+]
+
+const dimensions: [string, string][] = [
+  ['Fachliche Passung', 'Passen Examen, Erfahrung und Einsatzbereich zur Stelle?'],
+  ['Konditionspassung', 'Passen Arbeitszeit, Schichtmodell, Umfang, Pendelweg und Startzeitpunkt?'],
+  ['Wechselgrund-Passung', 'Löst deine Stelle den eigentlichen Grund, aus dem die Pflegekraft wechseln möchte?'],
+  ['Kultur- & Führungspassung', 'Passen Team, Kommunikation, Führung und Einarbeitung zu den Erwartungen?'],
+  ['Verbleibsprognose', 'Welche Risiken zeichnen sich für die ersten 180 Tage ab — Pendelweg, Gegenangebot, offene Zusagen?'],
+]
+
+const deliverables = [
   {
-    number: 'Säule 1',
-    icon: <Compass size={28} />,
-    title: 'Pflegekraft-Profiling',
-    description:
-      'Wir erfassen, was eine Pflegekraft fachlich, menschlich und organisatorisch wirklich braucht — über reine Qualifikation und Verfügbarkeit hinaus.',
-    bullets: [
-      'Wechselmotive und No-Gos',
-      'Dienstplanwünsche und Belastungsgrenzen',
-      'Führungs- und Teamerwartungen',
-      'Einarbeitungs- und Entwicklungsbedarf',
-    ],
+    num: '01',
+    title: 'Strukturierte Aufnahme deiner Stelle',
+    desc: 'Wir erfassen deine offene Position nicht nur formal, sondern mit Blick auf die echte Arbeitsrealität.',
+    bullets: ['Qualifikation, Umfang, Schichtmodell', 'Einarbeitung, Team, Leitungskultur', 'Einsatzbereich, Belastung, Grund der Vakanz'],
   },
   {
-    number: 'Säule 2',
-    icon: <Building2 size={28} />,
-    title: 'Arbeitgeber-Profiling',
-    description:
-      'Wir erfassen, welche Bedingungen deine Einrichtung tatsächlich bieten kann — nicht nur das, was in der Stellenanzeige steht.',
-    bullets: [
-      'Reale Dienstplan- und Einsatzlogik',
-      'Einarbeitungsstruktur und Mentoren',
-      'Teamprofil, Führung und Belastung',
-      'Verlässlichkeit der Arbeitgeberversprechen',
-    ],
+    num: '02',
+    title: 'Tiefe Qualifizierung der Pflegekraft',
+    desc: 'Neben Lebenslauf und Examen erfassen wir vor allem die entscheidenden Wechselkriterien.',
+    bullets: ['Wechselgrund und No-Gos', 'Arbeitszeit-, Team- und Führungswünsche', 'Belastungsgrenzen und Startzeitpunkt'],
   },
   {
-    number: 'Säule 3',
-    icon: <CalendarClock size={28} />,
-    title: '180-Tage-Wechselbegleitung',
-    description:
-      'Nach der Einstellung bleibt Medilane aktiv: strukturierte Check-ins decken Risiken auf, bevor sie zu Kündigungen werden.',
-    bullets: [
-      'Check-ins nach 7, 30, 60, 100 und 180 Tagen',
-      'Frühwarnindikatoren und Konfliktmoderation',
-      'Erwartungsabgleich vor dem ersten Arbeitstag',
-      'Abschlussreport mit Learnings',
-    ],
+    num: '03',
+    title: 'Match-Profil mit Match-Score',
+    desc: 'Jede Vorstellung kommt mit einer nachvollziehbaren Einschätzung zur Passung — nicht nur einem Lebenslauf.',
+    bullets: ['Fachliche, kulturelle und Konditionspassung', 'Mögliche Risikopunkte', 'Konkrete Gesprächsempfehlung'],
+  },
+  {
+    num: '04',
+    title: 'Weniger unpassende Gespräche',
+    desc: 'Wir schicken dir nicht möglichst viele Profile, sondern die, bei denen sich ein Gespräch wirklich lohnt.',
+    bullets: ['Weniger Abstimmungsaufwand', 'Schnellere Entscheidungen', 'Höhere Trefferquote'],
+  },
+  {
+    num: '05',
+    title: 'Begleitung bis zum Arbeitsbeginn',
+    desc: 'Wir koordinieren Gespräche, halten beide Seiten im Austausch und dokumentieren wichtige Zusagen.',
+    bullets: ['Klare Prozesssteuerung', 'Erwartungsabgleich vor Start', 'Verbindliche Absprachen'],
   },
 ]
 
-const processSteps = [
-  {
-    marker: '1',
-    icon: <ClipboardCheck size={22} />,
-    title: 'Mandatsaufnahme',
-    description:
-      'Wir verstehen deine Einrichtung in der Tiefe: Stellenprofil, Dienstplanrealität, Teamstruktur, Führungsstil, No-Gos.',
-  },
-  {
-    marker: '2',
-    icon: <Users size={22} />,
-    title: 'Kandidatenprofiling',
-    description:
-      'Strukturierter Fragebogen für die Pflegekraft — fachlich, motivational und alltagsbezogen.',
-  },
-  {
-    marker: '3',
-    icon: <Target size={22} />,
-    title: 'Matching',
-    description:
-      'Passungs- und Risikoanalyse über sechs Dimensionen mit klarer Ampellogik.',
-  },
-  {
-    marker: '4',
-    icon: <FileText size={22} />,
-    title: 'Match-Bericht',
-    description:
-      'Du bekommst keine Profilflut, sondern einen begründeten Match-Bericht mit Chancen, Risiken und Gesprächsempfehlungen.',
-  },
-  {
-    marker: '5',
-    icon: <MessagesSquare size={22} />,
-    title: 'Erwartungsabgleich',
-    description:
-      'Vor Arbeitsbeginn werden Versprechen, Dienstplan und Einarbeitung schriftlich abgeglichen.',
-  },
-  {
-    marker: '6',
-    icon: <HandHeart size={22} />,
-    title: '180-Tage-Begleitung',
-    description:
-      'Check-ins, Frühwarnindikatoren und Intervention — die kritischen ersten Monate sind aktiv abgesichert.',
-  },
-  {
-    marker: '7',
-    icon: <ShieldCheck size={22} />,
-    title: 'Abschlussreport',
-    description:
-      'Verbleib, Zufriedenheit, Learnings — du lernst aus jedem Match, nicht nur aus dem erfolgreichen.',
-  },
+const begleitungNodes = [
+  { day: 'Vor Start', title: 'Startklar-Check', desc: 'Vertrag, Startdatum, erster Dienstplan, Einarbeitung, offene Zusagen.' },
+  { day: 'Tag 7', title: 'Ankommens-Check', desc: 'Erste Eindrücke, Empfang, Start der Einarbeitung.' },
+  { day: 'Tag 30', title: 'Erwartungsabgleich', desc: 'Getrenntes Feedback von Pflegekraft und Einrichtung.' },
+  { day: 'Tag 60', title: 'Risiko-Check', desc: 'Abweichungen und Missverständnisse früh klären.' },
+  { day: 'Tag 90', title: 'Halbzeitbericht', desc: 'Zufriedenheit, Verbleibsrisiko und mögliche Maßnahmen.' },
+  { day: 'Tag 180', title: 'Abschlussdoku', desc: 'Kompakte Retentionsdokumentation mit Learnings.' },
 ]
 
-const matchReportItems = [
-  'Fachliche Passung und Berufserfahrung',
-  'Dienstplan- und Arbeitszeit-Passung',
-  'Team- und Kultur-Passung',
-  'Einarbeitungsbedarf und Startbedingungen',
-  'Risikofaktoren mit Ampellogik (grün / gelb / rot)',
-  'Empfohlene Gesprächsfragen für das Interview',
-  'Hinweise für die ersten 30 Tage',
-  'Einschätzung zur Verbleibswahrscheinlichkeit',
+const process = [
+  { num: '01', title: 'Erstgespräch', desc: 'Wir lernen deine Einrichtung, deine offenen Stellen und deine Personalsituation kennen.' },
+  { num: '02', title: 'Stellen- & Einrichtungsprofil', desc: 'Wir erstellen ein klares Suchprofil mit fachlichen Anforderungen und realistischen Rahmenbedingungen.' },
+  { num: '03', title: 'Gewinnung & Qualifizierung', desc: 'Wir sprechen passende Pflegefachkräfte an und prüfen, ob ihre Wechselgründe zu deiner Stelle passen.' },
+  { num: '04', title: 'Vorstellung mit Match-Profil', desc: 'Du erhältst geeignete Profile inklusive Match-Score, Erwartungsabgleich und Gesprächsempfehlung.' },
+  { num: '05', title: 'Gespräch & Einstellung', desc: 'Wir koordinieren den Prozess und begleiten beide Seiten bis zum Arbeitsbeginn.' },
+  { num: '06', title: '180-Tage-Begleitung', desc: 'Nach dem Start begleiten wir weiter, dokumentieren Check-ins und machen Risiken früh sichtbar.' },
 ]
 
-const comparisonRows = [
-  {
-    label: 'Fokus',
-    classic: 'Lebenslauf, Qualifikation, Verfügbarkeit',
-    medilane: 'Gesamtpassung über sechs Dimensionen',
-  },
-  {
-    label: 'Vermittlungsende',
-    classic: 'Mit Vertragsunterschrift',
-    medilane: 'Erst nach 180 Tagen Verbleib',
-  },
-  {
-    label: 'Risiken',
-    classic: 'Werden meist erst nach Arbeitsbeginn sichtbar',
-    medilane: 'Werden vor Start im Match-Bericht benannt',
-  },
-  {
-    label: 'Übergabe',
-    classic: 'Profil-Weiterleitung per E-Mail',
-    medilane: 'Begründeter Match-Bericht mit Empfehlungen',
-  },
-  {
-    label: 'Probezeitabbruch',
-    classic: 'Wird abgewartet — dann neue Suche',
-    medilane: 'Frühwarnindikatoren und Konfliktmoderation',
-  },
-  {
-    label: 'Wirkung',
-    classic: 'Einzelbesetzung als Endpunkt',
-    medilane: 'Integration als Prozess — mit Lernkurve',
-  },
+const advantages = [
+  'Weniger unpassende Kandidatenvorstellungen',
+  'Höhere Transparenz vor dem ersten Gespräch',
+  'Dokumentierte Erwartungen der Pflegekraft',
+  'Besserer Abgleich zwischen Wunsch und Arbeitsrealität',
+  'Frühwarnsystem in den ersten 180 Tagen',
+  'Mehr Sicherheit bei der Besetzungsentscheidung',
+  'Begleitung über den Arbeitsbeginn hinaus',
+  'Bessere Grundlage für langfristigen Verbleib',
 ]
 
-const notWhatWeAre = [
-  'Reine Lebenslaufweiterleitung',
-  'Massenvermittlung oder Profilflut',
-  'Zeitarbeit oder Arbeitnehmerüberlassung',
-  'Kurzfristige Lückenfüllung',
-  'Schönfärben von Arbeitgeberbedingungen',
-  'Kandidatenversand ohne Erwartungsabgleich',
+const fitFor = [
+  'Stationäre Altenpflegeeinrichtungen',
+  'Ambulante Pflegedienste',
+  'Langzeit- und Tagespflege',
+  'Einrichtungen mit wiederkehrendem Fachkräftebedarf',
+  'Träger, die Frühfluktuation reduzieren wollen',
+  'Häuser, die passende Gespräche statt Bewerbungsflut wollen',
 ]
 
-const suitableFor = [
-  {
-    icon: <Building2 size={24} />,
-    title: 'Stationäre Pflegeeinrichtungen',
-    desc: 'Stabilere Wohnbereiche durch passende Besetzung und begleitete Integration.',
-  },
-  {
-    icon: <Briefcase size={24} />,
-    title: 'Ambulante Pflegedienste',
-    desc: 'Tourenlogik, Arbeitszeit und Alleinarbeit fließen ins Matching ein.',
-  },
-  {
-    icon: <Users size={24} />,
-    title: 'Träger mit mehreren Standorten',
-    desc: 'Standardisierte Match- und Integrationsmethodik über alle Häuser.',
-  },
-  {
-    icon: <AlertOctagon size={24} />,
-    title: 'Einrichtungen mit hoher Fluktuation',
-    desc: 'Analyse der Abbruchgründe und systematische Frühwarnung.',
-  },
+const notFitFor = [
+  'Wenn du möglichst viele Lebensläufe ohne Prüfung willst',
+  'Wenn Stellen nicht realistisch beschrieben werden',
+  'Wenn Rahmenbedingungen nicht transparent kommuniziert werden',
+  'Wenn Rückmeldungen im Prozess zu lange dauern',
 ]
 
 const faqItems = [
   {
-    question: 'Was unterscheidet PflegeMatch 180 von klassischer Vermittlung?',
-    answer:
-      'Klassische Vermittlung optimiert auf Geschwindigkeit und Abschluss. PflegeMatch 180 endet nicht bei der Unterschrift — du bekommst einen begründeten Match-Bericht statt eines Lebenslaufs und 180 Tage aktive Begleitung. Das Ziel ist nicht die Besetzung, sondern der Verbleib.',
+    q: 'Was unterscheidet Medilane von klassischen Personalvermittlungen?',
+    a: 'Wir vermitteln nicht nur nach Qualifikation und Verfügbarkeit. Wir erfassen die Wechselgründe der Pflegekraft, dokumentieren ihre Erwartungen und gleichen sie mit den tatsächlichen Bedingungen deiner Einrichtung ab — und begleiten beide Seiten 180 Tage nach dem Start.',
   },
   {
-    question: 'Was kostet PflegeMatch 180?',
-    answer:
-      'PflegeMatch 180 wird als erfolgsorientiertes Paketmodell angeboten. Die konkrete Vergütung richtet sich nach Profil, Qualifikation und Begleitungsumfang. Üblicherweise wird in drei Raten gezahlt: bei Vertragsunterschrift, bei Arbeitsstart und nach 180 Tagen Verbleib — so ist sichergestellt, dass wir bis zum stabilen Verbleib im Boot bleiben.',
+    q: 'Was ist der Match-Score?',
+    a: 'Eine strukturierte Einschätzung der Passung zwischen Pflegekraft und Stelle. Er berücksichtigt fachliche Anforderungen, Arbeitsbedingungen, Wechselgründe, Kultur, Führung und Verbleibsrisiken. Der Score ersetzt kein Gespräch — er macht die Passung vorher transparent.',
   },
   {
-    question: 'Was passiert, wenn die Pflegekraft in der Probezeit kündigt?',
-    answer:
-      'Dann greift unsere Nachbesetzungslogik — abhängig vom Zeitpunkt und der Ursache. Für Abbrüche bis Tag 90 bieten wir in der Regel eine kostenfreie Nachbesetzung an, sofern die Ursache nicht auf gebrochene Zusagen der Einrichtung zurückgeht. Details klären wir im Erstgespräch.',
+    q: 'Was passiert, wenn eine Pflegekraft in der Probezeit kündigt?',
+    a: 'Dann greift unsere Nachbesetzungslogik: Wir unterstützen dich bei der Nachbesetzung derselben Position. Voraussetzung ist, dass die im Matching dokumentierten Arbeitsbedingungen eingehalten wurden.',
   },
   {
-    question: 'Wie schnell findet ihr eine passende Pflegekraft?',
-    answer:
-      'Wir priorisieren Passung gegenüber Geschwindigkeit. Erfahrungsgemäß siehst du innerhalb von zwei bis vier Wochen erste qualifizierte Match-Berichte — falsche Eilbesetzungen sind in der Pflege teurer als ein paar Wochen Suche.',
+    q: 'Ist die Vermittlung für Pflegekräfte wirklich kostenfrei?',
+    a: 'Ja. Für Pflegekräfte ist die Vermittlung über Medilane vollständig kostenfrei — und genauso strukturiert wie für Einrichtungen.',
   },
   {
-    question: 'Für welche Einrichtungen lohnt sich PflegeMatch 180 besonders?',
-    answer:
-      'Vor allem für Einrichtungen mit wiederkehrenden Probezeitabbrüchen, hohem Zeitarbeitseinsatz oder spürbarer Belastung des Stammteams. Wenn der Wechsel von "schnell besetzen" zu "stabil besetzen" das Ziel ist, passen wir gut.',
+    q: 'Können wir mehrere Stellen oder eine feste Partnerschaft besprechen?',
+    a: 'Gerne. Für mehrere offene Positionen, Exklusivmandate oder eine langfristige Zusammenarbeit finden wir das passende Modell im Erstgespräch.',
   },
   {
-    question: 'Was, wenn unsere Einrichtung die zugesagten Bedingungen nicht halten kann?',
-    answer:
-      'Das ist genau einer der Punkte, die wir vor der Vermittlung klären. Wir nehmen nur Versprechen in den Match auf, die haltbar sind. Wo wir strukturelle Risiken sehen, schlagen wir die optionale Stabilitätsberatung vor — das schützt am Ende auch deinen Ruf als Arbeitgeber.',
+    q: 'Vermittelt Medilane auch Pflegehilfskräfte oder Leitungskräfte?',
+    a: 'Zum Start liegt der Fokus auf Pflegefachkräften in Festanstellung. Weitere Rollen prüfen wir individuell.',
   },
 ]
 
+/* ----------------------------- Seite ----------------------------- */
+
 export default function PflegeMatch180() {
+  const [open, setOpen] = useState<number>(0)
+
   return (
-    <div className="pflegematch-page">
-      <PageHero
-        badge="Unser Kernangebot"
-        title={
-          <>
-            PflegeMatch 180:<br />
-            Pflegevermittlung mit{' '}
-            <span className="gradient-text">Verbleib im Fokus</span>
-          </>
-        }
-        subtitle="Direktvermittlung, strukturiertes Matching auf beiden Seiten und integrierte 180-Tage-Wechselbegleitung. Damit Pflegekräfte besser passen, besser ankommen und länger bleiben."
-        actions={
-          <>
-            <Link to="/kontakt?typ=einrichtung" className="btn btn--primary btn--lg">
-              <Target size={20} />
-              PflegeMatch 180 anfragen
-            </Link>
-            <Link to="/matching-system" className="btn btn--secondary btn--lg">
-              So funktioniert das Matching
-              <ArrowRight size={20} />
-            </Link>
-          </>
-        }
-        trust={
-          <>
-            <span className="trust-pill">
-              <CheckCircle size={16} /> Verbleib statt Abschluss
-            </span>
-            <span className="trust-pill">
-              <CheckCircle size={16} /> Begründeter Match-Bericht
-            </span>
-            <span className="trust-pill">
-              <CheckCircle size={16} /> 180 Tage Begleitung
-            </span>
-          </>
-        }
-      />
-
-      {/* WARUM KLASSISCH ZU KURZ GREIFT */}
-      <section className="section section--alt">
+    <div className="pm-page">
+      {/* HERO */}
+      <section className="pm-hero">
         <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Warum dieser Ansatz</span>
-              <h2 className="section-title">
-                Klassische Vermittlung greift in der Pflege{' '}
-                <span className="gradient-text">zu kurz</span>
-              </h2>
-              <p className="section-subtitle">
-                Viele Probezeitabbrüche entstehen nicht durch fehlende Qualifikation, sondern durch
-                falsche Erwartungen, unklare Dienstpläne, fehlende Einarbeitung oder Belastungs­situationen,
-                die vorher nicht thematisiert wurden.
+          <div className="pm-hero__grid">
+            <div className="pm-hero__copy">
+              <div className="pm-hero__topline">
+                <Eyebrow>Match &amp; Stay 180 · Für Einrichtungen</Eyebrow>
+              </div>
+              <h1 className="pm-hero__title">
+                Pflegefachkräfte fest einstellen. Nicht nur besetzen — <em>passend</em> besetzen.
+              </h1>
+              <p className="pm-hero__sub">
+                Medilane vermittelt Pflegefachkräfte in Festanstellung an Einrichtungen, ambulante
+                Dienste und Anbieter der Langzeitpflege. Mit strukturiertem Matching auf beiden
+                Seiten und integrierter 180-Tage-Wechselbegleitung — damit aus einer Einstellung
+                eine stabile Besetzung wird.
               </p>
+              <div className="pm-hero__cta">
+                <Link to={PRIMARY} className="btn btn--primary btn--lg">
+                  Kostenloses Erstgespräch vereinbaren <span className="arrow" aria-hidden="true">→</span>
+                </Link>
+                <a href="#matching" className="btn btn--ghost btn--lg">
+                  So funktioniert das Matching →
+                </a>
+              </div>
+              <p className="pm-hero__note">15 Minuten · Diskret · Unverbindlich</p>
+              <div className="pm-hero__avail">
+                <AvailabilityBar />
+              </div>
             </div>
-          </ScrollReveal>
 
-          <div className="problem-chain">
-            <ScrollReveal>
-              <div className="chain chain--bad">
-                <h3>So läuft es oft</h3>
-                <ol>
-                  <li>Offene Stelle</li>
-                  <li>Schnelle Besetzung</li>
-                  <li>Unpassender Match</li>
-                  <li>Frust im Team und bei der Pflegekraft</li>
-                  <li>Probezeitabbruch</li>
-                  <li>Erneute Lücke und Suche</li>
-                </ol>
+            <div className="pm-hero__image">
+              <img
+                src={heroPortrait}
+                alt="Pflegefachkraft berät eine Seniorin im Rollstuhl mit einem Tablet"
+              />
+              <div className="pm-hero__image-overlay">
+                <div className="avatar">PDL</div>
+                <div className="who">
+                  <strong>„Endlich Vorstellungen, bei denen sich das Gespräch lohnt."</strong>
+                  <span>Pflegedienstleitung · stationäre Altenpflege</span>
+                </div>
               </div>
-            </ScrollReveal>
-            <ScrollReveal delay={2}>
-              <div className="chain chain--good">
-                <h3>So läuft es mit PflegeMatch 180</h3>
-                <ol>
-                  <li>Analyse beider Seiten</li>
-                  <li>Strukturiertes Matching</li>
-                  <li>Erwartungs- und Risikoabgleich</li>
-                  <li>Begleiteter Start</li>
-                  <li>Frühwarnung und Moderation</li>
-                  <li>Verbleib nach 180 Tagen</li>
-                </ol>
-              </div>
-            </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* DREI SÄULEN */}
-      <section className="section">
+      {/* SHOWCASE — Marken-Lockup */}
+      <section className="pm-showcase-section">
         <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Die drei Säulen</span>
-              <h2 className="section-title">
-                PflegeMatch 180 ruht auf{' '}
-                <span className="gradient-text">drei Bausteinen</span>
-              </h2>
-              <p className="section-subtitle">
-                Diese drei Bausteine greifen ineinander. Wer einen davon weglässt, bekommt wieder
-                klassische Vermittlung.
-              </p>
-            </div>
-          </ScrollReveal>
-          <Pillars pillars={pillars} />
+          <div className="pm-showcase">
+            <img
+              src={gfxHero}
+              alt="Medilane Match & Stay 180 — Pflegefachkraft und Einrichtungsleitung, verbunden durch ein geprüftes Match"
+            />
+          </div>
         </div>
       </section>
 
-      {/* PROZESS */}
-      <section className="section section--alt">
+      {/* TRUST STRIP */}
+      <div className="trust-strip">
         <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Der Prozess</span>
-              <h2 className="section-title">
-                Von der Mandatsaufnahme bis zum{' '}
-                <span className="gradient-text">Abschlussreport</span>
-              </h2>
-              <p className="section-subtitle">
-                Sieben Phasen, die nicht mit der Unterschrift enden — sondern erst nach 180 Tagen
-                stabilem Verbleib.
-              </p>
+          <div className="trust-strip__row">
+            <span className="trust-strip__label">Match &amp; Stay 180</span>
+            <div className="trust-strip__items">
+              {trustItems.map(t => (
+                <span key={t} className="trust-strip__item">
+                  <span className="dot" />
+                  {t}
+                </span>
+              ))}
             </div>
-          </ScrollReveal>
-          <ProcessTimeline steps={processSteps} />
+          </div>
+        </div>
+      </div>
+
+      {/* PROBLEM */}
+      <section className="section section--soft">
+        <div className="container">
+          <div className="pm-feature">
+            <div className="pm-feature__copy">
+              <Eyebrow>Das Problem</Eyebrow>
+              <h2 className="section__title pm-feature__title">
+                Viele Einstellungen scheitern nicht an der Qualifikation.
+              </h2>
+              <p className="pm-feature__text">
+                In der Pflege passt ein Lebenslauf oft auf dem Papier. Die eigentliche Frage ist:
+                Passt die Stelle wirklich zu dem, was die Pflegekraft sucht?
+              </p>
+              <p className="pm-feature__text">
+                Viele Wechsel entstehen nicht, weil Pflegekräfte ihren Beruf satthaben — sondern
+                weil Dienstplan, Führung, Teamkultur, Pendelweg oder Belastung nicht mehr zu ihrer
+                Lebensrealität passen. Bleiben diese Gründe ungeklärt, startet die Pflegekraft zwar
+                — bleibt aber nicht.
+              </p>
+              <ul className="pm-checklist pm-checklist--muted">
+                {problemPoints.map(p => <li key={p}>{p}</li>)}
+              </ul>
+            </div>
+            <div className="pm-feature__media">
+              <img src={gfxProblem} alt="Fehlende Passung: Pflegekraft und Einrichtung mit mehreren rot markierten Abweichungen" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* MATCH-BERICHT */}
+      {/* ANSATZ */}
       <section className="section">
         <div className="container">
-          <div className="match-report-split">
-            <ScrollReveal>
-              <div className="match-report-text">
-                <span className="section-badge">Der Match-Bericht</span>
-                <h2 className="section-title" style={{ textAlign: 'left' }}>
-                  Du bekommst{' '}
-                  <span className="gradient-text">begründete Matches</span>,
-                  keine Profilflut.
-                </h2>
-                <p className="match-report-desc">
-                  Jede Vorstellung erfolgt mit einem strukturierten Match-Bericht. Du siehst nicht
-                  nur, wer fachlich passen könnte, sondern verstehen warum — und welche Punkte
-                  vor dem Start geklärt werden sollten.
-                </p>
+          <div className="pm-feature pm-feature--reverse">
+            <div className="pm-feature__media">
+              <img src={gfxAnsatz} alt="Geprüfte Passung: Pflegekraft und Einrichtung mit grün bestätigten Übereinstimmungen" />
+            </div>
+            <div className="pm-feature__copy">
+              <Eyebrow>Unser Ansatz</Eyebrow>
+              <h2 className="section__title pm-feature__title">
+                Wechselgrund-Matching statt reiner Lebenslaufvermittlung.
+              </h2>
+              <p className="pm-feature__text">
+                Medilane vermittelt keine beliebigen Profile. Vor jeder Vorstellung dokumentieren
+                wir beide Seiten — und gleichen sie strukturiert ab. So siehst du vor dem ersten
+                Gespräch nicht nur, ob eine Pflegekraft fachlich geeignet ist, sondern ob deine
+                Stelle den Grund für ihren Wechsel wirklich lösen kann.
+              </p>
+              <ul className="pm-checklist">
+                {ansatzPoints.map(p => <li key={p}>{p}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MATCHING-SYSTEM (dunkel) */}
+      <section className="section section--ink" id="matching">
+        <div className="container">
+          <div className="pm-system">
+            <div className="pm-system__copy">
+              <Eyebrow>Unser Matching-System</Eyebrow>
+              <h2 className="pm-system__title">
+                Ein Match-Score über mehrere Passungs-Dimensionen.
+              </h2>
+              <p className="pm-system__lead">
+                Der Medilane Match-Score ist keine automatische Entscheidung, sondern eine
+                strukturierte Entscheidungshilfe — ergänzt durch persönliche Prüfung, Gespräch und
+                ein klares „Warum".
+              </p>
+              <div className="pm-system__dims">
+                {dimensions.map(([label, text]) => (
+                  <div key={label} className="pm-system__dim">
+                    <span className="pm-system__dim-label">{label}</span>
+                    <span className="pm-system__dim-text">{text}</span>
+                  </div>
+                ))}
               </div>
-            </ScrollReveal>
-            <ScrollReveal delay={2}>
-              <div className="match-report-list">
-                <h3>Inhalte des Match-Berichts</h3>
-                <ul>
-                  {matchReportItems.map((item, i) => (
-                    <li key={i}>
-                      <CheckCircle size={18} /> {item}
-                    </li>
-                  ))}
+            </div>
+            <div className="pm-system__media">
+              <img
+                src={gfxMatchingSystem}
+                alt="Match-Score von 94 Prozent über die Dimensionen Qualifikation, Arbeitszeit, Team, Führung, Pendelweg und Verbleib"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WAS DU ERHÄLTST */}
+      <section className="section section--soft">
+        <div className="container">
+          <div className="section__head section__head--center">
+            <Eyebrow>Was du mit Medilane erhältst</Eyebrow>
+            <h2 className="section__title">
+              Kein Profilstapel. Ein begründeter Match — bis zum Arbeitsbeginn begleitet.
+            </h2>
+            <p className="section__lead">
+              Du bekommst eine strukturierte Einschätzung zur Passung, nicht nur einen Lebenslauf
+              — inklusive Match-Score, Erwartungsabgleich und Gesprächsempfehlung.
+            </p>
+          </div>
+
+          <div className="pm-showcase pm-showcase--inset">
+            <img
+              src={gfxMatchReport}
+              alt="Match-Report-Ansicht mit Top-Kandidaten, 98 Prozent Match und einer Für-dich-erledigt-Checkliste"
+            />
+          </div>
+
+          <div className="pm-deliverables">
+            {deliverables.map(d => (
+              <div key={d.num} className="pillar">
+                <span className="pillar__num">
+                  <span className="dot" />
+                  {d.num}
+                </span>
+                <h3 className="pillar__title">{d.title}</h3>
+                <p className="pillar__desc">{d.desc}</p>
+                <ul className="pillar__list">
+                  {d.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
               </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* VERGLEICH */}
-      <section className="section section--alt">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Im Vergleich</span>
-              <h2 className="section-title">
-                Klassische Vermittlung vs.{' '}
-                <span className="gradient-text">PflegeMatch 180</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <ComparisonTable rows={comparisonRows} medilaneHeader="PflegeMatch 180" />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* GEEIGNET FÜR */}
-      <section className="section">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Für wen geeignet</span>
-              <h2 className="section-title">
-                Wenn eine dieser Situationen{' '}
-                <span className="gradient-text">passt</span>, passen wir
-              </h2>
-            </div>
-          </ScrollReveal>
-          <div className="grid-2 suitable-grid">
-            {suitableFor.map((s, i) => (
-              <ScrollReveal key={i} delay={(i % 2) + 1}>
-                <div className="suitable-card">
-                  <div className="suitable-icon">{s.icon}</div>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                </div>
-              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* WAS WIR NICHT SIND */}
-      <section className="section section--alt">
-        <div className="container container--narrow">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Abgrenzung</span>
-              <h2 className="section-title">
-                Was PflegeMatch 180{' '}
-                <span className="gradient-text">nicht ist</span>
-              </h2>
-              <p className="section-subtitle">
-                Damit Erwartungen klar sind — hier eine ehrliche Negativliste.
+      {/* MOMENT BREAK */}
+      <section className="home-moment">
+        <div className="container container--wide">
+          <div className="home-moment__inner">
+            <img
+              src={momentFoto}
+              alt="Pflegerin und Bewohner lachen gemeinsam auf Augenhöhe"
+            />
+            <div className="home-moment__overlay">
+              <p className="home-moment__quote">
+                Eine gute Besetzung sieht man nicht am ersten Tag.<br />
+                Sondern am <em>180.</em>
               </p>
             </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <ul className="negation-list">
-              {notWhatWeAre.map((item, i) => (
-                <li key={i}>
-                  <XCircle size={20} /> {item}
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 180-TAGE-WECHSELBEGLEITUNG */}
+      <section className="section">
+        <div className="container">
+          <div className="section__head section__head--center">
+            <Eyebrow>Die 180-Tage-Wechselbegleitung</Eyebrow>
+            <h2 className="section__title">
+              Eine Vermittlung endet nicht mit der Unterschrift.
+            </h2>
+            <p className="section__lead">
+              Nach Arbeitsbeginn begleiten wir Pflegekraft und Einrichtung 180 Tage weiter — um
+              frühe Reibungspunkte zu erkennen und Risiken sichtbar zu machen, bevor aus kleinen
+              Problemen eine Kündigung wird.
+            </p>
+          </div>
+
+          <div className="pm-showcase pm-showcase--inset">
+            <img
+              src={gfxBegleitung}
+              alt="Zeitstrahl der 180-Tage-Wechselbegleitung mit Stationen nach 7, 30, 60, 90 und 180 Tagen"
+            />
+          </div>
+
+          <div className="pm-timeline">
+            {begleitungNodes.map((n, i) => (
+              <div
+                key={n.day}
+                className={`pm-timeline__node ${i === 0 || i === begleitungNodes.length - 1 ? 'pm-timeline__node--active' : ''}`}
+              >
+                <span className="pm-timeline__day">{n.day}</span>
+                <span className="pm-timeline__dot" />
+                <span className="pm-timeline__title">{n.title}</span>
+                <span className="pm-timeline__desc">{n.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ABLAUF */}
+      <section className="section section--soft">
+        <div className="container">
+          <div className="section__head section__head--center">
+            <Eyebrow>Der Ablauf der Zusammenarbeit</Eyebrow>
+            <h2 className="section__title">In sechs Schritten zur stabilen Besetzung.</h2>
+          </div>
+          <div className="pm-process">
+            {process.map(s => (
+              <div key={s.num} className="pm-step">
+                <span className="pm-step__num">{s.num}</span>
+                <h3 className="pm-step__title">{s.title}</h3>
+                <p className="pm-step__desc">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MEHRWERT */}
+      <section className="section">
+        <div className="container">
+          <div className="pm-feature pm-feature--reverse">
+            <div className="pm-feature__media">
+              <img
+                src={gfxNutzen}
+                alt="Vier Vorteile auf einen Blick: langfristige Festanstellung, Passung zu Mensch und Team, Stabilität und weniger Fluktuation"
+              />
+            </div>
+            <div className="pm-feature__copy">
+              <Eyebrow>Dein Mehrwert als Einrichtung</Eyebrow>
+              <h2 className="section__title pm-feature__title">
+                Du gewinnst nicht nur eine Pflegekraft — sondern einen Prozess auf Verbleib.
+              </h2>
+              <ul className="pm-checklist pm-checklist--two">
+                {advantages.map(a => <li key={a}>{a}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FÜR WEN GEEIGNET */}
+      <section className="section section--soft">
+        <div className="container">
+          <div className="section__head section__head--center">
+            <Eyebrow>Passt das zu euch?</Eyebrow>
+            <h2 className="section__title">
+              Für Häuser, die langfristig gewinnen wollen — nicht kurzfristig austauschen.
+            </h2>
+          </div>
+          <div className="pm-fit">
+            <div className="pm-fit__card pm-fit__card--yes">
+              <span className="pm-fit__label">
+                <span className="dot" />Medilane passt, wenn …
+              </span>
+              <ul className="pm-fit__list">
+                {fitFor.map(f => <li key={f}>{f}</li>)}
+              </ul>
+            </div>
+            <div className="pm-fit__card pm-fit__card--no">
+              <span className="pm-fit__label">Medilane passt nicht, wenn …</span>
+              <ul className="pm-fit__list pm-fit__list--no">
+                {notFitFor.map(f => <li key={f}>{f}</li>)}
+              </ul>
+              <p className="pm-fit__note">
+                Gutes Matching braucht Klarheit auf beiden Seiten — realistische Stellen,
+                transparente Rahmenbedingungen, zeitnahe Rückmeldungen.
+              </p>
+            </div>
+          </div>
+
+          <div className="pm-nurse-note">
+            <p>
+              <strong>Für Pflegekräfte ist die Vermittlung kostenfrei.</strong> Auch sie erhalten
+              keinen Strauß beliebiger Jobs, sondern passende Optionen mit transparenten Bedingungen.
+            </p>
+            <a href={FUNNEL} className="pm-nurse-note__link">
+              Du bist Pflegekraft? Wechselprofil erstellen <span className="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="section">
-        <div className="container container--narrow">
-          <ScrollReveal>
-            <div className="section-header">
-              <span className="section-badge">Häufige Fragen</span>
-              <h2 className="section-title">
-                Was Einrichtungen <span className="gradient-text">am häufigsten</span> fragen
-              </h2>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal>
-            <FAQAccordion items={faqItems} />
-          </ScrollReveal>
+        <div className="container">
+          <div className="section__head section__head--center">
+            <Eyebrow>Häufige Fragen</Eyebrow>
+            <h2 className="section__title">Was Einrichtungen am häufigsten fragen.</h2>
+          </div>
+          <div className="faq">
+            {faqItems.map((it, i) => {
+              const isOpen = open === i
+              return (
+                <div key={i} className={`faq__item ${isOpen ? 'faq__item--open' : ''}`}>
+                  <button
+                    className="faq__btn"
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="faq__q">{it.q}</span>
+                    <span className="faq__toggle" aria-hidden="true">+</span>
+                  </button>
+                  <p className="faq__a">{it.a}</p>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="section final-cta-section">
+      <section className="section">
         <div className="container">
-          <ScrollReveal>
-            <div className="final-cta-box">
-              <h2>Lass uns prüfen, ob PflegeMatch 180 zu dir passt.</h2>
-              <p>
-                Im kostenlosen Erstgespräch klären wir Bedarf, Rahmenbedingungen und nächste Schritte —
+          <div className="final-cta">
+            <div>
+              <h2 className="final-cta__title">
+                Lass uns prüfen, ob Match &amp; Stay 180 zu deiner Einrichtung passt.
+              </h2>
+              <p className="final-cta__sub">
+                Im kostenlosen Erstgespräch klären wir deine offenen Stellen, deine
+                Rahmenbedingungen und ob Medilane der passende Vermittlungspartner ist —
                 unverbindlich und vertraulich.
               </p>
-              <Link to="/kontakt?typ=einrichtung" className="btn btn--white btn--lg">
-                Kostenloses Erstgespräch vereinbaren
-                <ArrowRight size={20} />
-              </Link>
             </div>
-          </ScrollReveal>
+            <div className="final-cta__col">
+              <Link to={PRIMARY} className="btn btn--inverse btn--lg">
+                <span>Kostenloses Erstgespräch vereinbaren</span>
+                <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+              <span className="final-cta__note">Antwort innerhalb von 24 Stunden · info@medi-lane.de</span>
+            </div>
+          </div>
         </div>
       </section>
     </div>
