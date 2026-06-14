@@ -5,12 +5,10 @@ import AvailabilityBar from '../components/sections/AvailabilityBar'
 import { getFunnelUrl } from '../lib/tracking'
 
 // Grafiken — Angebotsseite Einrichtungen
-import gfxHero from '../assets/photos/grafiken-angebotsseite-firmen/hero-match-stay-180-pflegekraft-einrichtung-querformat.png'
 import gfxProblem from '../assets/photos/grafiken-angebotsseite-firmen/problem-fehlmatch-rote-kreuze-pflegekraft-leitung-querformat.png'
 import gfxAnsatz from '../assets/photos/grafiken-angebotsseite-firmen/ansatz-passung-gruene-haken-pflegekraft-leitung-querformat.png'
 import gfxMatchingSystem from '../assets/photos/grafiken-angebotsseite-firmen/matching-system-score-94-prozent-dimensionen-querformat.png'
 import gfxMatchReport from '../assets/photos/grafiken-angebotsseite-firmen/match-report-dashboard-kandidaten-leitung-laptop-querformat.png'
-import gfxBegleitung from '../assets/photos/grafiken-angebotsseite-firmen/wechselbegleitung-180-tage-timeline-querformat.png'
 import gfxNutzen from '../assets/photos/grafiken-angebotsseite-firmen/nutzen-vier-vorteilskarten-festanstellung-kontinuitaet-querformat.png'
 
 // Echte Pflege-Fotos
@@ -57,9 +55,9 @@ const dimensions: [string, string][] = [
 const deliverables = [
   {
     num: '01',
-    title: 'Strukturierte Aufnahme deiner Stelle',
-    desc: 'Wir erfassen deine offene Position nicht nur formal, sondern mit Blick auf die echte Arbeitsrealität.',
-    bullets: ['Qualifikation, Umfang, Schichtmodell', 'Einarbeitung, Team, Leitungskultur', 'Einsatzbereich, Belastung, Grund der Vakanz'],
+    title: 'Strukturierte Aufnahme deiner Einrichtung',
+    desc: 'Du trägst deine Einrichtung als Profil ein — mit Rahmenbedingungen, die meist stellenübergreifend gelten, nicht nur die einzelne Vakanz.',
+    bullets: ['Schichtmodell, Umfang, Einsatzbereiche', 'Einarbeitung, Team, Leitungskultur', 'Belastung, Doku-System, besondere Anforderungen'],
   },
   {
     num: '02',
@@ -98,8 +96,8 @@ const begleitungNodes = [
 
 const process = [
   { num: '01', title: 'Erstgespräch', desc: 'Wir lernen deine Einrichtung, deine offenen Stellen und deine Personalsituation kennen.' },
-  { num: '02', title: 'Stellen- & Einrichtungsprofil', desc: 'Wir erstellen ein klares Suchprofil mit fachlichen Anforderungen und realistischen Rahmenbedingungen.' },
-  { num: '03', title: 'Gewinnung & Qualifizierung', desc: 'Wir sprechen passende Pflegefachkräfte an und prüfen, ob ihre Wechselgründe zu deiner Stelle passen.' },
+  { num: '02', title: 'Einrichtungs- & Bedarfsprofil', desc: 'Wir erstellen ein klares Profil deiner Einrichtung mit fachlichen Anforderungen und realistischen Rahmenbedingungen — stellenübergreifend.' },
+  { num: '03', title: 'Passende Kandidaten', desc: 'Wir greifen auf unseren laufend wachsenden Pool zurück — viele Pflegekräfte kommen aktiv auf uns zu und bitten um Wechselhilfe. Wir qualifizieren sie strukturiert und prüfen, ob ihre Wechselgründe zu deiner Einrichtung passen.' },
   { num: '04', title: 'Vorstellung mit Match-Profil', desc: 'Du erhältst geeignete Profile inklusive Match-Score, Erwartungsabgleich und Gesprächsempfehlung.' },
   { num: '05', title: 'Gespräch & Einstellung', desc: 'Wir koordinieren den Prozess und begleiten beide Seiten bis zum Arbeitsbeginn.' },
   { num: '06', title: '180-Tage-Begleitung', desc: 'Nach dem Start begleiten wir weiter, dokumentieren Check-ins und machen Risiken früh sichtbar.' },
@@ -139,7 +137,7 @@ const faqItems = [
   },
   {
     q: 'Was ist der Match-Score?',
-    a: 'Eine strukturierte Einschätzung der Passung zwischen Pflegekraft und Stelle. Er berücksichtigt fachliche Anforderungen, Arbeitsbedingungen, Wechselgründe, Kultur, Führung und Verbleibsrisiken. Der Score ersetzt kein Gespräch — er macht die Passung vorher transparent.',
+    a: 'Eine strukturierte Einschätzung der Passung zwischen Pflegekraft und Stelle. Er berücksichtigt fachliche Anforderungen, Arbeitsbedingungen, Wechselgründe, Kultur, Führung, Verbleibsrisiken — und noch viele weitere Faktoren. Der Score ersetzt kein Gespräch — er macht die Passung vorher transparent.',
   },
   {
     q: 'Was passiert, wenn eine Pflegekraft in der Probezeit kündigt?',
@@ -210,18 +208,6 @@ export default function PflegeMatch180() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SHOWCASE — Marken-Lockup */}
-      <section className="pm-showcase-section">
-        <div className="container">
-          <div className="pm-showcase">
-            <img
-              src={gfxHero}
-              alt="Medilane Match & Stay 180 — Pflegefachkraft und Einrichtungsleitung, verbunden durch ein geprüftes Match"
-            />
           </div>
         </div>
       </section>
@@ -367,6 +353,22 @@ export default function PflegeMatch180() {
                 </ul>
               </div>
             ))}
+
+            <div className="pm-cta-card">
+              <span className="pm-cta-card__eyebrow">
+                <span className="dot" />Bereit?
+              </span>
+              <h3 className="pm-cta-card__title">
+                Lass uns über deine Einrichtung sprechen.
+              </h3>
+              <p className="pm-cta-card__desc">
+                15 Minuten, unverbindlich. Wir schauen gemeinsam, ob Match &amp; Stay 180
+                zu euch passt.
+              </p>
+              <Link to={PRIMARY} className="btn btn--inverse pm-cta-card__btn">
+                Erstgespräch vereinbaren <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -402,13 +404,6 @@ export default function PflegeMatch180() {
               frühe Reibungspunkte zu erkennen und Risiken sichtbar zu machen, bevor aus kleinen
               Problemen eine Kündigung wird.
             </p>
-          </div>
-
-          <div className="pm-showcase pm-showcase--inset">
-            <img
-              src={gfxBegleitung}
-              alt="Zeitstrahl der 180-Tage-Wechselbegleitung mit Stationen nach 7, 30, 60, 90 und 180 Tagen"
-            />
           </div>
 
           <div className="pm-timeline">

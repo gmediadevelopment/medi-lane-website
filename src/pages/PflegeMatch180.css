@@ -95,7 +95,6 @@
 }
 
 /* ===================== SHOWCASE (Grafik-Rahmen) ===================== */
-.pm-showcase-section { padding: 40px 0 0; }
 .pm-showcase {
   border-radius: var(--radius-2xl);
   overflow: hidden;
@@ -106,7 +105,6 @@
 .pm-showcase img { display: block; width: 100%; height: auto; }
 .pm-showcase--inset { margin: 8px 0 56px; }
 @media (max-width: 880px) {
-  .pm-showcase-section { padding: 28px 0 0; }
   .pm-showcase--inset { margin: 0 0 40px; }
 }
 
@@ -252,12 +250,49 @@
   font-size: 13px; color: var(--slate-700);
   padding-left: 18px; position: relative; line-height: 1.45;
 }
+.pm-deliverables .pillar__list li {
+  padding-left: 22px;
+}
 .pm-deliverables .pillar__list li::before {
-  content: ""; position: absolute; left: 0; top: 7px;
-  width: 6px; height: 1px; background: var(--teal);
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 11px; height: 2px; border-radius: 1px; background: var(--teal);
 }
 @media (max-width: 960px) { .pm-deliverables { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .pm-deliverables { grid-template-columns: 1fr; } }
+
+/* ----- CTA-Kachel (füllt die freie Grid-Zelle) ----- */
+.pm-cta-card {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative; overflow: hidden;
+}
+.pm-cta-card::before {
+  content: "";
+  position: absolute; width: 220px; height: 220px; border-radius: 50%;
+  background: var(--teal); opacity: 0.14;
+  top: -80px; right: -60px; filter: blur(38px);
+}
+.pm-cta-card__eyebrow {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.22em;
+  color: var(--teal);
+  display: flex; align-items: center; gap: 8px; position: relative;
+}
+.pm-cta-card__eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.pm-cta-card__title {
+  font-size: 22px; font-weight: 500;
+  letter-spacing: -0.015em; line-height: 1.15;
+  color: var(--white); margin: 0; position: relative; text-wrap: balance;
+}
+.pm-cta-card__desc {
+  font-size: 14px; line-height: 1.55;
+  color: var(--slate-300); margin: 0; position: relative;
+}
+.pm-cta-card__btn {
+  margin-top: auto; align-self: flex-start; position: relative;
+}
 
 /* ===================== MOMENT BREAK (echtes Foto) ===================== */
 .home-moment { padding: 0; margin: var(--sp-12) 0; }
