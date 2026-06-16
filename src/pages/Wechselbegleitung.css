@@ -1,189 +1,288 @@
-/* ============================================
-   WECHSELBEGLEITUNG PAGE
-   ============================================ */
+/* ============================================================
+   WECHSELBEGLEITUNG 180 — Angebotsseite Einrichtungen
+   Nutzt die globalen Startseiten-Klassen (hero--b, trust-strip,
+   pillars/pillar, home-moment, faq, final-cta). Hier nur die
+   seitenspezifischen wb-* Patterns — gleiche Design-Tokens.
+   ============================================================ */
 
-.moment-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
-  box-shadow: var(--shadow-sm);
-}
-
-.moment-list li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--color-gray-800);
-  line-height: var(--leading-snug);
-  font-weight: var(--font-medium);
-}
-
-.moment-list li svg {
-  color: var(--color-primary);
-  flex-shrink: 0;
-}
-
-/* ---- Indikatoren-Grid ---- */
-.indikatoren-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-}
-
-.indikator-card {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  transition: all var(--transition-base);
-  height: 100%;
-}
-
-.indikator-card:hover {
-  border-color: var(--color-accent-light);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.indikator-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: var(--teal-tint);
-  color: var(--teal-deep);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-3);
-}
-
-.indikator-card h3 {
-  font-size: var(--text-base);
-  margin-bottom: var(--space-2);
-  color: var(--color-gray-900);
-}
-
-.indikator-card p {
-  font-size: var(--text-sm);
-  color: var(--color-gray-600);
-  line-height: var(--leading-snug);
-}
-
-/* ---- Intervention List ---- */
-.intervention-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.intervention-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-md);
-  color: var(--color-gray-800);
-  line-height: var(--leading-snug);
-  transition: all var(--transition-fast);
-}
-
-.intervention-list li:hover {
-  border-color: var(--color-primary-lighter);
-  background: var(--color-primary-lightest);
-  transform: translateX(4px);
-}
-
-.intervention-list li svg {
-  color: var(--color-primary);
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-/* ---- Nutzen Split ---- */
-.nutzen-split {
+/* ===================== FEATURE-SPLIT (Copy + Grafik) ===================== */
+.wb-feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.nutzen-col {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
-  box-shadow: var(--shadow-sm);
-}
-
-.nutzen-col--alt {
-  background: linear-gradient(180deg, var(--color-primary-lightest), white);
-  border-color: var(--color-primary-lighter);
-}
-
-.nutzen-header {
-  display: flex;
+  gap: 72px;
   align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-gray-200);
+}
+.wb-feature__copy { display: flex; flex-direction: column; gap: 22px; }
+.wb-feature__title { text-align: left !important; margin: 0 !important; }
+.wb-feature__text {
+  font-size: 16px; line-height: 1.6;
+  color: var(--slate-700); margin: 0; max-width: 52ch;
+}
+.wb-feature__media {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+.wb-feature__media img { display: block; width: 100%; height: auto; }
+.wb-feature--reverse .wb-feature__media { order: -1; }
+@media (max-width: 880px) {
+  .wb-feature { grid-template-columns: 1fr; gap: 36px; }
+  .wb-feature--reverse .wb-feature__media { order: 0; }
 }
 
-.nutzen-header svg {
-  color: var(--color-primary);
+/* ----- Innere-Zweifel-Zitate ----- */
+.wb-quotes {
+  margin: 4px 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.wb-quotes li {
+  font-size: 15px; font-style: italic; line-height: 1.45;
+  color: var(--ink);
+  padding: 12px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--slate-300);
+  border-radius: var(--radius-md);
 }
 
-.nutzen-header h3 {
-  font-size: var(--text-xl);
-  margin: 0;
-  color: var(--color-gray-900);
+/* ----- Chips (Themenfelder) ----- */
+.wb-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.wb-chip {
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  padding: 8px 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  line-height: 1.3;
+}
+.section--soft .wb-chip { background: var(--white); }
+
+/* ===================== CHECKLISTE ===================== */
+.wb-checklist {
+  margin: 6px 0 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.wb-checklist li {
+  font-size: 15px; color: var(--ink); line-height: 1.45;
+  padding-left: 26px; position: relative;
+}
+.wb-checklist li::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 12px; height: 7px;
+  border-left: 2px solid var(--teal);
+  border-bottom: 2px solid var(--teal);
+  transform: rotate(-45deg);
 }
 
-.nutzen-col ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+/* ===================== KOSTEN (Frühfluktuation) ===================== */
+.wb-cost {
+  margin: 8px 0 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px;
+  max-width: 920px; margin-left: auto; margin-right: auto;
 }
+.wb-cost li {
+  font-size: 15px; color: var(--slate-700); line-height: 1.45;
+  padding-left: 26px; position: relative;
+}
+.wb-cost li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 12px; height: 2px; border-radius: 1px; background: var(--slate-400);
+}
+@media (max-width: 620px) { .wb-cost { grid-template-columns: 1fr; } }
 
-.nutzen-col li {
-  padding-left: var(--space-6);
+/* ===================== MAP (Wechselgrund → Fokus) ===================== */
+.wb-map {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  margin-top: 8px;
+}
+.wb-map__card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.wb-map__card:hover { border-color: var(--ink); box-shadow: var(--shadow-md); }
+.wb-map__reason { font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+.wb-map__arrow { font-size: 13px; color: var(--teal); }
+.wb-map__focus { font-size: 15px; color: var(--slate-500); line-height: 1.55; }
+@media (max-width: 720px) { .wb-map { grid-template-columns: 1fr; } }
+
+/* ===================== SYSTEM (dunkel, Vertrauen) ===================== */
+.wb-system {
+  display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px;
+  align-items: center;
+}
+.wb-system__copy { display: flex; flex-direction: column; gap: 22px; }
+.wb-system__title {
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 500; letter-spacing: -0.025em; line-height: 1.08;
+  color: var(--white); margin: 0; text-wrap: balance;
+}
+.wb-system__lead {
+  font-size: 17px; line-height: 1.6; color: var(--slate-300);
+  margin: 0; max-width: 52ch;
+}
+.wb-system__media {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+.wb-system__media img { display: block; width: 100%; height: auto; }
+@media (max-width: 960px) { .wb-system { grid-template-columns: 1fr; gap: 48px; } }
+
+/* ===================== EMPFANG (Liste + Beispiel) ===================== */
+.wb-receive {
+  display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px;
+  align-items: start; margin-top: 8px;
+}
+.wb-example { display: flex; flex-direction: column; gap: 16px; }
+.wb-example__col {
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+}
+.wb-example__col--bad { background: var(--slate-50); }
+.wb-example__col--good { background: var(--teal-tint); border-color: rgba(13,148,136,0.2); }
+.wb-example__label {
+  display: inline-block;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.wb-example__col--bad .wb-example__label { color: var(--slate-500); }
+.wb-example__col--good .wb-example__label { color: var(--teal-deep); }
+.wb-example__col p {
+  margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink);
+}
+.wb-example__col--bad p { color: var(--slate-700); }
+@media (max-width: 880px) { .wb-receive { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ===================== ABLAUF (vertikaler Flow, 7 Stationen) ===================== */
+.wb-flow {
   position: relative;
-  color: var(--color-gray-700);
-  line-height: var(--leading-snug);
+  display: flex; flex-direction: column;
+  gap: 0;
+  max-width: 880px; margin: 8px auto 0;
 }
-
-.nutzen-col li::before {
-  content: '✓';
+.wb-flow__row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 28px;
+  padding: 0 0 32px;
+  position: relative;
+}
+.wb-flow__row:last-child { padding-bottom: 0; }
+.wb-flow__marker {
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 12px; position: relative;
+  text-align: right;
+}
+.wb-flow__day {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--slate-500); white-space: nowrap;
+}
+.wb-flow__row--active .wb-flow__day { color: var(--teal); }
+.wb-flow__dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--white); border: 1px solid var(--slate-300);
+  position: relative; z-index: 2; margin-right: -7px;
+}
+.wb-flow__row--active .wb-flow__dot {
+  background: var(--teal); border-color: var(--teal);
+  box-shadow: 0 0 0 calc(6px * var(--accent-intensity)) rgba(13,148,136,0.18);
+}
+/* Verbindungslinie an der Marker-Spalte */
+.wb-flow__row::before {
+  content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--color-primary);
-  font-weight: var(--font-extrabold);
+  left: 130px; top: 20px; bottom: -4px;
+  transform: translateX(13px);
+  width: 1px; background: var(--border);
+}
+.wb-flow__row:last-child::before { display: none; }
+.wb-flow__body {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.wb-flow__title {
+  font-size: 19px; font-weight: 500;
+  letter-spacing: -0.01em; line-height: 1.2; color: var(--ink); margin: 0;
+}
+.wb-flow__desc { font-size: 14px; line-height: 1.55; color: var(--slate-500); margin: 0; }
+.wb-flow__list {
+  margin: 6px 0 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px;
+}
+.wb-flow__list li {
+  font-size: 13px; color: var(--slate-700); line-height: 1.45;
+  padding-left: 16px; position: relative;
+}
+.wb-flow__list li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 6px; height: 1px; background: var(--teal);
+}
+@media (max-width: 720px) {
+  .wb-flow__row { grid-template-columns: 1fr; gap: 12px; padding-bottom: 24px; }
+  .wb-flow__marker { flex-direction: row; align-items: center; justify-content: flex-start; text-align: left; }
+  .wb-flow__dot { margin-right: 0; }
+  .wb-flow__row::before { display: none; }
+  .wb-flow__list { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 1024px) {
-  .indikatoren-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ===================== FIT (Geeignet / Was es nicht ist) ===================== */
+.wb-fit {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px;
 }
-
-@media (max-width: 768px) {
-  .indikatoren-grid,
-  .nutzen-split {
-    grid-template-columns: 1fr;
-  }
-
-  .nutzen-col {
-    padding: var(--space-6);
-  }
+.wb-fit__card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  display: flex; flex-direction: column; gap: 20px;
 }
+.wb-fit__card--yes { border-color: var(--ink); }
+.wb-fit__label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--slate-500);
+  display: flex; align-items: center; gap: 10px;
+}
+.wb-fit__card--yes .wb-fit__label { color: var(--teal); }
+.wb-fit__label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.wb-fit__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.wb-fit__list li {
+  font-size: 15px; color: var(--ink); line-height: 1.45;
+  padding-left: 26px; position: relative;
+}
+.wb-fit__list li::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 12px; height: 7px;
+  border-left: 2px solid var(--teal);
+  border-bottom: 2px solid var(--teal);
+  transform: rotate(-45deg);
+}
+.wb-fit__list--no li { color: var(--slate-700); }
+.wb-fit__list--no li::before {
+  border: none;
+  width: 13px; height: 13px; top: 4px;
+  background:
+    linear-gradient(var(--slate-400), var(--slate-400)) center/13px 2px no-repeat,
+    linear-gradient(var(--slate-400), var(--slate-400)) center/2px 13px no-repeat;
+  transform: rotate(45deg);
+}
+.wb-fit__note {
+  margin: 4px 0 0; font-size: 13px; line-height: 1.55;
+  color: var(--slate-500);
+  padding-top: 16px; border-top: 1px solid var(--border);
+}
+@media (max-width: 760px) { .wb-fit { grid-template-columns: 1fr; } }
