@@ -5,6 +5,13 @@
    seitenspezifischen wb-* Patterns — gleiche Design-Tokens.
    ============================================================ */
 
+/* ===================== TRUST STRIP (alle Items in einer Zeile) ===================== */
+.wb-page .trust-strip__row { gap: 20px; }
+.wb-page .trust-strip__items { gap: 20px 24px; }
+@media (max-width: 980px) {
+  .wb-page .trust-strip__items { gap: 14px 22px; }
+}
+
 /* ===================== FEATURE-SPLIT (Copy + Grafik) ===================== */
 .wb-feature {
   display: grid;
@@ -163,25 +170,35 @@
 .wb-example__col--bad p { color: var(--slate-700); }
 @media (max-width: 880px) { .wb-receive { grid-template-columns: 1fr; gap: 32px; } }
 
-/* ===================== ABLAUF (vertikaler Flow, 7 Stationen) ===================== */
+/* ===================== ABLAUF (vertikaler Flow, 7 Stationen) =====================
+   Dot und Verbindungslinie liegen exakt auf derselben x-Achse (116px),
+   die Linie verläuft von Dot zu Dot und wird von den Dots maskiert.
+   ============================================================================ */
 .wb-flow {
   position: relative;
-  display: flex; flex-direction: column;
-  gap: 0;
   max-width: 880px; margin: 8px auto 0;
 }
 .wb-flow__row {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 28px;
-  padding: 0 0 32px;
   position: relative;
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: 32px;
+  padding-bottom: 28px;
+  align-items: start;
 }
 .wb-flow__row:last-child { padding-bottom: 0; }
+/* Verbindungslinie: vom Dot dieser Zeile bis zum Dot der nächsten */
+.wb-flow__row:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 116px; transform: translateX(-50%);
+  top: 35px; bottom: -35px;
+  width: 1px; background: var(--border);
+  z-index: 0;
+}
 .wb-flow__marker {
-  display: flex; flex-direction: column; align-items: flex-end;
-  gap: 12px; position: relative;
   text-align: right;
+  padding: 28px 28px 0 0;
 }
 .wb-flow__day {
   font-size: 11px; font-weight: 500;
@@ -190,23 +207,17 @@
 }
 .wb-flow__row--active .wb-flow__day { color: var(--teal); }
 .wb-flow__dot {
+  position: absolute;
+  left: 116px; transform: translateX(-50%);
+  top: 28px;
   width: 14px; height: 14px; border-radius: 50%;
   background: var(--white); border: 1px solid var(--slate-300);
-  position: relative; z-index: 2; margin-right: -7px;
+  z-index: 2;
 }
 .wb-flow__row--active .wb-flow__dot {
   background: var(--teal); border-color: var(--teal);
   box-shadow: 0 0 0 calc(6px * var(--accent-intensity)) rgba(13,148,136,0.18);
 }
-/* Verbindungslinie an der Marker-Spalte */
-.wb-flow__row::before {
-  content: "";
-  position: absolute;
-  left: 130px; top: 20px; bottom: -4px;
-  transform: translateX(13px);
-  width: 1px; background: var(--border);
-}
-.wb-flow__row:last-child::before { display: none; }
 .wb-flow__body {
   background: var(--white);
   border: 1px solid var(--border);
@@ -229,13 +240,16 @@
 }
 .wb-flow__list li::before {
   content: ""; position: absolute; left: 0; top: 8px;
-  width: 6px; height: 1px; background: var(--teal);
+  width: 8px; height: 2px; border-radius: 1px; background: var(--teal);
 }
 @media (max-width: 720px) {
-  .wb-flow__row { grid-template-columns: 1fr; gap: 12px; padding-bottom: 24px; }
-  .wb-flow__marker { flex-direction: row; align-items: center; justify-content: flex-start; text-align: left; }
-  .wb-flow__dot { margin-right: 0; }
-  .wb-flow__row::before { display: none; }
+  .wb-flow__row { grid-template-columns: 1fr; gap: 14px; padding-bottom: 24px; }
+  .wb-flow__row:not(:last-child)::before { display: none; }
+  .wb-flow__marker {
+    display: flex; align-items: center; gap: 12px;
+    text-align: left; padding: 0;
+  }
+  .wb-flow__dot { position: static; transform: none; order: -1; }
   .wb-flow__list { grid-template-columns: 1fr; }
 }
 

@@ -21,10 +21,10 @@ const PRIMARY = '/kontakt?typ=einrichtung'
 /* ----------------------------- Daten ----------------------------- */
 
 const trustItems = [
-  '180-Tage-Begleitung nach Start',
-  'Check-ins: Tag 7 · 30 · 60 · 90 · 150 · 180',
+  '180 Tage Begleitung',
+  'Check-ins bis Tag 180',
   'Vertrauliches Freigabeprinzip',
-  'Frühwarnsystem statt Kontrolle',
+  'Frühwarnsystem',
   'Weniger Frühfluktuation',
 ]
 
