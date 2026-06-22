@@ -185,13 +185,13 @@ export default function Kontakt() {
               <h3>PflegeMatch 180</h3>
               <p>Unser Kernangebot mit Matching und 180-Tage-Wechselbegleitung.</p>
             </Link>
-            <Link to="/stabilitaetsberatung" className="kontakt-quicklink">
-              <h3>Stabilitätsberatung</h3>
-              <p>Optionaler Beratungsbaustein zur Personalstabilität.</p>
+            <Link to="/matching-system" className="kontakt-quicklink">
+              <h3>Matching-System</h3>
+              <p>Passungsabgleich über sechs Dimensionen — mit Matchbericht.</p>
             </Link>
-            <Link to="/foerderung" className="kontakt-quicklink">
-              <h3>Förderlogik</h3>
-              <p>Welche Bestandteile fördernah aufgesetzt werden können.</p>
+            <Link to="/wechselbegleitung" className="kontakt-quicklink">
+              <h3>Wechselbegleitung 180</h3>
+              <p>Strukturierte Begleitung in den ersten 180 Tagen nach dem Start.</p>
             </Link>
             <Link to="/ueber-uns" className="kontakt-quicklink">
               <h3>Über Medilane</h3>

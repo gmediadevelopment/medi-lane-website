@@ -67,12 +67,12 @@ const Body = () => (
     <div className="article-cta">
       <h3>Wie wir damit umgehen</h3>
       <p>
-        Unsere Stabilitätsberatung adressiert genau diese drei Hebel — und zeigt, welche
-        Bestandteile fördernah aufgesetzt werden können. PflegeMatch 180 selbst senkt
-        Zeitarbeit, weil die Direktbesetzungen stabiler werden.
+        PflegeMatch 180 senkt Zeitarbeit, weil Direktbesetzungen stabiler werden — durch Matching
+        auf beiden Seiten und eine 180-Tage-Wechselbegleitung, die Frühfluktuation früh sichtbar
+        macht, bevor wieder eine Lücke entsteht.
       </p>
-      <Link to="/stabilitaetsberatung" className="btn btn--primary">
-        Mehr zur Stabilitätsberatung
+      <Link to="/pflegematch-180" className="btn btn--primary">
+        Match &amp; Stay 180 ansehen
       </Link>
     </div>
   </>

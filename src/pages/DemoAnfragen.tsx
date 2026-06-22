@@ -101,8 +101,8 @@ export default function DemoAnfragen() {
               <Handshake size={20} />
               Pilotgespräch vereinbaren
             </a>
-            <Link to="/digitale-plattform" className="btn btn--secondary btn--lg">
-              CareOS-Plattform ansehen
+            <Link to="/matching-system" className="btn btn--secondary btn--lg">
+              Matching-System ansehen
               <ArrowRight size={20} />
             </Link>
           </>

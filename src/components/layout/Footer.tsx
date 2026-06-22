@@ -30,11 +30,9 @@ export default function Footer() {
 
           <div className="site-footer__col">
             <h4>Für Einrichtungen</h4>
-            <Link to="/arbeitgeber">Übersicht</Link>
-            <Link to="/pflegematch-180">PflegeMatch 180</Link>
-            <Link to="/stabilitaetsberatung">Stabilitätsberatung</Link>
-            <Link to="/digitale-plattform">Digitale Plattform</Link>
-            <Link to="/foerderung">Förderung</Link>
+            <Link to="/pflegematch-180">Match &amp; Stay 180</Link>
+            <Link to="/matching-system">Matching-System</Link>
+            <Link to="/wechselbegleitung">Wechselbegleitung</Link>
           </div>
 
           <div className="site-footer__col">
@@ -46,15 +44,9 @@ export default function Footer() {
           </div>
 
           <div className="site-footer__col">
-            <h4>Methodik</h4>
-            <Link to="/matching-system">Matching-System</Link>
-            <Link to="/wechselbegleitung">Wechselbegleitung</Link>
-            <Link to="/wissen">Wissen</Link>
-          </div>
-
-          <div className="site-footer__col">
             <h4>Unternehmen</h4>
             <Link to="/ueber-uns">Über uns</Link>
+            <Link to="/wissen">Wissen</Link>
             <Link to="/kontakt">Kontakt</Link>
             <Link to="/demo-anfragen">Demo / Pilot</Link>
           </div>

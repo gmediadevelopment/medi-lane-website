@@ -20,13 +20,9 @@ interface NavGroup {
 const EINRICHTUNGEN: NavGroup = {
   label: 'Für Einrichtungen',
   items: [
-    { to: '/arbeitgeber',           title: 'Übersicht',            desc: 'Was Medilane für deine Einrichtung bedeutet' },
-    { to: '/pflegematch-180',       title: 'PflegeMatch 180',      desc: 'Vermittlung mit Matching und 180-Tage-Begleitung' },
-    { to: '/matching-system',       title: 'Matching-System',      desc: 'Sechs Dimensionen, ehrliche Ampel' },
-    { to: '/wechselbegleitung',     title: 'Wechselbegleitung',    desc: '180-Tage-Begleitung im Detail' },
-    { to: '/stabilitaetsberatung',  title: 'Stabilitätsberatung',  desc: 'Verbleib, Rückgewinnung, Einarbeitung' },
-    { to: '/foerderung',            title: 'Förderung',            desc: 'Welche Bestandteile fördernah sind' },
-    { to: '/digitale-plattform',    title: 'Digitale Plattform',   desc: 'CareOS — Dashboards, Check-ins, Reports' },
+    { to: '/pflegematch-180',       title: 'Match & Stay 180',     desc: 'Vermittlung mit Matching und 180-Tage-Begleitung' },
+    { to: '/matching-system',       title: 'Matching-System',      desc: 'Passungsabgleich über sechs Dimensionen' },
+    { to: '/wechselbegleitung',     title: 'Wechselbegleitung',    desc: '180-Tage-Begleitung nach dem Start' },
   ],
 }
 

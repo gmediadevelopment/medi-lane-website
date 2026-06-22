@@ -338,7 +338,7 @@ function AudienceSplit() {
         </div>
 
         <div className="audience-grid">
-          <Link to="/arbeitgeber" className="audience-card">
+          <Link to="/pflegematch-180" className="audience-card">
             <ImageSlot
               className="audience-card__img"
               src={audienceEinrichtungen}
