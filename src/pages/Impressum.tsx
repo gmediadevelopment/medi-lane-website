@@ -9,48 +9,18 @@ export default function Impressum() {
         <section className="legal-section">
           <h2>Angaben gemäß § 5 TMG</h2>
           <p>
-            <strong>[Firmenname eintragen]</strong><br />
-            [Rechtsform eintragen]<br />
-            [Straße und Hausnummer]<br />
-            [PLZ und Ort]<br />
+            <strong>Medilane</strong><br />
+            Schlehenweg 6<br />
+            53177 Bonn<br />
             Deutschland
           </p>
         </section>
 
         <section className="legal-section">
-          <h2>Vertreten durch</h2>
-          <p>[Name des Geschäftsführers / Vertretungsberechtigten]</p>
-        </section>
-
-        <section className="legal-section">
           <h2>Kontakt</h2>
           <p>
-            Telefon: [Telefonnummer eintragen]<br />
+            Telefon: +49 176 32398572<br />
             E-Mail: info@medi-lane.de
-          </p>
-        </section>
-
-        <section className="legal-section">
-          <h2>Registereintrag</h2>
-          <p>
-            Registergericht: [Amtsgericht eintragen]<br />
-            Registernummer: [HRB-Nummer eintragen]
-          </p>
-        </section>
-
-        <section className="legal-section">
-          <h2>Umsatzsteuer-Identifikationsnummer</h2>
-          <p>
-            gemäß § 27a Umsatzsteuergesetz:<br />
-            [USt-IdNr. eintragen]
-          </p>
-        </section>
-
-        <section className="legal-section">
-          <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
-          <p>
-            [Name eintragen]<br />
-            [Adresse eintragen]
           </p>
         </section>
 
