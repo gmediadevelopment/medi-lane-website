@@ -57,8 +57,9 @@ export default function Datenschutz() {
           <h3>Hinweis zur verantwortlichen Stelle</h3>
           <p>
             Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br /><br />
-            [Firmenname eintragen]<br />
-            [Adresse eintragen]<br />
+            Medilane<br />
+            Schlehenweg 6<br />
+            53177 Bonn<br />
             E-Mail: info@medi-lane.de
           </p>
 
